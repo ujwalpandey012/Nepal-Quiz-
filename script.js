@@ -184,7 +184,7 @@ function markForReview() { reviewSet.add(current); updateNav(); }
 /* ============================================================
    TIMER
 ============================================================ */
-let time = 300;
+let time = 600;
 function startTimer() {
 
   let timerText = document.getElementById("timerText");
