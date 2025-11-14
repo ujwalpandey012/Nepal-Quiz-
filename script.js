@@ -1,69 +1,157 @@
-/* GLOBAL */
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
-body{background:#020d25;color:white;}
-.hidden{display:none!important}
+/* GOOGLE SCRIPT URL */
+const APP_URL = "YOUR_APPS_SCRIPT_URL_HERE";
 
-/* START SCREEN */
-.start-screen{height:100vh;display:flex;justify-content:center;align-items:center;}
-.start-card{background:rgba(255,255,255,0.06);padding:40px;width:350px;border-radius:18px;
-backdrop-filter:blur(10px);box-shadow:0 0 25px rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15)}
-.start-card h1{color:gold;font-size:1.9rem}
-.start-card h2{color:#e0eaff;margin-bottom:25px}
-.start-card input{width:100%;padding:14px;margin:10px 0;background:rgba(255,255,255,0.12);
-color:white;border:none;border-radius:8px;outline:none}
-.start-btn{width:100%;padding:14px;background:gold;color:black;border:none;font-weight:600;
-border-radius:8px;margin-top:10px;cursor:pointer;transition:0.25s}
-.start-btn:hover{background:#ffdd55;transform:translateY(-2px)}
+/* --- QUESTIONS --- */
+const questions = [
+  { q:"नेपालमा पहिलो रेलसेवा कहाँ सञ्चालन भयो?", options:["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"], correct:"Raxaul – Amlekhganj"},
+  { q:"नेपालको पहिलो जलविद्युत् आयोजना कुन हो?",options:["Pharping","Trishuli","Kulekhani","Sunkoshi"],correct:"Pharping"},
+  { q:"नेपालको पहिलो बैंक कुन हो?",options:["Nepal Rastra Bank","ADB","Nepal Bank Limited","RBB"],correct:"Nepal Bank Limited"},
+  { q:"नेपालको पहिलो संविधान कुन वर्षमा जारी?",options:["1948","1951","1962","1990"],correct:"1948"},
+  { q:"नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले?",options:["1950","1955","1957","1961"],correct:"1955"},
+  { q:"पहिलो विश्वविद्यालय कुन?",options:["TU","KU","PU","MWU"],correct:"TU"},
+  { q:"पहिलो छायाङ्कन चलचित्र?",options:["Aama","Harischandra","Maitighar","Satya Harischandra"],correct:"Aama"},
+  { q:"राष्ट्रिय सभा सदस्य कति?",options:["50","56","59","60"],correct:"59"},
+  { q:"पहिलो जनगणना?",options:["1911","1941","1952","1961"],correct:"1911"},
+  { q:"SAARC चार्टर कहिले साइन?",options:["8 Dec 1985","6 Jan 1984","10 Dec 1986","1 Nov 1985"],correct:"8 Dec 1985"},
+  { q:"पहिलो आन्तरिक उडान?",options:["1949 Pokhara","1950 Biratnagar","1950 Simara","1951 Janakpur"],correct:"1950 Simara"}
+];
 
-/* EXAM SCREEN */
-.exam-screen{max-width:1050px;margin:auto;padding:25px}
+/* SHUFFLE EVERYTHING */
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}}
+shuffle(questions); questions.forEach(q=>shuffle(q.options));
 
-/* TOP BAR */
-.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+/* STATE */
+let current=0;
+let answers={};
+let review=new Set();
 
-/* NAVIGATION GRID */
-.question-nav{display:grid;grid-template-columns:repeat(6,40px);gap:10px}
-.nav-btn{height:40px;width:40px;display:flex;justify-content:center;align-items:center;
-background:rgba(255,255,255,0.15);border-radius:8px;cursor:pointer;transition:.25s;
-border:1px solid rgba(255,255,255,0.25)}
-.nav-btn.active{background:gold;color:black}
-.nav-btn.review{background:#ff6600;color:white}
+/* BEGIN EXAM */
+function beginExam(){
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("examScreen").classList.remove("hidden");
+  loadNav();
+  loadQ();
+  startTimer();
+}
 
-/* TIMER CIRCLE */
-.timer-ring{position:relative;width:80px;height:80px}
-.timer-ring svg{width:80px;height:80px;transform:rotate(-90deg)}
-.timer-ring circle{fill:none;stroke-width:6;stroke:rgba(255,255,255,0.2)}
-#timerCircle{stroke:gold;stroke-dasharray:220;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear}
-#timerText{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:600}
+/* NAV */
+function loadNav(){
+  let nav=document.getElementById("questionNav");
+  nav.innerHTML="";
+  questions.forEach((_,i)=>{
+    let b=document.createElement("div");
+    b.className="nav-btn";
+    b.innerText=i+1;
+    b.onclick=()=>go(i);
+    nav.appendChild(b);
+  });
+  updateNav();
+}
 
-/* QUESTION CARD */
-.question-container{padding:25px;border:1px solid rgba(255,255,255,0.15);
-border-radius:15px;background:rgba(255,255,255,0.05);backdrop-filter:blur(6px);
-animation:slideFade 0.5s ease}
-@keyframes slideFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+function updateNav(){
+  document.querySelectorAll(".nav-btn").forEach((b,i)=>{
+    b.classList.remove("active");
+    if(i===current) b.classList.add("active");
+    if(review.has(i)) b.classList.add("review");
+  });
+}
 
-/* OPTIONS */
-.option{padding:12px;margin:10px 0;background:rgba(255,255,255,0.08);
-border:1px solid rgba(255,255,255,0.2);border-radius:10px;
-display:flex;align-items:center;gap:12px;cursor:pointer;transition:0.25s}
-.option:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px)}
-.option input{transform:scale(1.2)}
+/* LOAD QUESTION */
+function loadQ(){
+  updateNav();
+  const q=questions[current];
+  let box=document.getElementById("questionContainer");
+  let h=`<h2>${current+1}. ${q.q}</h2>`;
+  q.options.forEach(opt=>{
+    h+=`
+      <label class="option">
+        <input type="radio" name="q${current}" value="${opt}" ${(answers[current]===opt)?"checked":""}>
+        ${opt}
+      </label>
+    `;
+  });
+  box.innerHTML=h;
+
+  document.getElementById("prevBtn").disabled=(current===0);
+  document.getElementById("nextBtn").disabled=(current===questions.length-1);
+}
+
+function saveAns(){
+  let s=document.querySelector(`input[name="q${current}"]:checked`);
+  if(s) answers[current]=s.value;
+}
 
 /* BUTTONS */
-.btn-row{display:flex;gap:10px;justify-content:center;margin-top:20px}
-.btn-row button{padding:12px 22px;border:none;border-radius:8px;background:rgba(255,255,255,0.15);
-color:white;cursor:pointer;transition:.25s}
-.btn-row button:hover{background:gold;color:black}
+function nextQuestion(){saveAns();current++;loadQ();}
+function prevQuestion(){saveAns();current--;loadQ();}
+function go(n){saveAns();current=n;loadQ();}
+function markForReview(){review.add(current);updateNav();}
 
-/* RESULT */
-.result-box{margin-top:25px;padding:25px;border-radius:15px;background:rgba(255,255,255,0.1);
-border:1px solid rgba(255,255,255,0.2);animation:slideFade .5s ease}
+/* TIMER */
+let time=300;
+function startTimer(){
+  let t=document.getElementById("timerText");
+  let c=document.getElementById("timerCircle");
+  let int=setInterval(()=>{
+    let m=Math.floor(time/60), s=time%60;
+    t.innerHTML=`${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
+    c.style.strokeDashoffset=220-(220*(time/300));
+    if(time<0){clearInterval(int);submitExam();}
+    time--;
+  },1000);
+}
 
-/* REVIEW SECTION */
-.review-section{margin-top:20px;padding:20px;background:rgba(255,255,255,0.05);
-border-radius:15px;border:1px solid rgba(255,255,255,0.15)}
-.review-card{padding:18px;margin-bottom:15px;border-bottom:1px solid rgba(255,255,255,0.2)}
-.review-q{font-weight:600;margin-bottom:6px}
-.correct-text{color:#00ff88;font-weight:600}
-.wrong-text{color:#ff5555;font-weight:600}
-.correct-ans{color:gold;font-weight:600}
+/* SUBMIT */
+async function submitExam(){
+  saveAns();
+
+  let score=0;
+  questions.forEach((q,i)=>{ if(answers[i]===q.correct) score++; });
+
+  let percent=((score/questions.length)*100).toFixed(2);
+
+  document.getElementById("resultBox").classList.remove("hidden");
+  document.getElementById("resultBox").innerHTML=`
+    <h2>धन्यवाद! तपाईंको परिक्षा सम्पन्न भयो।</h2>
+    <p><strong>Score:</strong> ${score}/${questions.length}</p>
+    <p><strong>Percentage:</strong> ${percent}%</p>
+  `;
+
+  buildReview();
+
+  fetch(APP_URL,{
+    method:"POST",
+    mode:"no-cors",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      name:document.getElementById("playerName").value,
+      email:document.getElementById("playerEmail").value,
+      score,percent,answers
+    })
+  });
+}
+
+/* REVIEW PANEL */
+function buildReview(){
+  let box=document.getElementById("reviewSection");
+  box.classList.remove("hidden");
+
+  let html="";
+  questions.forEach((q,i)=>{
+    let user=answers[i]||"Not Answered";
+    let correct=q.correct;
+    let status=(user===correct);
+
+    html+=`
+      <div class="review-card">
+        <div class="review-q">${i+1}. ${q.q}</div>
+        <div class="${status?'correct-text':'wrong-text'}">
+          Your Answer: ${user}
+        </div>
+        <div class="correct-ans">Correct Answer: ${correct}</div>
+      </div>
+    `;
+  });
+
+  box.innerHTML=html;
+}
