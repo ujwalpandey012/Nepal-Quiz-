@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ne">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nepal GK Quiz | Official</title>
+  <meta charset="UTF-8" />
+  <title>Nepal GK Secure Quiz | Ujwal Pandey</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
@@ -15,8 +12,9 @@
 <!-- START SCREEN -->
 <div id="startScreen" class="start-screen">
   <div class="start-box">
-    <h1>Nepal GK Official Quiz</h1>
-    <p>Secure • Timed • Anti-Cheat Enabled</p>
+    <img src="https://i.ibb.co/M6dM5Q3/nepal-flag.gif" class="flag">
+    <h1>Nepal Government GK Official Quiz</h1>
+    <p>Secure • Timed • Anti-Cheat • Mobile Friendly</p>
     <button class="start-btn" onclick="beginQuiz()">Start Quiz</button>
   </div>
 </div>
@@ -25,12 +23,11 @@
 <div id="quizContainer" class="quiz-container hidden">
 
   <div class="header">
-    <h2>🇳🇵 Nepal GK Secure Quiz</h2>
-    <div id="timer">05:00</div>
+    <h2>🇳🇵 Nepal GK Examination</h2>
+    <span id="timer">⏱ 05:00</span>
   </div>
 
   <form id="quizForm">
-
     <input type="text" id="playerName" placeholder="Full Name" required>
     <input type="email" id="playerEmail" placeholder="Email Address" required>
 
@@ -40,9 +37,18 @@
 
     <div id="resultBox"></div>
   </form>
+
 </div>
 
 <script src="script.js"></script>
+
+<script>
+function beginQuiz() {
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("quizContainer").classList.remove("hidden");
+  window.scrollTo(0, 0);
+}
+</script>
 
 </body>
 </html>
