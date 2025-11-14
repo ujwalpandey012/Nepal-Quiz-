@@ -12,19 +12,16 @@ const quizData = [
     options: ["Raxaul – Amlekhganj", "Birgunj – Simara", "Janakpur – Jaynagar", "Biratnagar – Rangeli"],
     correct: "Raxaul – Amlekhganj"
   },
-
   {
     q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?<br>Which was Nepal’s first hydroelectric project?",
     options: ["Pharping", "Trishuli", "Kulekhani", "Sunkoshi"],
     correct: "Pharping"
   },
-
   {
     q: "नेपालको पहिलो बैंक कुन हो?<br>Which is Nepal’s first bank?",
     options: ["Nepal Rastra Bank", "Agriculture Development Bank", "Nepal Bank Limited", "Rastriya Banijya Bank"],
     correct: "Nepal Bank Limited"
   },
-
   {
     q: "नेपालको पहिलो संविधान कुन वर्षमा जारी?<br>When was Nepal’s first constitution issued?",
     options: [
@@ -35,48 +32,41 @@ const quizData = [
     ],
     correct: "1948 A.D. (2004 B.S.)"
   },
-
   {
     q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले?<br>When did Nepal join the UN?",
     options: ["1950 A.D.", "1955 A.D.", "1957 A.D.", "1961 A.D."],
     correct: "1955 A.D."
   },
-
   {
     q: "पहिलो विश्वविद्यालय कुन?<br>First university?",
     options: ["Tribhuvan University", "Kathmandu University", "Purbanchal University", "MWU"],
     correct: "Tribhuvan University"
   },
-
   {
     q: "पहिलो छायाङ्कन चलचित्र?<br>First Nepali filmed movie?",
     options: ["Aama", "Satya Harischandra", "Maitighar", "Harischandra"],
     correct: "Aama"
   },
-
   {
     q: "राष्ट्रिय सभा सदस्य कति?<br>National Assembly members?",
     options: ["50", "56", "59", "60"],
     correct: "59"
   },
-
   {
     q: "पहिलो जनगणना?<br>First census?",
     options: [
-      "1911 A.D. during Chandra Shumsher",
+      "1911 during Chandra Shumsher",
       "1941 during Judha Shumsher",
       "1952 during Tribhuvan",
       "1961 during Mahendra Shah"
     ],
-    correct: "1911 A.D. during Chandra Shumsher"
+    correct: "1911 during Chandra Shumsher"
   },
-
   {
     q: "SAARC चार्टर कहिले साइन?<br>When was SAARC Charter signed?",
     options: ["8 December 1985", "6 January 1984", "10 December 1986", "1 Nov 1985"],
     correct: "8 December 1985"
   },
-
   {
     q: "पहिलो आन्तरिक उडान?<br>First domestic flight?",
     options: [
@@ -128,7 +118,7 @@ function loadQuestions() {
 
 loadQuestions();
 
-/* FIXED TIMER */
+/* TIMER */
 let timeLeft = 300;
 const timerDisplay = document.getElementById("timer");
 
@@ -147,15 +137,20 @@ const countdown = setInterval(() => {
   }
 }, 1000);
 
+/* ANTI CHEAT */
+window.onblur = () => {
+  alert("⚠️ Tab change detected! Auto submitting quiz.");
+  submitQuiz();
+};
 
-/* Submit Quiz */
+/* SUBMIT QUIZ */
 async function submitQuiz() {
   clearInterval(countdown);
 
   const name = document.getElementById("playerName").value.trim();
   const email = document.getElementById("playerEmail").value.trim();
 
-  if (!name || !email) return alert("Please enter your name & email!");
+  if (!name || !email) return alert("Please enter name & email!");
 
   let score = 0;
   let answersDetailed = [];
@@ -182,7 +177,7 @@ async function submitQuiz() {
     <h3>${name}, your quiz has been submitted.</h3>
     <p><b>Score:</b> ${score}/${quizData.length}</p>
     <p><b>Percentage:</b> ${percent}%</p>
-    <p>📩 A full report has been sent to your email.</p>
+    <p>📩 A detailed report has been emailed to you.</p>
   `;
 
   await fetch(APP_URL, {
