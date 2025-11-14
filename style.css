@@ -1,17 +1,14 @@
-/* ============= PREMIUM EXAM UI ============= */
+/* CLEAN PROFESSIONAL QUIZ UI (NO IMAGES) */
 
 body {
+  background: #f5f7fa;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #0047ab, #002c6f);
-  color: #ffffff;
-  overflow-x: hidden;
 }
 
-.hidden {
-  display: none !important;
-}
+/* HIDE */
+.hidden { display: none !important; }
 
 /* START SCREEN */
 .start-screen {
@@ -19,157 +16,113 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeIn 1s;
+  background: #004aad;
 }
-
 .start-box {
-  background: rgba(255, 255, 255, 0.18);
-  padding: 50px 70px;
-  border-radius: 22px;
-  backdrop-filter: blur(20px);
   text-align: center;
-  border: 2px solid rgba(255,255,255,0.4);
-  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-  animation: floatUp 1s ease-out;
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.2);
 }
-
-.flag {
-  width: 120px;
-  margin-bottom: 20px;
-}
-
 .start-box h1 {
-  font-size: 2.2rem;
-  color: white;
-  margin-bottom: 10px;
+  margin: 0;
+  font-size: 1.8rem;
+  color: #00306b;
 }
-
 .start-box p {
-  color: #cfe3ff;
+  color: #444;
   margin-bottom: 25px;
 }
-
 .start-btn {
-  background: white;
-  color: #0047ab;
-  padding: 13px 40px;
-  font-size: 1.2rem;
-  border-radius: 12px;
+  background: #004aad;
+  color: white;
+  padding: 14px 35px;
   border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
   cursor: pointer;
-  animation: pulse 2s infinite;
-  font-weight: bold;
 }
+.start-btn:hover { background: #012d6c; }
 
-.start-btn:hover {
-  transform: scale(1.05);
-}
-
-/* QUIZ PAGE */
+/* QUIZ CONTAINER */
 .quiz-container {
-  max-width: 900px;
+  max-width: 850px;
   margin: 30px auto;
-  padding: 30px;
   background: white;
-  color: black;
-  border-radius: 18px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0,0,0,0.15);
 }
 
+/* HEADER */
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 15px;
-  background: #eef4ff;
-  border-radius: 12px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #eee;
   margin-bottom: 20px;
 }
-
+.header h2 { margin: 0; }
 #timer {
-  padding: 8px 15px;
-  background: red;
-  color: white;
-  border-radius: 8px;
-  font-weight: 600;
-  animation: pulseTimer 1s infinite;
+  background: #d80000;
+  color: #fff;
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-weight: bold;
 }
 
+/* INPUTS */
 input {
   width: 100%;
-  padding: 15px;
-  margin-bottom: 15px;
-  border-radius: 12px;
-  border: 1px solid #bcd0ff;
-  background: #f6f8ff;
+  padding: 14px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
+/* QUESTIONS */
 .question {
   background: #f0f4ff;
-  border-left: 6px solid #0047ab;
-  padding: 20px;
-  margin-bottom: 18px;
-  border-radius: 14px;
-  animation: slideUp 0.5s;
+  padding: 18px;
+  border-left: 5px solid #004aad;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
+.question h3 { margin-top: 0; }
 
+/* OPTIONS */
 label {
   display: block;
-  padding: 10px;
-  margin: 5px 0;
-  background: #fff;
-  border-radius: 8px;
-  border: 1px solid #cbdcff;
+  padding: 6px;
+  border-radius: 6px;
   cursor: pointer;
 }
-
 label:hover {
-  background: #e9efff;
+  background: #e3ebff;
 }
+.correct { background: #b8ffb5 !important; }
+.wrong { background: #ffb5b5 !important; }
 
+/* SUBMIT BUTTON */
 button {
-  width: 100%;
-  background: #0047ab;
+  padding: 14px 32px;
+  background: #004aad;
   color: white;
-  padding: 15px;
   border: none;
-  font-size: 1.2rem;
-  border-radius: 12px;
-  margin-top: 10px;
+  border-radius: 8px;
+  margin: 20px auto;
+  display: block;
   cursor: pointer;
 }
-
-button:hover {
-  background: #00357d;
-}
+button:hover { background: #013578; }
 
 /* RESULT BOX */
 #resultBox {
   background: #eef5ff;
   padding: 20px;
-  border-radius: 15px;
-  border-left: 6px solid #0047ab;
+  border-left: 6px solid #004aad;
+  border-radius: 10px;
   margin-top: 20px;
   display: none;
-}
-
-/* ANIMATIONS */
-@keyframes floatUp {
-  from {opacity: 0; transform: translateY(40px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
-@keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
-}
-
-@keyframes slideUp {
-  from {opacity: 0; transform: translateY(25px);}
-  to {opacity: 1; transform: translateY(0);}
-}
-
-@keyframes pulseTimer {
-  0% {transform: scale(1);}
-  50% {transform: scale(1.08);}
-  100% {transform: scale(1);}
 }
