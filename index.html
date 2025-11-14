@@ -39,16 +39,15 @@
 </div>
 
 <script>
-
 /* START QUIZ */
 function beginQuiz() {
-  document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("quizContainer").classList.remove("hidden");
+  const start = document.getElementById("startScreen");
+  const quiz = document.getElementById("quizContainer");
+  start.classList.add("hidden");
+  quiz.classList.remove("hidden");       // show quiz
 }
 
-/* -------------------------
-   11 QUIZ QUESTIONS
--------------------------- */
+/* 11 QUIZ QUESTIONS */
 const quizData = [
   { q:"नेपालमा पहिलो रेल सेवा कहाँ सुरु भयो?", 
     options:["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"], 
@@ -95,7 +94,7 @@ const quizData = [
     correct:"1950 A.D., Kathmandu–Simara" }
 ];
 
-/* SHUFFLE FUNCTION */
+/* SHUFFLE */
 function shuffle(arr){
   for(let i=arr.length-1;i>0;i--){
     const j=Math.floor(Math.random()*(i+1));
@@ -103,94 +102,94 @@ function shuffle(arr){
   }
   return arr;
 }
-
 shuffle(quizData);
 quizData.forEach(q=>q.options=shuffle(q.options));
 
 /* DISPLAY QUESTIONS */
-const wrapper=document.getElementById("questions-wrapper");
+const wrapper = document.getElementById("questions-wrapper");
 quizData.forEach((item,i)=>{
-  const div=document.createElement("div");
+  const div = document.createElement("div");
   div.classList.add("question");
 
-  let html=`<h3>${i+1}. ${item.q}</h3>`;
+  let html = `<h3>${i+1}. ${item.q}</h3>`;
   item.options.forEach(opt=>{
-    html+=`<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>`;
+    html += `<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>`;
   });
 
-  div.innerHTML=html;
+  div.innerHTML = html;
   wrapper.appendChild(div);
 });
 
 /* TIMER */
-let timeLeft=300;
-const timer=document.getElementById("timer");
-const countdown=setInterval(()=>{
-
-  const m=Math.floor(timeLeft/60);
-  const s=timeLeft%60;
-
-  timer.textContent=`⏱ ${m}:${s.toString().padStart(2,"0")}`;
-
+let timeLeft = 300;
+const timer = document.getElementById("timer");
+const countdown = setInterval(()=>{
+  const m = Math.floor(timeLeft/60);
+  const s = timeLeft%60;
+  timer.textContent = `⏱ ${m}:${s.toString().padStart(2,"0")}`;
   timeLeft--;
-  if(timeLeft<0){
+  if(timeLeft < 0){
     clearInterval(countdown);
     submitQuiz();
   }
-
 },1000);
 
-/* ANTI CHEAT */
-window.onblur=()=>submitQuiz();
+/* ANTI-CHEAT: auto submit on tab change */
+window.onblur = () => {
+  submitQuiz();
+};
 
 /* SUBMIT QUIZ */
 async function submitQuiz(){
 
   clearInterval(countdown);
-  document.getElementById("submitBtn").disabled=true;
+  document.getElementById("submitBtn").disabled = true;
 
-  const name=document.getElementById("playerName").value.trim();
-  const email=document.getElementById("playerEmail").value.trim();
+  const name  = document.getElementById("playerName").value.trim();
+  const email = document.getElementById("playerEmail").value.trim();
 
   if(!name || !email){
     alert("Enter your name & email!");
     return;
   }
 
-  let score=0;
-  let answersDetailed=[];
+  let score = 0;
+  let answersDetailed = [];
 
   quizData.forEach((q,i)=>{
-    const sel=document.querySelector(`input[name="q${i}"]:checked`);
-    const userAns=sel?sel.value:"Not answered";
-    const correct=userAns===q.correct;
-    if(correct)score++;
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    const userAns = sel ? sel.value : "Not answered";
+    const correct  = userAns === q.correct;
+    if(correct) score++;
 
     answersDetailed.push({
-      question:q.q,
-      user:userAns,
+      question:  q.q,
+      user:      userAns,
       correctAns:q.correct,
       correct
     });
   });
 
-  const percent=((score/quizData.length)*100).toFixed(2);
+  const percent = ((score / quizData.length) * 100).toFixed(2);
 
-  document.getElementById("resultBox").style.display="block";
-  document.getElementById("resultBox").innerHTML =
-    `<h3>${name}, your score: ${score}/${quizData.length} (${percent}%)</h3>
-     <p>Your answers have been submitted. Check your email.</p>`;
+  const resultBox = document.getElementById("resultBox");
+  resultBox.style.display = "block";
+  resultBox.innerHTML = `
+    <h3>${name}, your score: ${score}/${quizData.length} (${percent}%)</h3>
+    <p>Your answers have been submitted. Check your email for details.</p>
+  `;
 
-  /* SEND TO GOOGLE SCRIPT */
-  fetch("https://script.google.com/macros/s/AKfycbwFuCsAeg_IQz0uSkNqo45TyMOf19y11g1yEwOCHbEHjXb4v5CkSim6-rfBEu-flTYgOA/exec",{
-    method:"POST",
-    mode:"no-cors",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      name,email,
+  // SEND TO GOOGLE SCRIPT (saving + email)
+  fetch("https://script.google.com/macros/s/AKfycbwFuCsAeg_IQz0uSkNqo45TyMOf19y11g1yEwOCHbEHjXb4v5CkSim6-rfBEu-flTYgOA/exec", {
+    method: "POST",
+    mode: "no-cors",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify({
+      name,
+      email,
       score,
       percent,
-      total:quizData.length,
+      total: quizData.length,
       answersDetailed
     })
   });
