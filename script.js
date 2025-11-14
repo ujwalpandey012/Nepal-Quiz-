@@ -1,145 +1,116 @@
 /* ============================================================
-   NEPAL GK PROFESSIONAL QUIZ ENGINE (Fixed Version)
+   CLEAN QUIZ SCRIPT (NO IMAGES) — FINAL STABLE VERSION
 ============================================================ */
 
+/* Your Apps Script URL */
 const APP_URL =
   "https://script.google.com/macros/s/AKfycbxiDuQwKO7Krp-QGNwXhSH6nKVxO_JSos7Dtl6jPtL1jl_AGAOM9ux1XH30EjDtxL-Y1Q/exec";
 
-/* QUIZ QUESTIONS */
+/* START QUIZ */
+function beginQuiz() {
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("quizContainer").classList.remove("hidden");
+}
+
+/* QUESTIONS */
 const quizData = [
   {
-    q: "नेपालमा पहिलो रेलसेवा कहाँ सञ्चालन भयो?<br>When and where was Nepal’s first railway service?",
+    q: "नेपालमा पहिलो रेलसेवा कहाँ सञ्चालन भयो?",
     options: ["Raxaul – Amlekhganj", "Birgunj – Simara", "Janakpur – Jaynagar", "Biratnagar – Rangeli"],
     correct: "Raxaul – Amlekhganj"
   },
   {
-    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?<br>Which was Nepal’s first hydroelectric project?",
+    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?",
     options: ["Pharping", "Trishuli", "Kulekhani", "Sunkoshi"],
     correct: "Pharping"
   },
   {
-    q: "नेपालको पहिलो बैंक कुन हो?<br>Which is Nepal’s first bank?",
-    options: ["Nepal Rastra Bank", "Agriculture Development Bank", "Nepal Bank Limited", "Rastriya Banijya Bank"],
+    q: "नेपालको पहिलो बैंक कुन हो?",
+    options: ["Nepal Rastra Bank", "ADB", "Nepal Bank Limited", "RBB"],
     correct: "Nepal Bank Limited"
   },
   {
-    q: "नेपालको पहिलो संविधान कुन वर्षमा जारी?<br>When was Nepal’s first constitution issued?",
-    options: [
-      "1948 A.D. (2004 B.S.)",
-      "1951 A.D. (2008 B.S.)",
-      "1962 A.D. (2019 B.S.)",
-      "1990 A.D. (2047 B.S.)"
-    ],
-    correct: "1948 A.D. (2004 B.S.)"
+    q: "नेपालको पहिलो संविधान कुन वर्षमा जारी?",
+    options: ["1948", "1951", "1962", "1990"],
+    correct: "1948"
   },
   {
-    q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले?<br>When did Nepal join the UN?",
-    options: ["1950 A.D.", "1955 A.D.", "1957 A.D.", "1961 A.D."],
-    correct: "1955 A.D."
+    q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले?",
+    options: ["1950", "1955", "1957", "1961"],
+    correct: "1955"
   },
   {
-    q: "पहिलो विश्वविद्यालय कुन?<br>First university?",
-    options: ["Tribhuvan University", "Kathmandu University", "Purbanchal University", "MWU"],
-    correct: "Tribhuvan University"
+    q: "पहिलो विश्वविद्यालय कुन?",
+    options: ["TU", "KU", "PU", "MWU"],
+    correct: "TU"
   },
   {
-    q: "पहिलो छायाङ्कन चलचित्र?<br>First Nepali filmed movie?",
-    options: ["Aama", "Satya Harischandra", "Maitighar", "Harischandra"],
+    q: "पहिलो छायाङ्कन चलचित्र?",
+    options: ["Aama", "Harischandra", "Maitighar", "Satya Harischandra"],
     correct: "Aama"
   },
   {
-    q: "राष्ट्रिय सभा सदस्य कति?<br>National Assembly members?",
+    q: "राष्ट्रिय सभा सदस्य कति?",
     options: ["50", "56", "59", "60"],
     correct: "59"
   },
   {
-    q: "पहिलो जनगणना?<br>First census?",
-    options: [
-      "1911 during Chandra Shumsher",
-      "1941 during Judha Shumsher",
-      "1952 during Tribhuvan",
-      "1961 during Mahendra Shah"
-    ],
-    correct: "1911 during Chandra Shumsher"
+    q: "पहिलो जनगणना?",
+    options: ["1911", "1941", "1952", "1961"],
+    correct: "1911"
   },
   {
-    q: "SAARC चार्टर कहिले साइन?<br>When was SAARC Charter signed?",
-    options: ["8 December 1985", "6 January 1984", "10 December 1986", "1 Nov 1985"],
-    correct: "8 December 1985"
+    q: "SAARC चार्टर कहिले साइन?",
+    options: ["8 Dec 1985", "6 Jan 1984", "10 Dec 1986", "1 Nov 1985"],
+    correct: "8 Dec 1985"
   },
   {
-    q: "पहिलो आन्तरिक उडान?<br>First domestic flight?",
-    options: [
-      "1949 Kathmandu–Pokhara",
-      "1950 Kathmandu–Biratnagar",
-      "1950 Kathmandu–Simara",
-      "1951 Kathmandu–Janakpur"
-    ],
-    correct: "1950 Kathmandu–Simara"
+    q: "पहिलो आन्तरिक उडान?",
+    options: ["1949 Pokhara", "1950 Biratnagar", "1950 Simara", "1951 Janakpur"],
+    correct: "1950 Simara"
   }
 ];
 
-/* FIXED SHUFFLE FUNCTION */
+/* SHUFFLE */
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-  return arr;
 }
-
-/* Shuffle questions + options */
 shuffle(quizData);
 quizData.forEach(q => shuffle(q.options));
 
-/* Load questions */
-function loadQuestions() {
-  const wrapper = document.getElementById("questions-wrapper");
-  wrapper.innerHTML = "";
+/* LOAD QUESTIONS */
+const wrapper = document.getElementById("questions-wrapper");
+quizData.forEach((item, index) => {
+  let div = document.createElement("div");
+  div.classList.add("question");
 
-  quizData.forEach((item, index) => {
-    let div = document.createElement("div");
-    div.classList.add("question");
-
-    let html = `<h3>${index + 1}. ${item.q}</h3>`;
-
-    item.options.forEach(opt => {
-      html += `
-      <label>
-        <input type="radio" name="q${index}" value="${opt}">
-        ${opt}
-      </label>`;
-    });
-
-    div.innerHTML = html;
-    wrapper.appendChild(div);
+  let html = `<h3>${index + 1}. ${item.q}</h3>`;
+  item.options.forEach(opt => {
+    html += `<label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label>`;
   });
-}
 
-loadQuestions();
+  div.innerHTML = html;
+  wrapper.appendChild(div);
+});
 
 /* TIMER */
 let timeLeft = 300;
-const timerDisplay = document.getElementById("timer");
+const timer = document.getElementById("timer");
 
 const countdown = setInterval(() => {
   const m = Math.floor(timeLeft / 60);
   const s = timeLeft % 60;
-
-  timerDisplay.textContent = `⏱ ${m.toString().padStart(2, "0")}:${s
-    .toString()
-    .padStart(2, "0")}`;
-
+  timer.textContent = `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
   timeLeft--;
-  if (timeLeft < 0) {
-    clearInterval(countdown);
-    submitQuiz();
-  }
+  if (timeLeft < 0) submitQuiz();
 }, 1000);
 
-/* ANTI CHEAT */
+/* ANTI-CHEAT */
 window.onblur = () => {
-  alert("⚠️ Tab change detected! Auto submitting quiz.");
+  alert("⚠️ You switched tab! Auto-submitting quiz.");
   submitQuiz();
 };
 
@@ -150,42 +121,41 @@ async function submitQuiz() {
   const name = document.getElementById("playerName").value.trim();
   const email = document.getElementById("playerEmail").value.trim();
 
-  if (!name || !email) return alert("Please enter name & email!");
+  if (!name || !email) return alert("Please enter name & email.");
 
   let score = 0;
   let answersDetailed = [];
 
   quizData.forEach((q, i) => {
     const selected = document.querySelector(`input[name="q${i}"]:checked`);
-    const userAnswer = selected ? selected.value : "Not Answered";
-    const isCorrect = userAnswer === q.correct;
-
-    if (isCorrect) score++;
+    const answer = selected ? selected.value : "Not Answered";
+    const correct = answer === q.correct;
+    if (correct) score++;
 
     answersDetailed.push({
       question: q.q,
-      user: userAnswer,
+      user: answer,
       correctAns: q.correct,
-      correct: isCorrect
+      correct
     });
   });
 
   const percent = ((score / quizData.length) * 100).toFixed(2);
 
-  document.getElementById("resultBox").style.display = "block";
   document.getElementById("resultBox").innerHTML = `
-    <h3>${name}, your quiz has been submitted.</h3>
-    <p><b>Score:</b> ${score}/${quizData.length}</p>
-    <p><b>Percentage:</b> ${percent}%</p>
-    <p>📩 A detailed report has been emailed to you.</p>
+    <h3>${name}, your quiz is submitted.</h3>
+    <p>Score: ${score}/${quizData.length}</p>
+    <p>Percentage: ${percent}%</p>
+    <p>Your answer report has been emailed.</p>
   `;
+  document.getElementById("resultBox").style.display = "block";
 
   await fetch(APP_URL, {
     method: "POST",
     mode: "no-cors",
-    headers: {"Content-Type": "application/json"},
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, score, percent, answersDetailed })
   });
 
-  alert("✅ Thank you! Your quiz is completed.");
+  alert("✔️ Quiz submitted successfully!");
 }
