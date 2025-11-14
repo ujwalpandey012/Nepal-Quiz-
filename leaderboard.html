@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Nepal Quiz Leaderboard</title>
+
+<style>
+body {
+  background: #eef5ff;
+  font-family: "Poppins", sans-serif;
+}
+.container {
+  width: 90%;
+  max-width: 700px;
+  margin: 40px auto;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+h1 {
+  text-align: center;
+  color: #004aad;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+th {
+  background: #004aad;
+  color: white;
+}
+.rank {
+  font-weight: bold;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+  <h1>🏆 Nepal Quiz Leaderboard</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Score</th>
+        <th>%</th>
+      </tr>
+    </thead>
+    <tbody id="leaderboardBody"></tbody>
+  </table>
+</div>
+
+<script>
+
+fetch("https://script.google.com/macros/s/AKfycbwQpIgyZx1a0LrWw3Ez56HTFUebC43rkiM3c98yK0wAPfs67Lq_9usQ7TCjbdgxRDwB3Q/exec")
+  .then(res => res.json())
+  .then(data => {
+    const body = document.getElementById("leaderboardBody");
+    
+    data.forEach((row, i) => {
+      body.innerHTML += `
+        <tr>
+          <td class="rank">#${i+1}</td>
+          <td>${row.name}</td>
+          <td>${row.score}</td>
+          <td>${row.percent}%</td>
+        </tr>
+      `;
+    });
+  });
+
+</script>
+
+</body>
+</html>
