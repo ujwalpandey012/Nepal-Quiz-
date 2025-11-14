@@ -7,11 +7,11 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
-
 </head>
+
 <body>
 
-<!-- FULL SCREEN DARK ROYAL BACKGROUND -->
+<!-- START SCREEN -->
 <div id="startScreen" class="start-screen">
     <div class="start-card slide-in">
         <h1>नेपाल सरकार</h1>
@@ -27,13 +27,9 @@
 <!-- EXAM SCREEN -->
 <div id="examScreen" class="exam-screen hidden">
 
-    <!-- HEADER TOP BAR -->
     <div class="top-bar">
-        
-        <!-- Navigation Grid -->
         <div class="question-nav" id="questionNav"></div>
 
-        <!-- Royal Timer -->
         <div class="timer-ring">
             <svg>
                 <circle cx="40" cy="40" r="35"></circle>
@@ -41,13 +37,10 @@
             </svg>
             <span id="timerText">05:00</span>
         </div>
-
     </div>
 
-    <!-- QUESTION AREA -->
     <div id="questionContainer" class="question-container"></div>
 
-    <!-- EXAM BUTTONS -->
     <div class="btn-row">
         <button id="prevBtn" onclick="prevQuestion()">Previous</button>
         <button id="reviewBtn" onclick="markForReview()">Mark for Review</button>
@@ -55,12 +48,12 @@
         <button id="submitBtn" onclick="submitExam()">Submit Exam</button>
     </div>
 
-    <!-- RESULT BOX -->
+    <!-- RESULT -->
     <div id="resultBox" class="result-box hidden"></div>
+    <div id="reviewSection" class="review-section hidden"></div>
 
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
