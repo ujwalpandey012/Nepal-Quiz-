@@ -1,4 +1,4 @@
-/* CLEAN PROFESSIONAL QUIZ UI (NO IMAGES) */
+/* CLEAN PROFESSIONAL QUIZ UI (FULLY FIXED VERSION) */
 
 body {
   background: #f5f7fa;
@@ -73,7 +73,8 @@ body {
 }
 
 /* INPUTS */
-input {
+input[type="text"],
+input[type="email"] {
   width: 100%;
   padding: 14px;
   margin-bottom: 12px;
@@ -91,18 +92,26 @@ input {
 }
 .question h3 { margin-top: 0; }
 
-/* OPTIONS */
-label {
-  display: block;
-  padding: 6px;
-  border-radius: 6px;
+/* OPTIONS — FIXED */
+.question label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin: 8px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+.question label:hover {
+  background: #eef3ff;
+}
+.question input[type="radio"] {
+  transform: scale(1.2);
   cursor: pointer;
 }
-label:hover {
-  background: #e3ebff;
-}
-.correct { background: #b8ffb5 !important; }
-.wrong { background: #ffb5b5 !important; }
 
 /* SUBMIT BUTTON */
 button {
