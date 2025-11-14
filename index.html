@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ne">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nepal GK Quiz | Ujwal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- START SCREEN -->
+<div id="startScreen" class="start-screen">
+  <div class="start-box">
+    <h1>Nepal GK Quiz</h1>
+    <p>Secure Online Quiz</p>
+    <button class="start-btn" onclick="beginQuiz()">Start Quiz</button>
+  </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quizContainer" class="quiz-container hidden">
+
+  <div class="header">
+    <h2>🇳🇵 Nepal General Knowledge Quiz</h2>
+    <span id="timer">⏱ 05:00</span>
+  </div>
+
+  <form id="quizForm">
+    <input type="text" id="playerName" placeholder="Full Name" required>
+    <input type="email" id="playerEmail" placeholder="Email" required>
+
+    <div id="questions-wrapper"></div>
+
+    <button type="button" id="submitBtn" onclick="submitQuiz()">Submit Quiz</button>
+    <div id="resultBox"></div>
+  </form>
+
+</div>
+
+<script>
+
+/* START QUIZ */
+function beginQuiz() {
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("quizContainer").classList.remove("hidden");
+}
+
+/* ############# 11 QUESTIONS ############# */
+const quizData = [
+  { q:"नेपालमा पहिलो रेल सेवा कहाँ सुरु भयो?", options:["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"], correct:"Raxaul – Amlekhganj" },
+
+  { q:"नेपालको पहिलो जलविद्युत् आयोजना कुन हो?", options:["Pharping","Trishuli","Kulekhani","Sunkoshi"], correct:"Pharping" },
+
+  { q:"नेपालको पहिलो बैंक कुन हो?", options:["Nepal Bank Limited","Nepal Rastra Bank","Rastriya Banijya Bank","Agriculture Development Bank"], correct:"Nepal Bank Limited" },
+
+  { q:"नेपालको पहिलो संविधान कहिले जारी भयो?", options:["1948 A.D.","1951 A.D.","1962 A.D.","1990 A.D."], correct:"1948 A.D." },
+
+  { q:"नेपाल UN को सदस्य कहिले भएको हो?", options:["1955 A.D.","1950 A.D.","1957 A.D.","1961 A.D."], correct:"1955 A.D." },
+
+  { q:"नेपालको पहिलो विश्वविद्यालय कुन हो?", options:["Tribhuvan University","Kathmandu University","Purbanchal University","MWU"], correct:"Tribhuvan University" },
+
+  { q:"पहिलो छायाङ्कन गरिएको नेपाली चलचित्र कुन हो?", options:["Aama","Satya Harischandra","Harischandra","Maitighar"], correct:"Aama" },
+
+  { q:"राष्ट्रिय सभामा कति सदस्य हुन्छन्?", options:["59","56","60","61"], correct:"59" },
+
+  { q:"नेपालको पहिलो राष्ट्रिय जनगणना कहिले?", options:["1911 A.D.","1941 A.D.","1952 A.D.","1961 A.D."], correct:"1911 A.D." },
+
+  { q:"नेपालले SAARC चार्टर कहिले साइन गर्‍यो?", options:["8 December 1985","6 January 1984","10 December 1986","1 November 1985"], correct:"8 December 1985" },
+
+  { q:"पहिलो आन्तरिक उडान कहिले भएको थियो?", options:["1950 A.D., Kathmandu–Simara","1949 A.D., Kathmandu–Pokhara","1950 A.D., Kathmandu–Biratnagar","1951 A.D., Kathmandu–Janakpur"], correct:"1950 A.D., Kathmandu–Simara" }
+];
+
+/* SHUFFLE FUNCTION */
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+  return arr;
+}
+
+shuffle(quizData);
+quizData.forEach(q=>q.options=shuffle(q.options));
+
+/* DISPLAY QUESTIONS */
+const wrapper=document.getElementById("questions-wrapper");
+quizData.forEach((item,i)=>{
+  const div=document.createElement("div");
+  div.classList.add("question");
+  let html=`<h3>${i+1}. ${item.q}</h3>`;
+  item.options.forEach(opt=>{
+    html+=`<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>`;
+  });
+  div.innerHTML=html;
+  wrapper.appendChild(div);
+});
+
+/* TIMER */
+let timeLeft=300;
+const timer=document.getElementById("timer");
+const countdown=setInterval(()=>{
+  const m=Math.floor(timeLeft/60);
+  const s=timeLeft%60;
+  timer.textContent=`⏱ ${m}:${s.toString().padStart(2,"0")}`;
+  timeLeft--;
+  if(timeLeft<0){
+    clearInterval(countdown);
+    submitQuiz();
+  }
+},1000);
+
+/* ANTI CHEAT – after quiz started */
+window.onblur=()=>submitQuiz();
+
+/* SUBMIT */
+async function submitQuiz(){
+  clearInterval(countdown);
+
+  const name=document.getElementById("playerName").value.trim();
+  const email=document.getElementById("playerEmail").value.trim();
+  if(!name || !email){
+    alert("Enter your name & email!");
+    return;
+  }
+
+  let score=0;
+  let answersDetailed=[];
+
+  quizData.forEach((q,i)=>{
+    const sel=document.querySelector(`input[name="q${i}"]:checked`);
+    const userAns=sel?sel.value:"Not answered";
+    const correct=userAns===q.correct;
+    if(correct)score++;
+
+    answersDetailed.push({
+      question:q.q,
+      user:userAns,
+      correctAns:q.correct,
+      correct
+    });
+  });
+
+  const percent=((score/quizData.length)*100).toFixed(2);
+
+  document.getElementById("resultBox").style.display="block";
+  document.getElementById("resultBox").innerHTML =
+    `<h3>${name}, your score: ${score}/${quizData.length} (${percent}%)</h3>
+     <p>Thank you for submitting your quiz.</p>`;
+
+  /* SEND TO GOOGLE SHEET API */
+  fetch("https://script.google.com/macros/s/AKfycbwQpIgyZx1a0LrWw3Ez56HTFUebC43rkiM3c98yK0wAPfs67Lq_9usQ7TCjbdgxRDwB3Q/exec",{
+    method:"POST",
+    mode:"no-cors",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({
+      name,email,score,percent,answersDetailed
+    })
+  });
+}
+
+</script>
+
+</body>
+</html>
