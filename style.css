@@ -1,6 +1,4 @@
-/* ================================  
-   NEPAL QUIZ UI – FINAL CLEAN VERSION  
-================================ */
+/* NEPAL QUIZ UI – CLEAN VERSION */
 
 body {
   background: linear-gradient(135deg, #d6e8ff, #f7faff);
@@ -15,10 +13,7 @@ body {
   display: none !important;
 }
 
-/* ===============================
-   START SCREEN
-=============================== */
-
+/* START SCREEN */
 .start-screen {
   width: 100%;
   height: 100vh;
@@ -27,7 +22,6 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  animation: fadeIn 1s ease-in-out;
 }
 
 .start-box {
@@ -37,7 +31,6 @@ body {
   backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
-  animation: floatUp 0.8s ease-out;
 }
 
 .start-box h1 {
@@ -52,13 +45,6 @@ body {
   margin-bottom: 20px;
 }
 
-.flag {
-  width: 110px;
-  margin-bottom: 15px;
-  animation: flagFloat 3s infinite ease-in-out;
-}
-
-/* Start button */
 .start-btn {
   padding: 14px 36px;
   background: #ffffff;
@@ -71,62 +57,34 @@ body {
   box-shadow: 0 4px 16px rgba(255, 255, 255, 0.4);
   transition: 0.25s ease;
 }
-
 .start-btn:hover {
   background: #b9dcff;
   transform: scale(1.07);
 }
 
-/* Animations */
-@keyframes flagFloat {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-  100% { transform: translateY(0px); }
-}
-
-@keyframes floatUp {
-  from { opacity: 0; transform: translateY(35px); }
-  to { opacity: 1; transform: translateY(0px); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* ===============================
-   QUIZ CONTAINER
-=============================== */
-
+/* QUIZ CONTAINER */
 .quiz-container {
   max-width: 900px;
   margin: 35px auto;
   padding: 40px;
   background: rgba(255, 255, 255, 0.93);
   border-radius: 18px;
-  backdrop-filter: blur(14px);
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
-  display: none;
-  animation: fadeIn 0.8s ease-out;
 }
 
-/* Sticky header */
+/* Header */
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: rgba(255,255,255,0.95);
-  backdrop-filter: blur(10px);
   padding: 12px;
-  position: sticky;
-  top: 0;
   border-bottom: 1px solid #d2d2d2;
-  z-index: 10;
 }
 
 .header h2 {
-  color: #003b84;
   margin: 0;
+  color: #003b84;
 }
 
 #timer {
@@ -137,8 +95,7 @@ body {
   font-weight: bold;
 }
 
-/* Input fields */
-
+/* Inputs */
 input[type="text"], input[type="email"] {
   width: 100%;
   padding: 14px;
@@ -149,29 +106,14 @@ input[type="text"], input[type="email"] {
   box-sizing: border-box;
 }
 
-input:focus {
-  border-color: #004aad;
-  box-shadow: 0 0 7px rgba(0, 74, 173, 0.3);
-  outline: none;
-}
-
 /* Question card */
-
 .question {
   background: #f4f7ff;
   border-left: 6px solid #004aad;
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 25px;
-  animation: slideIn 0.45s ease-out;
 }
-
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(35px); }
-  to { opacity: 1; transform: translateX(0); }
-}
-
-/* Options */
 
 label {
   display: block;
@@ -179,23 +121,12 @@ label {
   padding: 8px;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.2s ease;
 }
-
 label:hover {
   background: #e2eaff;
 }
 
-.correct {
-  background: #b6ffb0 !important;
-}
-
-.wrong {
-  background: #ffb6b6 !important;
-}
-
 /* Submit button */
-
 button {
   display: block;
   margin: 25px auto;
@@ -206,17 +137,13 @@ button {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: .25s ease;
   font-weight: bold;
 }
-
 button:hover {
   background: #023d7a;
-  transform: scale(1.06);
 }
 
-/* Result Box */
-
+/* Result box */
 #resultBox {
   display: none;
   background: #eef7ff;
@@ -226,26 +153,17 @@ button:hover {
   text-align: center;
   margin-top: 20px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  animation: fadeIn 0.7s ease-out;
 }
 
-/* Mobile Responsive */
-
+/* Mobile */
 @media (max-width: 768px) {
-
   .quiz-container {
     margin: 15px;
     padding: 20px;
   }
-
   .start-box {
-    padding: 25px 25px;
+    padding: 25px;
   }
-
-  .start-box h1 {
-    font-size: 1.6rem;
-  }
-
   button {
     width: 100%;
   }
