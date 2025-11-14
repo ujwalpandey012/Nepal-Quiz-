@@ -1,0 +1,252 @@
+/* ================================  
+   NEPAL QUIZ UI – FINAL CLEAN VERSION  
+================================ */
+
+body {
+  background: linear-gradient(135deg, #d6e8ff, #f7faff);
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  color: #1e1e1e;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* ===============================
+   START SCREEN
+=============================== */
+
+.start-screen {
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(135deg, #004aad, #0275d8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.start-box {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 40px 50px;
+  border-radius: 18px;
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  animation: floatUp 0.8s ease-out;
+}
+
+.start-box h1 {
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.start-box p {
+  color: #e9f2ff;
+  margin-bottom: 20px;
+}
+
+.flag {
+  width: 110px;
+  margin-bottom: 15px;
+  animation: flagFloat 3s infinite ease-in-out;
+}
+
+/* Start button */
+.start-btn {
+  padding: 14px 36px;
+  background: #ffffff;
+  color: #004aad;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.4);
+  transition: 0.25s ease;
+}
+
+.start-btn:hover {
+  background: #b9dcff;
+  transform: scale(1.07);
+}
+
+/* Animations */
+@keyframes flagFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(35px); }
+  to { opacity: 1; transform: translateY(0px); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===============================
+   QUIZ CONTAINER
+=============================== */
+
+.quiz-container {
+  max-width: 900px;
+  margin: 35px auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.93);
+  border-radius: 18px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+  display: none;
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Sticky header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px;
+  position: sticky;
+  top: 0;
+  border-bottom: 1px solid #d2d2d2;
+  z-index: 10;
+}
+
+.header h2 {
+  color: #003b84;
+  margin: 0;
+}
+
+#timer {
+  background: #e60000;
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: bold;
+}
+
+/* Input fields */
+
+input[type="text"], input[type="email"] {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: 1px solid #b5b5b5;
+  margin-bottom: 18px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #004aad;
+  box-shadow: 0 0 7px rgba(0, 74, 173, 0.3);
+  outline: none;
+}
+
+/* Question card */
+
+.question {
+  background: #f4f7ff;
+  border-left: 6px solid #004aad;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 25px;
+  animation: slideIn 0.45s ease-out;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(35px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Options */
+
+label {
+  display: block;
+  margin: 7px 0;
+  padding: 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+label:hover {
+  background: #e2eaff;
+}
+
+.correct {
+  background: #b6ffb0 !important;
+}
+
+.wrong {
+  background: #ffb6b6 !important;
+}
+
+/* Submit button */
+
+button {
+  display: block;
+  margin: 25px auto;
+  background: #004aad;
+  color: white;
+  padding: 15px 34px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: .25s ease;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #023d7a;
+  transform: scale(1.06);
+}
+
+/* Result Box */
+
+#resultBox {
+  display: none;
+  background: #eef7ff;
+  padding: 25px;
+  border-left: 6px solid #004aad;
+  border-radius: 12px;
+  text-align: center;
+  margin-top: 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  animation: fadeIn 0.7s ease-out;
+}
+
+/* Mobile Responsive */
+
+@media (max-width: 768px) {
+
+  .quiz-container {
+    margin: 15px;
+    padding: 20px;
+  }
+
+  .start-box {
+    padding: 25px 25px;
+  }
+
+  .start-box h1 {
+    font-size: 1.6rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}
