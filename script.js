@@ -69,9 +69,27 @@ let current=0, answers={}, reviewSet=new Set();
 
 /* START */
 function beginExam(){
+
   document.getElementById("startScreen").classList.add("hidden");
   document.getElementById("examScreen").classList.remove("hidden");
-  loadNav(); loadQ(); startTimer();
+
+  loadNav(); 
+  loadQ(); 
+  startTimer();
+
+  /* 🚨 ANTI-CHEAT SYSTEM (ACTIVATES WHEN EXAM STARTS) */
+
+  // Switch tab → auto submit
+  window.onblur = () => {
+      submitExam();
+  };
+
+  // Minimize, open new window, switch apps → auto submit
+  document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+          submitExam();
+      }
+  });
 }
 
 /* NAV */
