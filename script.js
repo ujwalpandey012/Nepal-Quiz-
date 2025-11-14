@@ -1,157 +1,292 @@
-/* GOOGLE SCRIPT URL */
-const APP_URL = "YOUR_APPS_SCRIPT_URL_HERE";
+/* GOOGLE SHEET ENDPOINT */
+const APP_URL = "https://script.google.com/macros/s/AKfycbyTXArmFAAChhMuBdnZUP1k95aEElCadrmZavf7XuTZlPUn4j-RScEsHkoOV7B27J4qEw/exec";
 
-/* --- QUESTIONS --- */
+/* ======================================================
+   BILINGUAL QUESTION SET (Nepali + English)
+====================================================== */
 const questions = [
-  { q:"नेपालमा पहिलो रेलसेवा कहाँ सञ्चालन भयो?", options:["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"], correct:"Raxaul – Amlekhganj"},
-  { q:"नेपालको पहिलो जलविद्युत् आयोजना कुन हो?",options:["Pharping","Trishuli","Kulekhani","Sunkoshi"],correct:"Pharping"},
-  { q:"नेपालको पहिलो बैंक कुन हो?",options:["Nepal Rastra Bank","ADB","Nepal Bank Limited","RBB"],correct:"Nepal Bank Limited"},
-  { q:"नेपालको पहिलो संविधान कुन वर्षमा जारी?",options:["1948","1951","1962","1990"],correct:"1948"},
-  { q:"नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले?",options:["1950","1955","1957","1961"],correct:"1955"},
-  { q:"पहिलो विश्वविद्यालय कुन?",options:["TU","KU","PU","MWU"],correct:"TU"},
-  { q:"पहिलो छायाङ्कन चलचित्र?",options:["Aama","Harischandra","Maitighar","Satya Harischandra"],correct:"Aama"},
-  { q:"राष्ट्रिय सभा सदस्य कति?",options:["50","56","59","60"],correct:"59"},
-  { q:"पहिलो जनगणना?",options:["1911","1941","1952","1961"],correct:"1911"},
-  { q:"SAARC चार्टर कहिले साइन?",options:["8 Dec 1985","6 Jan 1984","10 Dec 1986","1 Nov 1985"],correct:"8 Dec 1985"},
-  { q:"पहिलो आन्तरिक उडान?",options:["1949 Pokhara","1950 Biratnagar","1950 Simara","1951 Janakpur"],correct:"1950 Simara"}
+  {
+    q: "नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?<br>Where was Nepal’s first railway service operated?",
+    options: [
+      "Raxaul – Amlekhganj",
+      "Birgunj – Simara",
+      "Janakpur – Jaynagar",
+      "Biratnagar – Rangeli"
+    ],
+    correct: "Raxaul – Amlekhganj"
+  },
+  {
+    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?<br>What is the first hydroelectric project of Nepal?",
+    options: ["Trishuli", "Pharping", "Kulekhani", "Sunkoshi"],
+    correct: "Pharping"
+  },
+  {
+    q: "नेपालको पहिलो बैंक कुन हो?<br>What is the first bank of Nepal?",
+    options: [
+      "Nepal Rastra Bank",
+      "Agriculture Development Bank",
+      "Nepal Bank Limited",
+      "Rastriya Banijya Bank"
+    ],
+    correct: "Nepal Bank Limited"
+  },
+  {
+    q: "नेपालको पहिलो संविधान कुन वर्ष जारी गरिएको थियो?<br>In which year was Nepal’s first constitution issued?",
+    options: [
+      "1948 A.D. (2004 B.S.)",
+      "1951 A.D. (2008 B.S.)",
+      "1962 A.D. (2019 B.S.)",
+      "1990 A.D. (2047 B.S.)"
+    ],
+    correct: "1948 A.D. (2004 B.S.)"
+  },
+  {
+    q: "नेपाल संयुक्त राष्ट्रसंघको सदस्य कहिले भएको हो?<br>When did Nepal become a member of the UN?",
+    options: ["1950 A.D", "1955 A.D", "1957 A.D", "1961 A.D"],
+    correct: "1955 A.D"
+  },
+  {
+    q: "नेपालको पहिलो विश्वविद्यालय कुन हो?<br>What is the first university of Nepal?",
+    options: [
+      "Tribhuvan University",
+      "Kathmandu University",
+      "Purbanchal University",
+      "Mid-Western University"
+    ],
+    correct: "Tribhuvan University"
+  },
+  {
+    q: "नेपाली भाषामा छायाङ्कन भएको पहिलो चलचित्र कुन हो?<br>What is the first Nepali-language filmed movie?",
+    options: ["Aama", "Satya Harischandra", "Maitighar", "Harischandra"],
+    correct: "Aama"
+  },
+  {
+    q: "राष्ट्रिय सभामा कति जना सदस्य हुन्छन्?<br>How many members are there in Nepal’s National Assembly?",
+    options: ["50", "56", "59", "60"],
+    correct: "59"
+  },
+  {
+    q: "नेपालको पहिलो जनगणना कहिले र कसको कालमा भएको हो?<br>When was Nepal’s first census conducted, and under whose rule?",
+    options: [
+      "1911 A.D., during Chandra Shumsher",
+      "1941 A.D., during Judha Shumsher",
+      "1952 A.D., during Tribhuwan Shah",
+      "1961 A.D., during King Mahendra"
+    ],
+    correct: "1911 A.D., during Chandra Shumsher"
+  },
+  {
+    q: "नेपालले SAARC को चार्टर कहिले साइन गरेको थियो?<br>When did Nepal sign the SAARC Charter?",
+    options: [
+      "8 December 1985",
+      "6 January 1984",
+      "10 December 1986",
+      "1 November 1985"
+    ],
+    correct: "8 December 1985"
+  },
+  {
+    q: "नेपालको पहिलो आन्तरिक उडान कहिले र कुन मार्गमा भएको हो?<br>When and on which route did Nepal’s first domestic flight take place?",
+    options: [
+      "1949 A.D., Kathmandu–Pokhara",
+      "1950 A.D., Kathmandu–Biratnagar",
+      "1950 A.D., Kathmandu–Simara",
+      "1951 A.D., Kathmandu–Janakpur"
+    ],
+    correct: "1950 A.D., Kathmandu–Simara"
+  }
 ];
 
-/* SHUFFLE EVERYTHING */
-function shuffle(arr){for(let i=arr.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}}
-shuffle(questions); questions.forEach(q=>shuffle(q.options));
+/* ======================================================
+   RANDOMIZATION (Shuffling)
+====================================================== */
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+shuffle(questions);
+questions.forEach(q => shuffle(q.options));
 
-/* STATE */
-let current=0;
-let answers={};
-let review=new Set();
+/* ======================================================
+   CBT STATE
+====================================================== */
+let current = 0;
+let answers = {};
+let reviewSet = new Set();
 
-/* BEGIN EXAM */
-function beginExam(){
+/* START EXAM */
+function beginExam() {
   document.getElementById("startScreen").classList.add("hidden");
   document.getElementById("examScreen").classList.remove("hidden");
   loadNav();
-  loadQ();
+  loadQuestion();
   startTimer();
 }
 
-/* NAV */
-function loadNav(){
-  let nav=document.getElementById("questionNav");
-  nav.innerHTML="";
-  questions.forEach((_,i)=>{
-    let b=document.createElement("div");
-    b.className="nav-btn";
-    b.innerText=i+1;
-    b.onclick=()=>go(i);
-    nav.appendChild(b);
+/* ======================================================
+   NAVIGATION BUTTONS (1–11)
+====================================================== */
+function loadNav() {
+  let nav = document.getElementById("questionNav");
+  nav.innerHTML = "";
+
+  questions.forEach((_, i) => {
+    let btn = document.createElement("div");
+    btn.className = "nav-btn";
+    btn.innerText = i + 1;
+    btn.onclick = () => goTo(i);
+    nav.appendChild(btn);
   });
+
   updateNav();
 }
 
-function updateNav(){
-  document.querySelectorAll(".nav-btn").forEach((b,i)=>{
-    b.classList.remove("active");
-    if(i===current) b.classList.add("active");
-    if(review.has(i)) b.classList.add("review");
+function updateNav() {
+  document.querySelectorAll(".nav-btn").forEach((btn, i) => {
+    btn.classList.remove("active");
+    if (i === current) btn.classList.add("active");
+    if (reviewSet.has(i)) btn.classList.add("review");
   });
 }
 
-/* LOAD QUESTION */
-function loadQ(){
+/* ======================================================
+   LOAD QUESTION (NO CORRECT ANSWER SHOWN)
+====================================================== */
+function loadQuestion() {
   updateNav();
-  const q=questions[current];
-  let box=document.getElementById("questionContainer");
-  let h=`<h2>${current+1}. ${q.q}</h2>`;
-  q.options.forEach(opt=>{
-    h+=`
+
+  const q = questions[current];
+  const box = document.getElementById("questionContainer");
+
+  let html = `<h2>${current + 1}. ${q.q}</h2>`;
+
+  q.options.forEach(opt => {
+    html += `
       <label class="option">
-        <input type="radio" name="q${current}" value="${opt}" ${(answers[current]===opt)?"checked":""}>
+        <input type="radio" name="q${current}" value="${opt}"
+        ${answers[current] === opt ? "checked" : ""}>
         ${opt}
       </label>
     `;
   });
-  box.innerHTML=h;
 
-  document.getElementById("prevBtn").disabled=(current===0);
-  document.getElementById("nextBtn").disabled=(current===questions.length-1);
+  box.innerHTML = html;
+
+  document.getElementById("prevBtn").disabled = current === 0;
+  document.getElementById("nextBtn").disabled = current === questions.length - 1;
 }
 
-function saveAns(){
-  let s=document.querySelector(`input[name="q${current}"]:checked`);
-  if(s) answers[current]=s.value;
+function saveAnswer() {
+  let selected = document.querySelector(`input[name="q${current}"]:checked`);
+  if (selected) answers[current] = selected.value;
 }
 
 /* BUTTONS */
-function nextQuestion(){saveAns();current++;loadQ();}
-function prevQuestion(){saveAns();current--;loadQ();}
-function go(n){saveAns();current=n;loadQ();}
-function markForReview(){review.add(current);updateNav();}
+function nextQuestion() { saveAnswer(); current++; loadQuestion(); }
+function prevQuestion() { saveAnswer(); current--; loadQuestion(); }
+function goTo(n) { saveAnswer(); current = n; loadQuestion(); }
+function markForReview() { reviewSet.add(current); updateNav(); }
 
-/* TIMER */
-let time=300;
-function startTimer(){
-  let t=document.getElementById("timerText");
-  let c=document.getElementById("timerCircle");
-  let int=setInterval(()=>{
-    let m=Math.floor(time/60), s=time%60;
-    t.innerHTML=`${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
-    c.style.strokeDashoffset=220-(220*(time/300));
-    if(time<0){clearInterval(int);submitExam();}
+/* ======================================================
+   TIMER (5 min)
+====================================================== */
+let time = 300;
+function startTimer() {
+  let timerText = document.getElementById("timerText");
+  let circle = document.getElementById("timerCircle");
+
+  let t = setInterval(() => {
+    let m = Math.floor(time / 60);
+    let s = time % 60;
+    timerText.innerHTML = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
+
+    circle.style.strokeDashoffset = 220 - (220 * (time / 300));
+
+    if (time < 0) { clearInterval(t); submitExam(); }
     time--;
-  },1000);
+  }, 1000);
 }
 
-/* SUBMIT */
-async function submitExam(){
-  saveAns();
+/* ======================================================
+   SUBMIT EXAM (LOCK + REVIEW + SEND TO SHEET)
+====================================================== */
+async function submitExam() {
+  saveAnswer();
 
-  let score=0;
-  questions.forEach((q,i)=>{ if(answers[i]===q.correct) score++; });
+  /* LOCK EXAM INTERFACE */
+  document.querySelector(".btn-row").classList.add("hidden");
+  document.querySelector(".top-bar").classList.add("hidden");
+  document.getElementById("questionContainer").classList.add("hidden");
 
-  let percent=((score/questions.length)*100).toFixed(2);
+  let score = 0;
+  let details = [];
 
-  document.getElementById("resultBox").classList.remove("hidden");
-  document.getElementById("resultBox").innerHTML=`
-    <h2>धन्यवाद! तपाईंको परिक्षा सम्पन्न भयो।</h2>
+  questions.forEach((q, i) => {
+    let user = answers[i] || "Not Answered";
+    let correct = q.correct;
+    let isCorrect = (user === correct);
+    if (isCorrect) score++;
+
+    details.push({
+      question: q.q,
+      user,
+      correctAns: correct,
+      correct: isCorrect
+    });
+  });
+
+  let percent = ((score / questions.length) * 100).toFixed(2);
+
+  let result = document.getElementById("resultBox");
+  result.classList.remove("hidden");
+  result.innerHTML = `
+    <h2>धन्यवाद! परीक्षा सफलतापूर्वक सम्पन्न भयो।</h2>
     <p><strong>Score:</strong> ${score}/${questions.length}</p>
     <p><strong>Percentage:</strong> ${percent}%</p>
+    <p>Your full answer review is shown below.</p>
   `;
 
-  buildReview();
+  buildReview(details);
 
-  fetch(APP_URL,{
-    method:"POST",
-    mode:"no-cors",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      name:document.getElementById("playerName").value,
-      email:document.getElementById("playerEmail").value,
-      score,percent,answers
+  /* SEND DATA TO GOOGLE SHEETS */
+  await fetch(APP_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: document.getElementById("playerName").value,
+      email: document.getElementById("playerEmail").value,
+      score,
+      percent,
+      answersDetailed: details
     })
   });
+
+  /* STOP REFRESH / BACK */
+  window.onbeforeunload = () => "Exam already submitted.";
 }
 
-/* REVIEW PANEL */
-function buildReview(){
-  let box=document.getElementById("reviewSection");
+/* ======================================================
+   REVIEW SECTION (AFTER SUBMIT ONLY)
+====================================================== */
+function buildReview(details) {
+  let box = document.getElementById("reviewSection");
   box.classList.remove("hidden");
 
-  let html="";
-  questions.forEach((q,i)=>{
-    let user=answers[i]||"Not Answered";
-    let correct=q.correct;
-    let status=(user===correct);
-
-    html+=`
+  let html = "";
+  details.forEach((ans, i) => {
+    html += `
       <div class="review-card">
-        <div class="review-q">${i+1}. ${q.q}</div>
-        <div class="${status?'correct-text':'wrong-text'}">
-          Your Answer: ${user}
+        <div class="review-q">${i + 1}. ${ans.question}</div>
+        <div class="${ans.correct ? 'correct-text' : 'wrong-text'}">
+          Your Answer: ${ans.user}
         </div>
-        <div class="correct-ans">Correct Answer: ${correct}</div>
+        <div class="correct-ans">Correct Answer: ${ans.correctAns}</div>
       </div>
     `;
   });
 
-  box.innerHTML=html;
+  box.innerHTML = html;
 }
