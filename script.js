@@ -1,30 +1,5 @@
-/* LOADING SCREEN ----------------------------------------- */
-window.onload = () => {
-  setTimeout(() => {
-    document.getElementById("loadingScreen").classList.add("hidden");
-    document.getElementById("startScreen").classList.remove("hidden");
-  }, 1500);
-};
-
-/* BEGIN QUIZ -------------------------------------------- */
-function beginQuiz() {
-  const name = document.getElementById("playerName").value.trim();
-  const email = document.getElementById("playerEmail").value.trim();
-
-  if (!name || !email) {
-    alert("Please fill all fields correctly.");
-    return;
-  }
-
-  document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("quizScreen").classList.remove("hidden");
-
-  loadQuestions();
-  startTimer();
-}
-
-/* QUESTIONS --------------------------------------------- */
-const quizData = [
+/* QUESTIONS DATABASE -------------------------------------------- */
+const questions = [
   { q: "नेपालमा पहिलो रेलसेवा कहाँ सञ्चालन भयो?", options: ["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"], correct: "Raxaul – Amlekhganj" },
   { q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?", options: ["Pharping","Trishuli","Kulekhani","Sunkoshi"], correct: "Pharping" },
   { q: "नेपालको पहिलो बैंक कुन हो?", options: ["Nepal Rastra Bank","ADB","Nepal Bank Limited","RBB"], correct: "Nepal Bank Limited" },
@@ -38,99 +13,151 @@ const quizData = [
   { q: "पहिलो आन्तरिक उडान?", options: ["1949 Pokhara","1950 Biratnagar","1950 Simara","1951 Janakpur"], correct: "1950 Simara" }
 ];
 
-/* SHUFFLE FUNCTION */
-function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+/* SHUFFLE QUESTIONS + OPTIONS ----------------------------------- */
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
   }
 }
+shuffle(questions);
+questions.forEach(q => shuffle(q.options));
 
-/* LOAD QUESTIONS ---------------------------------------- */
-function loadQuestions() {
-  shuffle(quizData);
+/* STATE ---------------------------------------------------------- */
+let current = 0;
+let answers = {};
+let reviewList = new Set();
 
-  const wrapper = document.getElementById("questionsWrapper");
-  wrapper.innerHTML = "";
+/* START EXAM ----------------------------------------------------- */
+function beginExam() {
+  document.getElementById("startScreen").classList.add("hidden");
+  document.getElementById("examScreen").classList.remove("hidden");
 
-  quizData.forEach((item, index) => {
-    shuffle(item.options);
+  loadNavigation();
+  loadQuestion();
+  startTimer();
+}
 
-    let card = document.createElement("div");
-    card.classList.add("question-card");
+/* NAVIGATION GRID ------------------------------------------------ */
+function loadNavigation() {
+  let nav = document.getElementById("questionNav");
+  nav.innerHTML = "";
 
-    let html = `<h3>${index + 1}. ${item.q}</h3>`;
+  questions.forEach((_, i) => {
+    let btn = document.createElement("div");
+    btn.className = "nav-btn";
+    btn.innerText = i + 1;
+    btn.onclick = () => goTo(i);
+    nav.appendChild(btn);
+  });
 
-    item.options.forEach(opt => {
-      html += `
-      <label class="option">
-        <input type="radio" name="q${index}" value="${opt}">
-        ${opt}
-      </label>`;
-    });
+  updateNav();
+}
 
-    card.innerHTML = html;
-    wrapper.appendChild(card);
+function updateNav() {
+  document.querySelectorAll(".nav-btn").forEach((btn, i) => {
+    btn.classList.remove("active");
+    if (i === current) btn.classList.add("active");
+    if (reviewList.has(i)) btn.classList.add("review");
   });
 }
 
-/* TIMER ------------------------------------------------- */
-let totalTime = 300; // 5 minutes
+/* LOAD QUESTION -------------------------------------------------- */
+function loadQuestion() {
+  updateNav();
+
+  const q = questions[current];
+  const container = document.getElementById("questionContainer");
+
+  let html = `<h2>${current + 1}. ${q.q}</h2>`;
+
+  q.options.forEach(opt => {
+    html += `
+      <label class="option">
+        <input type="radio" 
+               name="q${current}" 
+               value="${opt}"
+               ${answers[current] === opt ? "checked" : ""}>
+        ${opt}
+      </label>`;
+  });
+
+  container.innerHTML = html;
+
+  // buttons conditions
+  document.getElementById("prevBtn").disabled = current === 0;
+  document.getElementById("nextBtn").disabled = current === questions.length - 1;
+}
+
+/* BUTTON FUNCTIONS ---------------------------------------------- */
+function nextQuestion() {
+  saveAnswer();
+  current++;
+  loadQuestion();
+}
+
+function prevQuestion() {
+  saveAnswer();
+  current--;
+  loadQuestion();
+}
+
+function goTo(n) {
+  saveAnswer();
+  current = n;
+  loadQuestion();
+}
+
+function saveAnswer() {
+  const selected = document.querySelector(`input[name="q${current}"]:checked`);
+  if (selected) answers[current] = selected.value;
+}
+
+function markForReview() {
+  reviewList.add(current);
+  updateNav();
+}
+
+/* TIMER ---------------------------------------------------------- */
+let time = 300; 
 function startTimer() {
-  const timer = document.getElementById("timer");
+  const timerText = document.getElementById("timerText");
+  const circle = document.getElementById("timerCircle");
 
-  let countdown = setInterval(() => {
-    let m = Math.floor(totalTime / 60);
-    let s = totalTime % 60;
+  let interval = setInterval(() => {
+    let m = Math.floor(time / 60);
+    let s = time % 60;
 
-    timer.textContent = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
+    timerText.innerHTML = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
 
-    // Change color when time is low
-    if (totalTime === 60) timer.style.background = "#ff9300";
-    if (totalTime === 20) timer.style.background = "#d80000";
+    let progress = (time / 300) * 220;
+    circle.style.strokeDashoffset = 220 - progress;
 
-    totalTime--;
-    updateProgressBar();
+    time--;
 
-    if (totalTime < 0) {
-      clearInterval(countdown);
-      submitQuiz();
+    if (time < 0) {
+      clearInterval(interval);
+      submitExam();
     }
+
   }, 1000);
 }
 
-/* PROGRESS BAR ------------------------------------------ */
-function updateProgressBar() {
-  const fill = document.getElementById("progressFill");
-  let percentage = ((300 - totalTime) / 300) * 100;
-  fill.style.width = percentage + "%";
-}
-
-/* SUBMIT QUIZ ------------------------------------------ */
-function submitQuiz() {
-  const name = document.getElementById("playerName").value;
-  const email = document.getElementById("playerEmail").value;
+/* SUBMIT RESULT -------------------------------------------------- */
+function submitExam() {
+  saveAnswer();
 
   let score = 0;
-  let details = [];
-
-  quizData.forEach((q, i) => {
-    const selected = document.querySelector(`input[name="q${i}"]:checked`);
-    let answer = selected ? selected.value : "Not Answered";
-
-    if (answer === q.correct) score++;
-
-    details.push({ question: q.q, selected: answer, correct: q.correct });
+  questions.forEach((q, i) => {
+    if (answers[i] === q.correct) score++;
   });
 
-  const result = document.getElementById("resultBox");
+  let result = document.getElementById("resultBox");
   result.classList.remove("hidden");
   result.innerHTML = `
-      <h2>Examination Completed</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Score:</strong> ${score}/${quizData.length}</p>
-      <p><strong>Percentage:</strong> ${(score / quizData.length * 100).toFixed(2)}%</p>
+    <h2>Exam Completed</h2>
+    <p><strong>Score:</strong> ${score}/${questions.length}</p>
+    <p><strong>Percentage:</strong> ${(score / questions.length * 100).toFixed(2)}%</p>
   `;
 
   window.scrollTo({ top: 0, behavior: "smooth" });
