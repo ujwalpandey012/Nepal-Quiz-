@@ -1,148 +1,219 @@
-/* ================================
-   1) START QUIZ
-================================ */
-function beginQuiz() {
-  document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("quizContainer").classList.remove("hidden");
-}
+/* ============================================================
+   NEPAL GK PROFESSIONAL QUIZ ENGINE (Final Version)
+   Created for Ujwal Pandey
+============================================================ */
 
-/* ================================
-   2) QUIZ DATA (11 QUESTIONS)
-================================ */
+// ⭐ Your Google Apps Script Web App URL:
+const APP_URL = "https://script.google.com/macros/s/AKfycbxiDuQwKO7Krp-QGNwXhSH6nKVxO_JSos7Dtl6jPtL1jl_AGAOM9ux1XH30EjDtxL-Y1Q/exec";
+
+/* ============================================================
+   QUIZ QUESTIONS — Final Set (11 Questions)
+============================================================ */
 const quizData = [
-  { q:"नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?", 
-    options:["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"],
-    correct:"Raxaul – Amlekhganj" },
-  { q:"नेपालको पहिलो जलविद्युत् आयोजना कुन हो?",
-    options:["Pharping","Trishuli","Kulekhani","Sunkoshi"],
-    correct:"Pharping" },
-  { q:"नेपालको पहिलो बैंक कुन हो?",
-    options:["Nepal Bank Limited","Nepal Rastra Bank","RBB","ADB"],
-    correct:"Nepal Bank Limited" },
-  { q:"नेपालको पहिलो संविधान कहिले जारी?",
-    options:["1948 A.D.","1951 A.D.","1962 A.D.","1990 A.D."],
-    correct:"1948 A.D." },
-  { q:"UN को सदस्य नेपाल कहिले?",
-    options:["1955 A.D.","1950 A.D.","1957 A.D.","1961 A.D."],
-    correct:"1955 A.D." },
-  { q:"नेपालको पहिलो विश्वविद्यालय कुन?",
-    options:["Tribhuvan University","Kathmandu University","Purbanchal University","MWU"],
-    correct:"Tribhuvan University" },
-  { q:"छायाङ्कन गरिएको पहिलो नेपाली चलचित्र कुन?",
-    options:["Aama","Maitighar","Harischandra","SH"],
-    correct:"Aama" },
-  { q:"राष्ट्रिय सभा सदस्य कति?",
-    options:["59","56","60","61"],
-    correct:"59" },
-  { q:"नेपालको पहिलो जनगणना कहिले?",
-    options:["1911 A.D.","1941 A.D.","1952 A.D.","1961 A.D."],
-    correct:"1911 A.D." },
-  { q:"SAARC चार्टर कहिले साइन?",
-    options:["8 December 1985","6 Jan 1984","10 Dec 1986","1 Nov 1985"],
-    correct:"8 December 1985" },
-  { q:"पहिलो आन्तरिक उडान कहिले?",
-    options:["1950 A.D., Kathmandu–Simara","1949 A.D., Kathmandu–Pokhara","1950 A.D., Kathmandu–Biratnagar","1951 A.D., Kathmandu–Janakpur"],
-    correct:"1950 A.D., Kathmandu–Simara" }
+  {
+    q: "नेपालमा पहिलो रेलसेवा कहाँ सञ्चालन भयो?<br>When and where was Nepal’s first railway service operated?",
+    options: ["Raxaul – Amlekhganj", "Birgunj – Simara", "Janakpur – Jaynagar", "Biratnagar – Rangeli"],
+    correct: "Raxaul – Amlekhganj"
+  },
+
+  {
+    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?<br>Which was Nepal’s first hydroelectric project?",
+    options: ["Pharping", "Trishuli", "Kulekhani", "Sunkoshi"],
+    correct: "Pharping"
+  },
+
+  {
+    q: "नेपालको पहिलो बैंक कुन हो?<br>Which is Nepal’s first bank?",
+    options: ["Nepal Rastra Bank", "Agriculture Development Bank", "Nepal Bank Limited", "Rastriya Banijya Bank"],
+    correct: "Nepal Bank Limited"
+  },
+
+  {
+    q: "नेपालको पहिलो संविधान कुन वर्षमा जारी गरिएको थियो?<br>In which year was Nepal’s first constitution promulgated?",
+    options: ["1948 A.D. (2004 B.S.)", "1951 A.D. (2008 B.S.)", "1962 A.D. (2019 B.S.)", "1990 A.D. (2047 B.S.)"],
+    correct: "1948 A.D. (2004 B.S.)"
+  },
+
+  {
+    q: "नेपाल संयुक्त राष्ट्रसंघको सदस्य कहिले भएको हो?<br>When did Nepal join the United Nations?",
+    options: ["1950 A.D.", "1955 A.D.", "1957 A.D.", "1961 A.D."],
+    correct: "1955 A.D."
+  },
+
+  {
+    q: "नेपालको पहिलो विश्वविद्यालय कुन हो?<br>Which is the first university of Nepal?",
+    options: ["Tribhuvan University", "Kathmandu University", "Purbanchal University", "Mid-Western University"],
+    correct: "Tribhuvan University"
+  },
+
+  {
+    q: "नेपाली भाषामा छायाङ्कन भएको पहिलो चलचित्र कुन हो?<br>Which is the first Nepali-language movie shot in Nepal?",
+    options: ["Aama", "Satya Harischandra", "Maitighar", "Harischandra"],
+    correct: "Aama"
+  },
+
+  {
+    q: "संविधान २०७२ अनुसार राष्ट्रिय सभामा कति सदस्य हुन्छन्?<br>How many members are in the National Assembly as per Constitution 2072?",
+    options: ["50", "56", "59", "60"],
+    correct: "59"
+  },
+
+  {
+    q: "नेपालमा पहिलो राष्ट्रिय जनगणना कहिले र कसको कालमा भयो?<br>When was Nepal’s first national census conducted?",
+    options: [
+      "1911 A.D. during Chandra Shumsher",
+      "1941 A.D. during Judha Shumsher",
+      "1952 A.D. during Tribhuvan Shah",
+      "1961 A.D. during Mahendra Shah"
+    ],
+    correct: "1911 A.D. during Chandra Shumsher"
+  },
+
+  {
+    q: "नेपालले SAARC को स्थापना सम्झौता कहिले साइन गरेको थियो?<br>When did Nepal sign the SAARC Charter?",
+    options: ["8 December 1985", "6 January 1984", "10 December 1986", "1 November 1985"],
+    correct: "8 December 1985"
+  },
+
+  {
+    q: "नेपालमा पहिलो आन्तरिक उडान कहिले र कुन मार्गमा भयो?<br>When and on which route was Nepal’s first domestic flight?",
+    options: [
+      "1949 A.D., Kathmandu–Pokhara",
+      "1950 A.D., Kathmandu–Biratnagar",
+      "1950 A.D., Kathmandu–Simara",
+      "1951 A.D., Kathmandu–Janakpur"
+    ],
+    correct: "1950 A.D., Kathmandu–Simara"
+  }
 ];
 
-/* Randomize */
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+/* ============================================================
+   Shuffle Function
+============================================================ */
+function shuffle(arr) {
+  for (let i = arr.length - i; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+/* Shuffle questions + options */
 shuffle(quizData);
-quizData.forEach(q=>q.options=shuffle(q.options));
+quizData.forEach(q => shuffle(q.options));
 
-const quizBox=document.getElementById("questions-wrapper");
-quizData.forEach((item,i)=>{
-  let div=document.createElement("div");
-  div.className="question";
-  let html=`<h3>${i+1}. ${item.q}</h3>`;
-  item.options.forEach(opt=>{
-    html+=`<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>`;
+/* ============================================================
+   Load Questions
+============================================================ */
+function loadQuestions() {
+  const wrapper = document.getElementById("questions-wrapper");
+  wrapper.innerHTML = "";
+
+  quizData.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.classList.add("question");
+
+    let html = `<h3>${index + 1}. ${item.q}</h3>`;
+
+    item.options.forEach(opt => {
+      html += `
+        <label>
+          <input type="radio" name="q${index}" value="${opt}">
+          ${opt}
+        </label>`;
+    });
+
+    div.innerHTML = html;
+    wrapper.appendChild(div);
   });
-  div.innerHTML=html;
-  quizBox.appendChild(div);
-});
+}
 
-/* ================================
-   3) TIMER
-================================ */
-let timeLeft=300;
-let timer=document.getElementById("timer");
-let countdown=setInterval(()=>{
-  let m=Math.floor(timeLeft/60);
-  let s=timeLeft%60;
-  timer.textContent=`${m}:${s.toString().padStart(2,"0")}`;
+loadQuestions();
+
+/* ============================================================
+   Timer
+============================================================ */
+let timeLeft = 300;
+const timerDisplay = document.getElementById("timer");
+
+const countdown = setInterval(() => {
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+
+  timerDisplay.textContent = `⏱ ${m.toString().padStart(2, "0")}:${s
+    .toString()
+    .padStart(2, "0")}`;
+
   timeLeft--;
-  if(timeLeft<0){
+
+  if (timeLeft < 0) {
     clearInterval(countdown);
     submitQuiz();
   }
-},1000);
+}, 1000);
 
-/* ================================
-   4) ANTI-CHEAT
-================================ */
-window.onblur=()=>{
-  alert("⚠ Tab switch detected. Auto-submitting...");
+/* ============================================================
+   ANTI-CHEAT (Auto Submit on Tab Switch)
+============================================================ */
+window.onblur = () => {
+  alert("⚠️ You switched tab! Your quiz is being auto-submitted.");
   submitQuiz();
 };
 
-/* ================================
-   5) SUBMIT QUIZ — SAVE + EMAIL
-================================ */
-async function submitQuiz(){
-
+/* ============================================================
+   Submit Function
+============================================================ */
+async function submitQuiz() {
   clearInterval(countdown);
   document.getElementById("submitBtn").disabled = true;
 
-  const name=document.getElementById("playerName").value.trim();
-  const email=document.getElementById("playerEmail").value.trim();
+  const name = document.getElementById("playerName").value.trim();
+  const email = document.getElementById("playerEmail").value.trim();
 
-  if(!name||!email){
-    alert("Please enter name and email!");
+  if (!name || !email) {
+    alert("Please enter your full name and email.");
     return;
   }
 
-  let score=0;
-  let answerDetails=[];
+  let score = 0;
+  let answersDetailed = [];
 
-  quizData.forEach((q,i)=>{
-    const sel=document.querySelector(`input[name="q${i}"]:checked`);
-    const user=(sel)?sel.value:"Not Answered";
-    const isCorrect=(user===q.correct);
+  quizData.forEach((q, i) => {
+    const selected = document.querySelector(`input[name="q${i}"]:checked`);
+    const userAnswer = selected ? selected.value : "Not Answered";
+    const isCorrect = userAnswer === q.correct;
+    if (isCorrect) score++;
 
-    if(isCorrect) score++;
-
-    answerDetails.push({
-      question:q.q,
-      user:user,
-      correct:q.correct,
-      correctStatus:isCorrect?"Correct":"Wrong"
+    answersDetailed.push({
+      question: q.q,
+      user: userAnswer,
+      correctAns: q.correct,
+      correct: isCorrect
     });
   });
 
-  const percent=((score/quizData.length)*100).toFixed(2);
+  const percent = ((score / quizData.length) * 100).toFixed(2);
 
-  document.getElementById("resultBox").style.display="block";
+  document.getElementById("resultBox").style.display = "block";
   document.getElementById("resultBox").innerHTML = `
-    <h3>Thank You, ${name}!</h3>
-    <p>Your Score: <b>${score}/${quizData.length}</b> (${percent}%)</p>
-    <p>A detailed answer breakdown has been emailed to you.</p>
+    <h3>${name}, your quiz has been submitted.</h3>
+    <p><b>Score:</b> ${score}/${quizData.length}</p>
+    <p><b>Percentage:</b> ${percent}%</p>
+    <p>📩 Your full answer breakdown has been emailed!</p>
   `;
 
-  await fetch("https://script.google.com/macros/s/AKfycbxiDuQwKO7Krp-QGNwXhSH6nKVxO_JSos7Dtl6jPtL1jl_AGAOM9ux1XH30EjDtxL-Y1Q/exec",{
-    method:"POST",
-    mode:"no-cors",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
+  /* SEND TO GOOGLE SHEET + SEND EMAIL */
+  await fetch(APP_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
       name,
       email,
       score,
       percent,
-      total: quizData.length,
-      answersDetailed: answerDetails,
-      device: navigator.userAgent
+      answersDetailed
     })
   });
 
-  alert("Your result has been submitted and emailed.");
+  alert("✅ Thank you! Your quiz is completed.");
 }
