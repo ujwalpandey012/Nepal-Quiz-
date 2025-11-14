@@ -46,29 +46,53 @@ function beginQuiz() {
   document.getElementById("quizContainer").classList.remove("hidden");
 }
 
-/* ############# 11 QUESTIONS ############# */
+/* -------------------------
+   11 QUIZ QUESTIONS
+-------------------------- */
 const quizData = [
-  { q:"नेपालमा पहिलो रेल सेवा कहाँ सुरु भयो?", options:["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"], correct:"Raxaul – Amlekhganj" },
+  { q:"नेपालमा पहिलो रेल सेवा कहाँ सुरु भयो?", 
+    options:["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"], 
+    correct:"Raxaul – Amlekhganj" },
 
-  { q:"नेपालको पहिलो जलविद्युत् आयोजना कुन हो?", options:["Pharping","Trishuli","Kulekhani","Sunkoshi"], correct:"Pharping" },
+  { q:"नेपालको पहिलो जलविद्युत् आयोजना कुन हो?", 
+    options:["Pharping","Trishuli","Kulekhani","Sunkoshi"], 
+    correct:"Pharping" },
 
-  { q:"नेपालको पहिलो बैंक कुन हो?", options:["Nepal Bank Limited","Nepal Rastra Bank","Rastriya Banijya Bank","Agriculture Development Bank"], correct:"Nepal Bank Limited" },
+  { q:"नेपालको पहिलो बैंक कुन हो?", 
+    options:["Nepal Bank Limited","Nepal Rastra Bank","Rastriya Banijya Bank","Agriculture Development Bank"], 
+    correct:"Nepal Bank Limited" },
 
-  { q:"नेपालको पहिलो संविधान कहिले जारी भयो?", options:["1948 A.D.","1951 A.D.","1962 A.D.","1990 A.D."], correct:"1948 A.D." },
+  { q:"नेपालको पहिलो संविधान कहिले जारी भयो?", 
+    options:["1948 A.D.","1951 A.D.","1962 A.D.","1990 A.D."], 
+    correct:"1948 A.D." },
 
-  { q:"नेपाल UN को सदस्य कहिले भएको हो?", options:["1955 A.D.","1950 A.D.","1957 A.D.","1961 A.D."], correct:"1955 A.D." },
+  { q:"नेपाल UN को सदस्य कहिले भएको हो?", 
+    options:["1955 A.D.","1950 A.D.","1957 A.D.","1961 A.D."], 
+    correct:"1955 A.D." },
 
-  { q:"नेपालको पहिलो विश्वविद्यालय कुन हो?", options:["Tribhuvan University","Kathmandu University","Purbanchal University","MWU"], correct:"Tribhuvan University" },
+  { q:"नेपालको पहिलो विश्वविद्यालय कुन हो?", 
+    options:["Tribhuvan University","Kathmandu University","Purbanchal University","Mid-Western University"], 
+    correct:"Tribhuvan University" },
 
-  { q:"पहिलो छायाङ्कन गरिएको नेपाली चलचित्र कुन हो?", options:["Aama","Satya Harischandra","Harischandra","Maitighar"], correct:"Aama" },
+  { q:"नेपालमा छायाङ्कन गरिएको पहिलो नेपाली चलचित्र कुन हो?", 
+    options:["Aama","Satya Harischandra","Maitighar","Harischandra"], 
+    correct:"Aama" },
 
-  { q:"राष्ट्रिय सभामा कति सदस्य हुन्छन्?", options:["59","56","60","61"], correct:"59" },
+  { q:"राष्ट्रिय सभामा कति सदस्य हुन्छन्?", 
+    options:["59","56","60","61"], 
+    correct:"59" },
 
-  { q:"नेपालको पहिलो राष्ट्रिय जनगणना कहिले?", options:["1911 A.D.","1941 A.D.","1952 A.D.","1961 A.D."], correct:"1911 A.D." },
+  { q:"नेपालको पहिलो जनगणना कहिले भएको हो?", 
+    options:["1911 A.D.","1941 A.D.","1952 A.D.","1961 A.D."], 
+    correct:"1911 A.D." },
 
-  { q:"नेपालले SAARC चार्टर कहिले साइन गर्‍यो?", options:["8 December 1985","6 January 1984","10 December 1986","1 November 1985"], correct:"8 December 1985" },
+  { q:"नेपालले SAARC चार्टर कहिले साइन गर्‍यो?", 
+    options:["8 December 1985","6 January 1984","10 December 1986","1 November 1985"], 
+    correct:"8 December 1985" },
 
-  { q:"पहिलो आन्तरिक उडान कहिले भएको थियो?", options:["1950 A.D., Kathmandu–Simara","1949 A.D., Kathmandu–Pokhara","1950 A.D., Kathmandu–Biratnagar","1951 A.D., Kathmandu–Janakpur"], correct:"1950 A.D., Kathmandu–Simara" }
+  { q:"नेपालको पहिलो आन्तरिक उडान कहिले भएको थियो?", 
+    options:["1950 A.D., Kathmandu–Simara","1949 A.D., Kathmandu–Pokhara","1950 A.D., Kathmandu–Biratnagar","1951 A.D., Kathmandu–Janakpur"], 
+    correct:"1950 A.D., Kathmandu–Simara" }
 ];
 
 /* SHUFFLE FUNCTION */
@@ -88,10 +112,12 @@ const wrapper=document.getElementById("questions-wrapper");
 quizData.forEach((item,i)=>{
   const div=document.createElement("div");
   div.classList.add("question");
+
   let html=`<h3>${i+1}. ${item.q}</h3>`;
   item.options.forEach(opt=>{
     html+=`<label><input type="radio" name="q${i}" value="${opt}"> ${opt}</label>`;
   });
+
   div.innerHTML=html;
   wrapper.appendChild(div);
 });
@@ -100,25 +126,32 @@ quizData.forEach((item,i)=>{
 let timeLeft=300;
 const timer=document.getElementById("timer");
 const countdown=setInterval(()=>{
+
   const m=Math.floor(timeLeft/60);
   const s=timeLeft%60;
+
   timer.textContent=`⏱ ${m}:${s.toString().padStart(2,"0")}`;
+
   timeLeft--;
   if(timeLeft<0){
     clearInterval(countdown);
     submitQuiz();
   }
+
 },1000);
 
-/* ANTI CHEAT – after quiz started */
+/* ANTI CHEAT */
 window.onblur=()=>submitQuiz();
 
-/* SUBMIT */
+/* SUBMIT QUIZ */
 async function submitQuiz(){
+
   clearInterval(countdown);
+  document.getElementById("submitBtn").disabled=true;
 
   const name=document.getElementById("playerName").value.trim();
   const email=document.getElementById("playerEmail").value.trim();
+
   if(!name || !email){
     alert("Enter your name & email!");
     return;
@@ -146,15 +179,19 @@ async function submitQuiz(){
   document.getElementById("resultBox").style.display="block";
   document.getElementById("resultBox").innerHTML =
     `<h3>${name}, your score: ${score}/${quizData.length} (${percent}%)</h3>
-     <p>Thank you for submitting your quiz.</p>`;
+     <p>Your answers have been submitted. Check your email.</p>`;
 
-  /* SEND TO GOOGLE SHEET API */
-  fetch("https://script.google.com/macros/s/AKfycbwQpIgyZx1a0LrWw3Ez56HTFUebC43rkiM3c98yK0wAPfs67Lq_9usQ7TCjbdgxRDwB3Q/exec",{
+  /* SEND TO GOOGLE SCRIPT */
+  fetch("https://script.google.com/macros/s/AKfycbwFuCsAeg_IQz0uSkNqo45TyMOf19y11g1yEwOCHbEHjXb4v5CkSim6-rfBEu-flTYgOA/exec",{
     method:"POST",
     mode:"no-cors",
     headers:{"Content-Type":"application/json"},
     body:JSON.stringify({
-      name,email,score,percent,answersDetailed
+      name,email,
+      score,
+      percent,
+      total:quizData.length,
+      answersDetailed
     })
   });
 }
