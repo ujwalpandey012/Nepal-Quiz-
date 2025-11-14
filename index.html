@@ -1,54 +1,43 @@
 <!DOCTYPE html>
-<html lang="ne">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Nepal GK Secure Quiz | Ujwal Pandey</title>
-  <link rel="stylesheet" href="style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Nepal GK Quiz | Ujwal Pandey</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
 <!-- START SCREEN -->
 <div id="startScreen" class="start-screen">
-  <div class="start-box">
-    <img src="https://i.ibb.co/M6dM5Q3/nepal-flag.gif" class="flag">
-    <h1>Nepal Government GK Official Quiz</h1>
-    <p>Secure • Timed • Anti-Cheat • Mobile Friendly</p>
-    <button class="start-btn" onclick="beginQuiz()">Start Quiz</button>
-  </div>
+    <div class="start-box">
+        <h1>Nepal Government • Official GK Quiz</h1>
+        <p>Secure Online Examination</p>
+        <button onclick="beginQuiz()" class="start-btn">Start Quiz</button>
+    </div>
 </div>
 
 <!-- QUIZ SCREEN -->
 <div id="quizContainer" class="quiz-container hidden">
+    <div class="header">
+        <h2>Nepal GK Examination</h2>
+        <span id="timer">05:00</span>
+    </div>
 
-  <div class="header">
-    <h2>🇳🇵 Nepal GK Examination</h2>
-    <span id="timer">⏱ 05:00</span>
-  </div>
+    <form id="quizForm">
+        <input type="text" id="playerName" placeholder="Full Name" required>
+        <input type="email" id="playerEmail" placeholder="Email Address" required>
 
-  <form id="quizForm">
-    <input type="text" id="playerName" placeholder="Full Name" required>
-    <input type="email" id="playerEmail" placeholder="Email Address" required>
+        <div id="questions-wrapper"></div>
 
-    <div id="questions-wrapper"></div>
+        <button type="button" onclick="submitQuiz()" id="submitBtn">Submit Quiz</button>
 
-    <button type="button" id="submitBtn" onclick="submitQuiz()">Submit Quiz</button>
-
-    <div id="resultBox"></div>
-  </form>
-
+        <div id="resultBox"></div>
+    </form>
 </div>
 
 <script src="script.js"></script>
-
-<script>
-function beginQuiz() {
-  document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("quizContainer").classList.remove("hidden");
-  window.scrollTo(0, 0);
-}
-</script>
 
 </body>
 </html>
