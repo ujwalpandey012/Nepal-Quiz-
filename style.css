@@ -1,6 +1,4 @@
-/* ===========================================
-   PREMIUM EXAM UI — ANIMATED VERSION
-=========================================== */
+/* ============= PREMIUM EXAM UI ============= */
 
 body {
   margin: 0;
@@ -21,160 +19,157 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeIn 1s ease-out;
+  animation: fadeIn 1s;
 }
 
 .start-box {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 55px 70px;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 50px 70px;
   border-radius: 22px;
-  text-align: center;
   backdrop-filter: blur(20px);
-  border: 2px solid rgba(255,255,255,0.3);
-  box-shadow: 0 15px 45px rgba(0,0,0,0.35);
-  animation: floatUp 0.9s ease-out;
+  text-align: center;
+  border: 2px solid rgba(255,255,255,0.4);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  animation: floatUp 1s ease-out;
+}
+
+.flag {
+  width: 120px;
+  margin-bottom: 20px;
 }
 
 .start-box h1 {
-  font-size: 2.4rem;
-  font-weight: 600;
-  letter-spacing: 1px;
+  font-size: 2.2rem;
+  color: white;
   margin-bottom: 10px;
 }
 
 .start-box p {
-  color: #dce8ff;
-  font-size: 1.1rem;
-  margin-bottom: 35px;
+  color: #cfe3ff;
+  margin-bottom: 25px;
 }
 
 .start-btn {
-  padding: 15px 42px;
-  background: #ffffff;
-  color: #003d90;
-  font-size: 1.3rem;
-  font-weight: 600;
-  border-radius: 14px;
+  background: white;
+  color: #0047ab;
+  padding: 13px 40px;
+  font-size: 1.2rem;
+  border-radius: 12px;
   border: none;
   cursor: pointer;
-  transition: 0.3s ease-in-out;
-  box-shadow: 0 8px 26px rgba(255,255,255,0.4);
+  animation: pulse 2s infinite;
+  font-weight: bold;
 }
 
 .start-btn:hover {
   transform: scale(1.05);
-  background: #dcedff;
 }
 
-/* Animations */
-@keyframes floatUp { from {opacity:0; transform:translateY(35px);} to {opacity:1; transform:translateY(0);} }
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-
-/* QUIZ CONTAINER */
+/* QUIZ PAGE */
 .quiz-container {
   max-width: 900px;
-  margin: 35px auto;
-  padding: 40px;
-  background: #ffffff;
-  border-radius: 20px;
-  color: #000;
-  animation: fadeIn 0.9s ease-out;
-  box-shadow: 0 12px 35px rgba(0,0,0,0.25);
+  margin: 30px auto;
+  padding: 30px;
+  background: white;
+  color: black;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
 }
 
-/* Header */
 .header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background: #eef3ff;
   padding: 15px;
+  background: #eef4ff;
   border-radius: 12px;
   margin-bottom: 20px;
 }
 
 #timer {
-  background: #ff1e1e;
-  padding: 8px 16px;
+  padding: 8px 15px;
+  background: red;
   color: white;
   border-radius: 8px;
-  font-weight: bold;
-  animation: timerPulse 1s infinite;
+  font-weight: 600;
+  animation: pulseTimer 1s infinite;
 }
 
-@keyframes timerPulse { 0%{transform:scale(1);} 50%{transform:scale(1.07);} 100%{transform:scale(1);} }
-
-/* Inputs */
-input[type="text"],
-input[type="email"] {
+input {
   width: 100%;
-  padding: 14px;
-  border-radius: 10px;
-  border: 1px solid #b4c2ff;
-  margin-bottom: 18px;
-  background: #f6f8ff;
-  font-size: 1.05rem;
-}
-
-input:focus {
-  border-color: #004aad;
-  box-shadow: 0 0 6px rgba(0,74,173,0.4);
-  outline: none;
-}
-
-/* Questions */
-.question {
-  background: #f7f9ff;
-  border-left: 6px solid #003c99;
-  padding: 22px;
+  padding: 15px;
+  margin-bottom: 15px;
   border-radius: 12px;
-  margin-bottom: 22px;
-  animation: slideUp 0.5s ease-out;
+  border: 1px solid #bcd0ff;
+  background: #f6f8ff;
 }
 
-@keyframes slideUp { from{opacity:0; transform:translateY(25px);} to{opacity:1; transform:translateY(0);} }
+.question {
+  background: #f0f4ff;
+  border-left: 6px solid #0047ab;
+  padding: 20px;
+  margin-bottom: 18px;
+  border-radius: 14px;
+  animation: slideUp 0.5s;
+}
 
 label {
   display: block;
   padding: 10px;
-  margin: 7px 0;
+  margin: 5px 0;
+  background: #fff;
   border-radius: 8px;
+  border: 1px solid #cbdcff;
   cursor: pointer;
 }
 
 label:hover {
-  background: #e8eeff;
+  background: #e9efff;
 }
 
-.correct { background: #caffe0 !important; }
-.wrong { background: #ffd1d1 !important; }
-
-/* Submit Button */
 button {
   width: 100%;
+  background: #0047ab;
+  color: white;
   padding: 15px;
   border: none;
-  border-radius: 12px;
   font-size: 1.2rem;
-  font-weight: 600;
-  background: #004aad;
-  color: white;
+  border-radius: 12px;
+  margin-top: 10px;
   cursor: pointer;
-  transition: 0.25s ease-in-out;
 }
 
 button:hover {
-  transform: scale(1.03);
-  background: #003580;
+  background: #00357d;
 }
 
-/* Result Box */
+/* RESULT BOX */
 #resultBox {
-  background: #eaf2ff;
-  padding: 25px;
-  border-left: 6px solid #003c99;
-  border-radius: 12px;
-  margin-top: 25px;
-  text-align: center;
+  background: #eef5ff;
+  padding: 20px;
+  border-radius: 15px;
+  border-left: 6px solid #0047ab;
+  margin-top: 20px;
   display: none;
+}
+
+/* ANIMATIONS */
+@keyframes floatUp {
+  from {opacity: 0; transform: translateY(40px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes slideUp {
+  from {opacity: 0; transform: translateY(25px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+@keyframes pulseTimer {
+  0% {transform: scale(1);}
+  50% {transform: scale(1.08);}
+  100% {transform: scale(1);}
 }
