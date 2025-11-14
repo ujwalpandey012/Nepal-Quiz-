@@ -41,7 +41,7 @@ const questions = [
   {
     q: "नेपाली भाषामा छायाङ्कन गरिएको पहिलो चलचित्र कुन हो?<br>What is the first Nepali-language film?",
     options: ["Aama", "Satya Harischandra", "Maitighar", "Harischandra"],
-    correct: "Satya Harischndra"
+    correct: "Satya Harischandra"
   },
   {
     q: "राष्ट्रिय सभामा कति जना सदस्य हुन्छन्?<br>How many members are there in the National Assembly?",
