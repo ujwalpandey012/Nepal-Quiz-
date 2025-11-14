@@ -1,57 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Nepal GK Examination | Secure Online Quiz</title>
+<meta charset="UTF-8">
+<title>Nepal Government | Secure GK Examination</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 
 </head>
-
 <body>
 
-<!-- LOADING SCREEN -->
-<div id="loadingScreen" class="loading-screen">
-    <div class="loader"></div>
-    <p>Preparing Your Examination…</p>
-</div>
-
-<!-- START SCREEN -->
-<div id="startScreen" class="start-screen hidden">
-    <div class="start-card animate-in">
-        <h1>Nepal Government</h1>
-        <h2>Official GK Examination</h2>
-        <p>Please enter your details to begin.</p>
+<!-- FULL SCREEN DARK ROYAL BACKGROUND -->
+<div id="startScreen" class="start-screen">
+    <div class="start-card slide-in">
+        <h1>नेपाल सरकार</h1>
+        <h2>अधिकारिक अनलाइन परिक्षा</h2>
 
         <input type="text" id="playerName" placeholder="Full Name" required>
         <input type="email" id="playerEmail" placeholder="Email Address" required>
 
-        <button onclick="beginQuiz()" class="start-btn">
-            Start Examination
-        </button>
+        <button onclick="beginExam()" class="start-btn">Start Examination</button>
     </div>
 </div>
 
-<!-- QUIZ SCREEN -->
-<div id="quizScreen" class="quiz-screen hidden">
+<!-- EXAM SCREEN -->
+<div id="examScreen" class="exam-screen hidden">
 
+    <!-- HEADER TOP BAR -->
     <div class="top-bar">
-        <div class="progress">
-            <div id="progressFill"></div>
+        
+        <!-- Navigation Grid -->
+        <div class="question-nav" id="questionNav"></div>
+
+        <!-- Royal Timer -->
+        <div class="timer-ring">
+            <svg>
+                <circle cx="40" cy="40" r="35"></circle>
+                <circle id="timerCircle" cx="40" cy="40" r="35"></circle>
+            </svg>
+            <span id="timerText">05:00</span>
         </div>
 
-        <div id="timer" class="timer">05:00</div>
     </div>
 
-    <div id="questionsWrapper"></div>
+    <!-- QUESTION AREA -->
+    <div id="questionContainer" class="question-container"></div>
 
-    <button class="submit-btn" onclick="submitQuiz()">Submit Examination</button>
+    <!-- EXAM BUTTONS -->
+    <div class="btn-row">
+        <button id="prevBtn" onclick="prevQuestion()">Previous</button>
+        <button id="reviewBtn" onclick="markForReview()">Mark for Review</button>
+        <button id="nextBtn" onclick="nextQuestion()">Next</button>
+        <button id="submitBtn" onclick="submitExam()">Submit Exam</button>
+    </div>
 
+    <!-- RESULT BOX -->
     <div id="resultBox" class="result-box hidden"></div>
+
 </div>
 
 <script src="script.js"></script>
+
 </body>
 </html>
