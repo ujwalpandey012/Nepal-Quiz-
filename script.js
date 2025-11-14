@@ -88,8 +88,13 @@ quizData.forEach((item, index) => {
   div.classList.add("question");
 
   let html = `<h3>${index + 1}. ${item.q}</h3>`;
+
   item.options.forEach(opt => {
-    html += `<label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label>`;
+    html += `
+    <label class="option">
+      <input type="radio" name="q${index}" value="${opt}">
+      ${opt}
+    </label>`;
   });
 
   div.innerHTML = html;
