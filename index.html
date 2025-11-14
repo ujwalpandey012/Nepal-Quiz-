@@ -1,44 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Nepal GK Quiz | Ujwal Pandey</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nepal GK Examination | Secure Online Quiz</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
 
+<!-- LOADING SCREEN -->
+<div id="loadingScreen" class="loading-screen">
+    <div class="loader"></div>
+    <p>Preparing Your Examination…</p>
+</div>
+
 <!-- START SCREEN -->
-<div id="startScreen" class="start-screen">
-    <div class="start-box">
-        <h1>Nepal Government • Official GK Quiz</h1>
-        <p>Secure Online Examination</p>
-        <button onclick="beginQuiz()" class="start-btn">Start Quiz</button>
+<div id="startScreen" class="start-screen hidden">
+    <div class="start-card animate-in">
+        <h1>Nepal Government</h1>
+        <h2>Official GK Examination</h2>
+        <p>Please enter your details to begin.</p>
+
+        <input type="text" id="playerName" placeholder="Full Name" required>
+        <input type="email" id="playerEmail" placeholder="Email Address" required>
+
+        <button onclick="beginQuiz()" class="start-btn">
+            Start Examination
+        </button>
     </div>
 </div>
 
 <!-- QUIZ SCREEN -->
-<div id="quizContainer" class="quiz-container hidden">
-    <div class="header">
-        <h2>Nepal GK Examination</h2>
-        <span id="timer">05:00</span>
+<div id="quizScreen" class="quiz-screen hidden">
+
+    <div class="top-bar">
+        <div class="progress">
+            <div id="progressFill"></div>
+        </div>
+
+        <div id="timer" class="timer">05:00</div>
     </div>
 
-    <form id="quizForm">
-        <input type="text" id="playerName" placeholder="Full Name" required>
-        <input type="email" id="playerEmail" placeholder="Email Address" required>
+    <div id="questionsWrapper"></div>
 
-        <div id="questions-wrapper"></div>
+    <button class="submit-btn" onclick="submitQuiz()">Submit Examination</button>
 
-        <button type="button" onclick="submitQuiz()" id="submitBtn">Submit Quiz</button>
-
-        <div id="resultBox"></div>
-    </form>
+    <div id="resultBox" class="result-box hidden"></div>
 </div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
-
