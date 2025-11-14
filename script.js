@@ -1,164 +1,69 @@
-/* QUESTIONS DATABASE -------------------------------------------- */
-const questions = [
-  { q: "नेपालमा पहिलो रेलसेवा कहाँ सञ्चालन भयो?", options: ["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"], correct: "Raxaul – Amlekhganj" },
-  { q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?", options: ["Pharping","Trishuli","Kulekhani","Sunkoshi"], correct: "Pharping" },
-  { q: "नेपालको पहिलो बैंक कुन हो?", options: ["Nepal Rastra Bank","ADB","Nepal Bank Limited","RBB"], correct: "Nepal Bank Limited" },
-  { q: "नेपालको पहिलो संविधान कुन वर्षमा जारी?", options: ["1948","1951","1962","1990"], correct: "1948" },
-  { q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले?", options: ["1950","1955","1957","1961"], correct: "1955" },
-  { q: "पहिलो विश्वविद्यालय कुन?", options: ["TU","KU","PU","MWU"], correct: "TU" },
-  { q: "पहिलो छायाङ्कन चलचित्र?", options: ["Aama","Harischandra","Maitighar","Satya Harischandra"], correct: "Aama" },
-  { q: "राष्ट्रिय सभा सदस्य कति?", options: ["50","56","59","60"], correct: "59" },
-  { q: "पहिलो जनगणना?", options: ["1911","1941","1952","1961"], correct: "1911" },
-  { q: "SAARC चार्टर कहिले साइन?", options: ["8 Dec 1985","6 Jan 1984","10 Dec 1986","1 Nov 1985"], correct: "8 Dec 1985" },
-  { q: "पहिलो आन्तरिक उडान?", options: ["1949 Pokhara","1950 Biratnagar","1950 Simara","1951 Janakpur"], correct: "1950 Simara" }
-];
+/* GLOBAL */
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
+body{background:#020d25;color:white;}
+.hidden{display:none!important}
 
-/* SHUFFLE QUESTIONS + OPTIONS ----------------------------------- */
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-shuffle(questions);
-questions.forEach(q => shuffle(q.options));
+/* START SCREEN */
+.start-screen{height:100vh;display:flex;justify-content:center;align-items:center;}
+.start-card{background:rgba(255,255,255,0.06);padding:40px;width:350px;border-radius:18px;
+backdrop-filter:blur(10px);box-shadow:0 0 25px rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15)}
+.start-card h1{color:gold;font-size:1.9rem}
+.start-card h2{color:#e0eaff;margin-bottom:25px}
+.start-card input{width:100%;padding:14px;margin:10px 0;background:rgba(255,255,255,0.12);
+color:white;border:none;border-radius:8px;outline:none}
+.start-btn{width:100%;padding:14px;background:gold;color:black;border:none;font-weight:600;
+border-radius:8px;margin-top:10px;cursor:pointer;transition:0.25s}
+.start-btn:hover{background:#ffdd55;transform:translateY(-2px)}
 
-/* STATE ---------------------------------------------------------- */
-let current = 0;
-let answers = {};
-let reviewList = new Set();
+/* EXAM SCREEN */
+.exam-screen{max-width:1050px;margin:auto;padding:25px}
 
-/* START EXAM ----------------------------------------------------- */
-function beginExam() {
-  document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("examScreen").classList.remove("hidden");
+/* TOP BAR */
+.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
 
-  loadNavigation();
-  loadQuestion();
-  startTimer();
-}
+/* NAVIGATION GRID */
+.question-nav{display:grid;grid-template-columns:repeat(6,40px);gap:10px}
+.nav-btn{height:40px;width:40px;display:flex;justify-content:center;align-items:center;
+background:rgba(255,255,255,0.15);border-radius:8px;cursor:pointer;transition:.25s;
+border:1px solid rgba(255,255,255,0.25)}
+.nav-btn.active{background:gold;color:black}
+.nav-btn.review{background:#ff6600;color:white}
 
-/* NAVIGATION GRID ------------------------------------------------ */
-function loadNavigation() {
-  let nav = document.getElementById("questionNav");
-  nav.innerHTML = "";
+/* TIMER CIRCLE */
+.timer-ring{position:relative;width:80px;height:80px}
+.timer-ring svg{width:80px;height:80px;transform:rotate(-90deg)}
+.timer-ring circle{fill:none;stroke-width:6;stroke:rgba(255,255,255,0.2)}
+#timerCircle{stroke:gold;stroke-dasharray:220;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear}
+#timerText{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:600}
 
-  questions.forEach((_, i) => {
-    let btn = document.createElement("div");
-    btn.className = "nav-btn";
-    btn.innerText = i + 1;
-    btn.onclick = () => goTo(i);
-    nav.appendChild(btn);
-  });
+/* QUESTION CARD */
+.question-container{padding:25px;border:1px solid rgba(255,255,255,0.15);
+border-radius:15px;background:rgba(255,255,255,0.05);backdrop-filter:blur(6px);
+animation:slideFade 0.5s ease}
+@keyframes slideFade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 
-  updateNav();
-}
+/* OPTIONS */
+.option{padding:12px;margin:10px 0;background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.2);border-radius:10px;
+display:flex;align-items:center;gap:12px;cursor:pointer;transition:0.25s}
+.option:hover{background:rgba(255,255,255,0.2);transform:translateY(-2px)}
+.option input{transform:scale(1.2)}
 
-function updateNav() {
-  document.querySelectorAll(".nav-btn").forEach((btn, i) => {
-    btn.classList.remove("active");
-    if (i === current) btn.classList.add("active");
-    if (reviewList.has(i)) btn.classList.add("review");
-  });
-}
+/* BUTTONS */
+.btn-row{display:flex;gap:10px;justify-content:center;margin-top:20px}
+.btn-row button{padding:12px 22px;border:none;border-radius:8px;background:rgba(255,255,255,0.15);
+color:white;cursor:pointer;transition:.25s}
+.btn-row button:hover{background:gold;color:black}
 
-/* LOAD QUESTION -------------------------------------------------- */
-function loadQuestion() {
-  updateNav();
+/* RESULT */
+.result-box{margin-top:25px;padding:25px;border-radius:15px;background:rgba(255,255,255,0.1);
+border:1px solid rgba(255,255,255,0.2);animation:slideFade .5s ease}
 
-  const q = questions[current];
-  const container = document.getElementById("questionContainer");
-
-  let html = `<h2>${current + 1}. ${q.q}</h2>`;
-
-  q.options.forEach(opt => {
-    html += `
-      <label class="option">
-        <input type="radio" 
-               name="q${current}" 
-               value="${opt}"
-               ${answers[current] === opt ? "checked" : ""}>
-        ${opt}
-      </label>`;
-  });
-
-  container.innerHTML = html;
-
-  // buttons conditions
-  document.getElementById("prevBtn").disabled = current === 0;
-  document.getElementById("nextBtn").disabled = current === questions.length - 1;
-}
-
-/* BUTTON FUNCTIONS ---------------------------------------------- */
-function nextQuestion() {
-  saveAnswer();
-  current++;
-  loadQuestion();
-}
-
-function prevQuestion() {
-  saveAnswer();
-  current--;
-  loadQuestion();
-}
-
-function goTo(n) {
-  saveAnswer();
-  current = n;
-  loadQuestion();
-}
-
-function saveAnswer() {
-  const selected = document.querySelector(`input[name="q${current}"]:checked`);
-  if (selected) answers[current] = selected.value;
-}
-
-function markForReview() {
-  reviewList.add(current);
-  updateNav();
-}
-
-/* TIMER ---------------------------------------------------------- */
-let time = 300; 
-function startTimer() {
-  const timerText = document.getElementById("timerText");
-  const circle = document.getElementById("timerCircle");
-
-  let interval = setInterval(() => {
-    let m = Math.floor(time / 60);
-    let s = time % 60;
-
-    timerText.innerHTML = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
-
-    let progress = (time / 300) * 220;
-    circle.style.strokeDashoffset = 220 - progress;
-
-    time--;
-
-    if (time < 0) {
-      clearInterval(interval);
-      submitExam();
-    }
-
-  }, 1000);
-}
-
-/* SUBMIT RESULT -------------------------------------------------- */
-function submitExam() {
-  saveAnswer();
-
-  let score = 0;
-  questions.forEach((q, i) => {
-    if (answers[i] === q.correct) score++;
-  });
-
-  let result = document.getElementById("resultBox");
-  result.classList.remove("hidden");
-  result.innerHTML = `
-    <h2>Exam Completed</h2>
-    <p><strong>Score:</strong> ${score}/${questions.length}</p>
-    <p><strong>Percentage:</strong> ${(score / questions.length * 100).toFixed(2)}%</p>
-  `;
-
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+/* REVIEW SECTION */
+.review-section{margin-top:20px;padding:20px;background:rgba(255,255,255,0.05);
+border-radius:15px;border:1px solid rgba(255,255,255,0.15)}
+.review-card{padding:18px;margin-bottom:15px;border-bottom:1px solid rgba(255,255,255,0.2)}
+.review-q{font-weight:600;margin-bottom:6px}
+.correct-text{color:#00ff88;font-weight:600}
+.wrong-text{color:#ff5555;font-weight:600}
+.correct-ans{color:gold;font-weight:600}
