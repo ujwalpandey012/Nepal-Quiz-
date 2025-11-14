@@ -1,166 +1,137 @@
-/* ============================================================
-   CLEAN QUIZ SCRIPT (NO IMAGES) — FINAL STABLE VERSION
-============================================================ */
+/* LOADING SCREEN ----------------------------------------- */
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("loadingScreen").classList.add("hidden");
+    document.getElementById("startScreen").classList.remove("hidden");
+  }, 1500);
+};
 
-/* Your Apps Script URL */
-const APP_URL =
-  "https://script.google.com/macros/s/AKfycbxiDuQwKO7Krp-QGNwXhSH6nKVxO_JSos7Dtl6jPtL1jl_AGAOM9ux1XH30EjDtxL-Y1Q/exec";
-
-/* START QUIZ */
+/* BEGIN QUIZ -------------------------------------------- */
 function beginQuiz() {
+  const name = document.getElementById("playerName").value.trim();
+  const email = document.getElementById("playerEmail").value.trim();
+
+  if (!name || !email) {
+    alert("Please fill all fields correctly.");
+    return;
+  }
+
   document.getElementById("startScreen").classList.add("hidden");
-  document.getElementById("quizContainer").classList.remove("hidden");
+  document.getElementById("quizScreen").classList.remove("hidden");
+
+  loadQuestions();
+  startTimer();
 }
 
-/* QUESTIONS */
+/* QUESTIONS --------------------------------------------- */
 const quizData = [
-  {
-    q: "नेपालमा पहिलो रेलसेवा कहाँ सञ्चालन भयो?",
-    options: ["Raxaul – Amlekhganj", "Birgunj – Simara", "Janakpur – Jaynagar", "Biratnagar – Rangeli"],
-    correct: "Raxaul – Amlekhganj"
-  },
-  {
-    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?",
-    options: ["Pharping", "Trishuli", "Kulekhani", "Sunkoshi"],
-    correct: "Pharping"
-  },
-  {
-    q: "नेपालको पहिलो बैंक कुन हो?",
-    options: ["Nepal Rastra Bank", "ADB", "Nepal Bank Limited", "RBB"],
-    correct: "Nepal Bank Limited"
-  },
-  {
-    q: "नेपालको पहिलो संविधान कुन वर्षमा जारी?",
-    options: ["1948", "1951", "1962", "1990"],
-    correct: "1948"
-  },
-  {
-    q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले?",
-    options: ["1950", "1955", "1957", "1961"],
-    correct: "1955"
-  },
-  {
-    q: "पहिलो विश्वविद्यालय कुन?",
-    options: ["TU", "KU", "PU", "MWU"],
-    correct: "TU"
-  },
-  {
-    q: "पहिलो छायाङ्कन चलचित्र?",
-    options: ["Aama", "Harischandra", "Maitighar", "Satya Harischandra"],
-    correct: "Aama"
-  },
-  {
-    q: "राष्ट्रिय सभा सदस्य कति?",
-    options: ["50", "56", "59", "60"],
-    correct: "59"
-  },
-  {
-    q: "पहिलो जनगणना?",
-    options: ["1911", "1941", "1952", "1961"],
-    correct: "1911"
-  },
-  {
-    q: "SAARC चार्टर कहिले साइन?",
-    options: ["8 Dec 1985", "6 Jan 1984", "10 Dec 1986", "1 Nov 1985"],
-    correct: "8 Dec 1985"
-  },
-  {
-    q: "पहिलो आन्तरिक उडान?",
-    options: ["1949 Pokhara", "1950 Biratnagar", "1950 Simara", "1951 Janakpur"],
-    correct: "1950 Simara"
-  }
+  { q: "नेपालमा पहिलो रेलसेवा कहाँ सञ्चालन भयो?", options: ["Raxaul – Amlekhganj","Birgunj – Simara","Janakpur – Jaynagar","Biratnagar – Rangeli"], correct: "Raxaul – Amlekhganj" },
+  { q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?", options: ["Pharping","Trishuli","Kulekhani","Sunkoshi"], correct: "Pharping" },
+  { q: "नेपालको पहिलो बैंक कुन हो?", options: ["Nepal Rastra Bank","ADB","Nepal Bank Limited","RBB"], correct: "Nepal Bank Limited" },
+  { q: "नेपालको पहिलो संविधान कुन वर्षमा जारी?", options: ["1948","1951","1962","1990"], correct: "1948" },
+  { q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले?", options: ["1950","1955","1957","1961"], correct: "1955" },
+  { q: "पहिलो विश्वविद्यालय कुन?", options: ["TU","KU","PU","MWU"], correct: "TU" },
+  { q: "पहिलो छायाङ्कन चलचित्र?", options: ["Aama","Harischandra","Maitighar","Satya Harischandra"], correct: "Aama" },
+  { q: "राष्ट्रिय सभा सदस्य कति?", options: ["50","56","59","60"], correct: "59" },
+  { q: "पहिलो जनगणना?", options: ["1911","1941","1952","1961"], correct: "1911" },
+  { q: "SAARC चार्टर कहिले साइन?", options: ["8 Dec 1985","6 Jan 1984","10 Dec 1986","1 Nov 1985"], correct: "8 Dec 1985" },
+  { q: "पहिलो आन्तरिक उडान?", options: ["1949 Pokhara","1950 Biratnagar","1950 Simara","1951 Janakpur"], correct: "1950 Simara" }
 ];
 
-/* SHUFFLE */
+/* SHUFFLE FUNCTION */
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
-shuffle(quizData);
-quizData.forEach(q => shuffle(q.options));
 
-/* LOAD QUESTIONS */
-const wrapper = document.getElementById("questions-wrapper");
-quizData.forEach((item, index) => {
-  let div = document.createElement("div");
-  div.classList.add("question");
+/* LOAD QUESTIONS ---------------------------------------- */
+function loadQuestions() {
+  shuffle(quizData);
 
-  let html = `<h3>${index + 1}. ${item.q}</h3>`;
+  const wrapper = document.getElementById("questionsWrapper");
+  wrapper.innerHTML = "";
 
-  item.options.forEach(opt => {
-    html += `
-    <label class="option">
-      <input type="radio" name="q${index}" value="${opt}">
-      ${opt}
-    </label>`;
+  quizData.forEach((item, index) => {
+    shuffle(item.options);
+
+    let card = document.createElement("div");
+    card.classList.add("question-card");
+
+    let html = `<h3>${index + 1}. ${item.q}</h3>`;
+
+    item.options.forEach(opt => {
+      html += `
+      <label class="option">
+        <input type="radio" name="q${index}" value="${opt}">
+        ${opt}
+      </label>`;
+    });
+
+    card.innerHTML = html;
+    wrapper.appendChild(card);
   });
+}
 
-  div.innerHTML = html;
-  wrapper.appendChild(div);
-});
+/* TIMER ------------------------------------------------- */
+let totalTime = 300; // 5 minutes
+function startTimer() {
+  const timer = document.getElementById("timer");
 
-/* TIMER */
-let timeLeft = 300;
-const timer = document.getElementById("timer");
+  let countdown = setInterval(() => {
+    let m = Math.floor(totalTime / 60);
+    let s = totalTime % 60;
 
-const countdown = setInterval(() => {
-  const m = Math.floor(timeLeft / 60);
-  const s = timeLeft % 60;
-  timer.textContent = `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-  timeLeft--;
-  if (timeLeft < 0) submitQuiz();
-}, 1000);
+    timer.textContent = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
 
-/* ANTI-CHEAT */
-window.onblur = () => {
-  alert("⚠️ You switched tab! Auto-submitting quiz.");
-  submitQuiz();
-};
+    // Change color when time is low
+    if (totalTime === 60) timer.style.background = "#ff9300";
+    if (totalTime === 20) timer.style.background = "#d80000";
 
-/* SUBMIT QUIZ */
-async function submitQuiz() {
-  clearInterval(countdown);
+    totalTime--;
+    updateProgressBar();
 
-  const name = document.getElementById("playerName").value.trim();
-  const email = document.getElementById("playerEmail").value.trim();
+    if (totalTime < 0) {
+      clearInterval(countdown);
+      submitQuiz();
+    }
+  }, 1000);
+}
 
-  if (!name || !email) return alert("Please enter name & email.");
+/* PROGRESS BAR ------------------------------------------ */
+function updateProgressBar() {
+  const fill = document.getElementById("progressFill");
+  let percentage = ((300 - totalTime) / 300) * 100;
+  fill.style.width = percentage + "%";
+}
+
+/* SUBMIT QUIZ ------------------------------------------ */
+function submitQuiz() {
+  const name = document.getElementById("playerName").value;
+  const email = document.getElementById("playerEmail").value;
 
   let score = 0;
-  let answersDetailed = [];
+  let details = [];
 
   quizData.forEach((q, i) => {
     const selected = document.querySelector(`input[name="q${i}"]:checked`);
-    const answer = selected ? selected.value : "Not Answered";
-    const correct = answer === q.correct;
-    if (correct) score++;
+    let answer = selected ? selected.value : "Not Answered";
 
-    answersDetailed.push({
-      question: q.q,
-      user: answer,
-      correctAns: q.correct,
-      correct
-    });
+    if (answer === q.correct) score++;
+
+    details.push({ question: q.q, selected: answer, correct: q.correct });
   });
 
-  const percent = ((score / quizData.length) * 100).toFixed(2);
-
-  document.getElementById("resultBox").innerHTML = `
-    <h3>${name}, your quiz is submitted.</h3>
-    <p>Score: ${score}/${quizData.length}</p>
-    <p>Percentage: ${percent}%</p>
-    <p>Your answer report has been emailed.</p>
+  const result = document.getElementById("resultBox");
+  result.classList.remove("hidden");
+  result.innerHTML = `
+      <h2>Examination Completed</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Score:</strong> ${score}/${quizData.length}</p>
+      <p><strong>Percentage:</strong> ${(score / quizData.length * 100).toFixed(2)}%</p>
   `;
-  document.getElementById("resultBox").style.display = "block";
 
-  await fetch(APP_URL, {
-    method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, email, score, percent, answersDetailed })
-  });
-
-  alert("✔️ Quiz submitted successfully!");
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
