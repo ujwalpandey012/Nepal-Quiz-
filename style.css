@@ -70,3 +70,33 @@ border-radius:15px;border:1px solid rgba(255,255,255,0.15)}
 .correct-text{color:#00ff88;font-weight:600}
 .wrong-text{color:#ff5555;font-weight:600}
 .correct-ans{color:gold;font-weight:600}
+/* ERROR + SUCCESS STATES */
+.error-msg {
+  color: #ff4444;
+  font-size: 0.85rem;
+  margin-top: -5px;
+  margin-bottom: 8px;
+  display: block;
+  text-align: left;
+  padding-left: 5px;
+}
+
+.input-error {
+  border: 1px solid #ff4444 !important;
+  background: rgba(255,0,0,0.15) !important;
+  animation: shake 0.25s ease;
+}
+
+.input-success {
+  border: 1px solid #00ff88 !important;
+  background: rgba(0,255,136,0.10) !important;
+}
+
+/* SHAKE EFFECT */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  50% { transform: translateX(3px); }
+  75% { transform: translateX(-3px); }
+  100% { transform: translateX(0); }
+}
