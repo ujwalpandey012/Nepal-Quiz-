@@ -5,9 +5,53 @@ const APP_URL =
   "https://script.google.com/macros/s/AKfycbyTXArmFAAChhMuBdnZUP1k95aEElCadrmZavf7XuTZlPUn4j-RScEsHkoOV7B27J4qEw/exec";
 
 /* ============================================================
-   BILINGUAL QUESTIONS
+   QUESTIONS (15 TOTAL)
 ============================================================ */
 const questions = [
+
+  /* ---- New Questions Added ---- */
+
+  {
+    q: "नेपालको राष्ट्रिय गान “सयौँ थुँगा फूलका हामी” मा कति शब्द र कति अक्षर छन्?<br>How many words and letters are in the National Anthem of Nepal?",
+    options: [
+      "47 words – 150 letters",
+      "46 words – 128 letters",
+      "52 words – 160 letters",
+      "44 words – 120 letters"
+    ],
+    correct: "46 words – 128 letters"
+  },
+
+  {
+    q: "नेपालमा शनिबार बिदा (Saturday holiday) कसले सुरु गरेका हुन्?<br>Who started the Saturday holiday in Nepal?",
+    options: [
+      "Chandra Shamsher Rana",
+      "Surya Bahadur Thapa",
+      "Bhim Shamsher Rana",
+      "Juddha Shamsher Rana"
+    ],
+    correct: "Bhim Shamsher Rana"
+  },
+
+  {
+    q: "Olympic Games सबैभन्दा पहिले कुन देशबाट सुरु भएका थिए?<br>Where did the Olympic Games start?",
+    options: ["China", "USA", "Greece", "France"],
+    correct: "Greece"
+  },
+
+  {
+    q: "नेपालको कुन प्रदेशमा सबैभन्दा धेरै जिल्ला छन्?<br>Which province of Nepal has the highest number of districts?",
+    options: [
+      "Bagmati Province",
+      "Lumbini Province",
+      "Sudurpashchim Province",
+      "Koshi Province (Province 1)"
+    ],
+    correct: "Koshi Province (Province 1)"
+  },
+
+  /* ---- Old Original 11 Questions ---- */
+
   {
     q: "नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?<br>Where was Nepal’s first railway service operated?",
     options: ["Raxaul – Amlekhganj", "Birgunj – Simara", "Janakpur – Jaynagar", "Biratnagar – Rangeli"],
@@ -116,7 +160,6 @@ function setupAntiCheat() {
 
   let cheatLock = false;
 
-  // User actually left the tab
   document.addEventListener("visibilitychange", () => {
     if (document.hidden && !alreadySubmitted && !cheatLock) {
       cheatLock = true;
@@ -126,9 +169,8 @@ function setupAntiCheat() {
     }
   });
 
-  // Prevent false triggers when interacting inside page
   window.addEventListener("blur", () => {
-    if (!document.hidden) return; // ignore focus changes inside window
+    if (!document.hidden) return;
   });
 }
 
@@ -153,7 +195,6 @@ function loadNav() {
 function updateNav() {
   document.querySelectorAll(".nav-btn").forEach((btn, i) => {
     btn.classList.remove("active");
-
     if (i === current) btn.classList.add("active");
     if (reviewSet.has(i)) btn.classList.add("review");
   });
@@ -197,9 +238,9 @@ function go(n) { saveAns(); current = n; loadQ(); }
 function markForReview() { reviewSet.add(current); updateNav(); }
 
 /* ============================================================
-   TIMER — FIXED
+   TIMER (10 MIN)
 ============================================================ */
-let time = 600; // 10 minutes
+let time = 600;
 
 function startTimer() {
   let timerText = document.getElementById("timerText");
@@ -213,7 +254,6 @@ function startTimer() {
     timerText.innerHTML =
       `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
-    // FIXED: correct 600-second animation
     circle.style.strokeDashoffset = 220 - (220 * (time / 600));
 
     if (time <= 0) {
