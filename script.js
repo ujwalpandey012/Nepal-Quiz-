@@ -72,13 +72,18 @@ const questions = [
       "1951 A.D., Kathmandu–Janakpur"
     ],
     correct: "1950 A.D., Kathmandu–Simara"
-  },
+  }
 ];
 
 /* ============================================================
    SHUFFLE QUESTIONS + OPTIONS
 ============================================================ */
-function shuffle(a){ for(let i=a.length-1;i>0;i--){ let j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } }
+function shuffle(a){
+  for(let i=a.length-1; i>0; i--){
+    let j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+}
 shuffle(questions);
 questions.forEach(q => shuffle(q.options));
 
@@ -88,39 +93,47 @@ questions.forEach(q => shuffle(q.options));
 let current = 0;
 let answers = {};
 let reviewSet = new Set();
-let alreadySubmitted = false;   // 🔒 prevents duplicate submissions
+let alreadySubmitted = false;
 
 /* ============================================================
    START EXAM
 ============================================================ */
 function beginExam() {
 
-  // Hide start & show exam
   document.getElementById("startScreen").classList.add("hidden");
   document.getElementById("examScreen").classList.remove("hidden");
 
   loadNav();
   loadQ();
   startTimer();
-
-  /* ============================================================
-      🚨 ANTI-CHEAT SYSTEM (AUTO SUBMIT ON CHEATING)
-  ============================================================ */
-
-  // If student switches tab/window → auto submit
-  window.onblur = () => {
-    if (!alreadySubmitted) submitExam();
-  };
-
-  // If exam window hidden (minimize, new app, swipe up) → auto submit
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden && !alreadySubmitted) submitExam();
-  });
-
+  setupAntiCheat();
 }
 
 /* ============================================================
-   NAVIGATION BUTTONS
+   SAFE ANTI-CHEAT
+============================================================ */
+function setupAntiCheat() {
+
+  let cheatLock = false;
+
+  // User actually left the tab
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && !alreadySubmitted && !cheatLock) {
+      cheatLock = true;
+      setTimeout(() => {
+        if (!alreadySubmitted) submitExam();
+      }, 300);
+    }
+  });
+
+  // Prevent false triggers when interacting inside page
+  window.addEventListener("blur", () => {
+    if (!document.hidden) return; // ignore focus changes inside window
+  });
+}
+
+/* ============================================================
+   NAVIGATION
 ============================================================ */
 function loadNav() {
   let nav = document.getElementById("questionNav");
@@ -140,6 +153,7 @@ function loadNav() {
 function updateNav() {
   document.querySelectorAll(".nav-btn").forEach((btn, i) => {
     btn.classList.remove("active");
+
     if (i === current) btn.classList.add("active");
     if (reviewSet.has(i)) btn.classList.add("review");
   });
@@ -149,6 +163,7 @@ function updateNav() {
    LOAD QUESTION
 ============================================================ */
 function loadQ() {
+
   updateNav();
 
   const q = questions[current];
@@ -182,11 +197,11 @@ function go(n) { saveAns(); current = n; loadQ(); }
 function markForReview() { reviewSet.add(current); updateNav(); }
 
 /* ============================================================
-   TIMER
+   TIMER — FIXED
 ============================================================ */
-let time = 600;
-function startTimer() {
+let time = 600; // 10 minutes
 
+function startTimer() {
   let timerText = document.getElementById("timerText");
   let circle = document.getElementById("timerCircle");
 
@@ -195,11 +210,13 @@ function startTimer() {
     let m = Math.floor(time / 60);
     let s = time % 60;
 
-    timerText.innerHTML = `${m.toString().padStart(2,"0")}:${s.toString().padStart(2,"0")}`;
+    timerText.innerHTML =
+      `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
-    circle.style.strokeDashoffset = 220 - (220 * (time / 300));
+    // FIXED: correct 600-second animation
+    circle.style.strokeDashoffset = 220 - (220 * (time / 600));
 
-    if (time < 0) {
+    if (time <= 0) {
       clearInterval(t);
       submitExam();
     }
@@ -209,22 +226,19 @@ function startTimer() {
 }
 
 /* ============================================================
-   SUBMIT EXAM (LOCK + SEND + REVIEW)
+   SUBMIT EXAM
 ============================================================ */
 async function submitExam() {
 
-  // 🔒 Stop double submissions
   if (alreadySubmitted) return;
   alreadySubmitted = true;
 
   saveAns();
 
-  // Lock UI
   document.querySelector(".btn-row").classList.add("hidden");
   document.querySelector(".top-bar").classList.add("hidden");
   document.getElementById("questionContainer").classList.add("hidden");
 
-  // Scoring
   let score = 0;
   let list = [];
 
@@ -234,12 +248,16 @@ async function submitExam() {
     let ok = (user === correct);
     if (ok) score++;
 
-    list.push({ question: q.q, user, correctAns: correct, correct: ok });
+    list.push({
+      question: q.q,
+      user,
+      correctAns: correct,
+      correct: ok
+    });
   });
 
   let percent = ((score / questions.length) * 100).toFixed(2);
 
-  // Show results
   let res = document.getElementById("resultBox");
   res.classList.remove("hidden");
   res.innerHTML = `
@@ -251,7 +269,6 @@ async function submitExam() {
 
   buildReview(list);
 
-  // Send data to sheet + email
   await fetch(APP_URL, {
     method: "POST",
     mode: "no-cors",
@@ -265,12 +282,11 @@ async function submitExam() {
     })
   });
 
-  // Block refresh resubmit
   window.onbeforeunload = () => "Exam already submitted.";
 }
 
 /* ============================================================
-   REVIEW PANEL (AFTER SUBMISSION)
+   REVIEW PANEL
 ============================================================ */
 function buildReview(list) {
   let box = document.getElementById("reviewSection");
@@ -282,7 +298,7 @@ function buildReview(list) {
     html += `
       <div class="review-card">
         <div class="review-q">${i + 1}. ${a.question}</div>
-        <div class="${a.correct ? 'correct-text' : 'wrong-text'}">
+        <div class="${a.correct ? "correct-text" : "wrong-text"}">
           Your Answer: ${a.user}
         </div>
         <div class="correct-ans">
