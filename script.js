@@ -72,7 +72,27 @@ const questions = [
       "1951 A.D., Kathmandu–Janakpur"
     ],
     correct: "1950 A.D., Kathmandu–Simara"
-  }
+  },
+   {
+   q: "Nepal ko Rashtriya gaan "sayaun thunga phoolka Hami" maa kati sabdha ra kati aakshar chan?",
+    options: [
+      "47 words-150 letters",
+      "46 words -128 letters",
+      "52 words - 160 letters",
+      "44 words - 120 letters "
+    ],
+    correct: "46 words -128 letters" 
+},
+{ 
+   q: " Nepal ma saturday holiday (bida) kashle suru gareka hun ?" 
+   options: [
+      " chandra shamsher rana"
+        "surya bahadur thapa"
+        "Bhim shamsher Rana"
+        "juddha shamsher rana"
+], 
+   correct: "Bhim shamsher Rana"
+}
 ];
 
 /* ============================================================
