@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title> welcome to ujwal pandey  | Secure GK Examination </title>
+<title>Welcome to Ujwal Pandey | Secure GK Examination</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -14,17 +14,22 @@
 <!-- START SCREEN -->
 <div id="startScreen" class="start-screen">
     <div class="start-card slide-in">
-        <h1>Ujwal Pandey </h1>
+        
+        <h1>Ujwal Pandey</h1>
         <h2>अधिकारिक अनलाइन परीक्षा</h2>
-        <h3> Develop BY ujwal Pandey  </h3>
+        <h3>Develop BY Ujwal Pandey</h3>
 
-       <input type="text" id="playerName" placeholder="Full Name" required>
-<small id="nameError" class="error-msg"></small>
+        <!-- Full Name -->
+        <input type="text" id="playerName" placeholder="Full Name" required>
+        <small id="nameError" class="error-msg"></small>
 
-<input type="email" id="playerEmail" placeholder="Email Address" required>
-<small id="emailError" class="error-msg"></small>
+        <!-- Email -->
+        <input type="email" id="playerEmail" placeholder="Email Address" required>
+        <small id="emailError" class="error-msg"></small>
 
-        <button onclick="beginExam()" class="start-btn">Start Examination</button>
+        <!-- Start Button -->
+        <button id="startExamBtn" class="start-btn">Start Examination</button>
+
     </div>
 </div>
 
@@ -32,19 +37,25 @@
 <div id="examScreen" class="exam-screen hidden">
 
     <div class="top-bar">
+
+        <!-- Question Navigation -->
         <div class="question-nav" id="questionNav"></div>
 
+        <!-- Timer -->
         <div class="timer-ring">
             <svg>
                 <circle cx="40" cy="40" r="35"></circle>
                 <circle id="timerCircle" cx="40" cy="40" r="35"></circle>
             </svg>
-            <span id="timerText">05:00</span>
+            <span id="timerText">10:00</span>
         </div>
+
     </div>
 
+    <!-- Question Container -->
     <div id="questionContainer" class="question-container"></div>
 
+    <!-- Navigation Buttons -->
     <div class="btn-row">
         <button id="prevBtn" onclick="prevQuestion()">Previous</button>
         <button id="reviewBtn" onclick="markForReview()">Mark for Review</button>
@@ -52,6 +63,7 @@
         <button id="submitBtn" onclick="submitExam()">Submit Exam</button>
     </div>
 
+    <!-- Result + Review Section -->
     <div id="resultBox" class="result-box hidden"></div>
     <div id="reviewSection" class="review-section hidden"></div>
 
