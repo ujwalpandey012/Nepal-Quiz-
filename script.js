@@ -3,7 +3,8 @@
 ============================================================ */
 const APP_URL =
   "https://script.google.com/macros/s/AKfycbyTXArmFAAChhMuBdnZUP1k95aEElCadrmZavf7XuTZlPUn4j-RScEsHkoOV7B27J4qEw/exec";
-
+// 🟩 ADD THIS LINE BELOW:
+document.getElementById("startExamBtn").onclick = beginExam;
 /* ============================================================
    QUESTIONS (15 TOTAL)
 ============================================================ */
