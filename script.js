@@ -143,7 +143,23 @@ let alreadySubmitted = false;
    START EXAM
 ============================================================ */
 function beginExam() {
+  const name = document.getElementById("playerName").value.trim();
+  const email = document.getElementById("playerEmail").value.trim();
 
+  // VALIDATION PART
+  if (name === "" || email === "") {
+    alert("Please enter your Full Name and Email Address to start the exam.");
+    return; 
+  }
+
+  // VALID EMAIL FORMAT CHECK
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailPattern.test(email)) {
+    alert("Please enter a valid email address.");
+    return;
+  }
+
+  // IF VALID → Continue exam
   document.getElementById("startScreen").classList.add("hidden");
   document.getElementById("examScreen").classList.remove("hidden");
 
