@@ -86,9 +86,9 @@ const questions = [
 { 
    q: " Nepal ma saturday holiday (bida) kashle suru gareka hun ?" 
    options: [
-      " chandra shamsher rana"
-        "surya bahadur thapa"
-        "Bhim shamsher Rana"
+      " chandra shamsher rana",
+        "surya bahadur thapa",
+        "Bhim shamsher Rana",
         "juddha shamsher rana"
 ], 
    correct: "Bhim shamsher Rana"
