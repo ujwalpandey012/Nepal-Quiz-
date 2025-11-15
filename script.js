@@ -143,23 +143,41 @@ let alreadySubmitted = false;
    START EXAM
 ============================================================ */
 function beginExam() {
-  const name = document.getElementById("playerName").value.trim();
-  const email = document.getElementById("playerEmail").value.trim();
+  const name = document.getElementById("playerName");
+  const email = document.getElementById("playerEmail");
+  const nameError = document.getElementById("nameError");
+  const emailError = document.getElementById("emailError");
 
-  // VALIDATION PART
-  if (name === "" || email === "") {
-    alert("Please enter your Full Name and Email Address to start the exam.");
-    return; 
+  resetValidation(name, nameError);
+  resetValidation(email, emailError);
+
+  let valid = true;
+
+  // NAME VALIDATION
+  if (name.value.trim() === "") {
+    showError(name, nameError, "Full Name is required.");
+    valid = false;
+  } else {
+    showSuccess(name);
   }
 
-  // VALID EMAIL FORMAT CHECK
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailPattern.test(email)) {
-    alert("Please enter a valid email address.");
-    return;
+  // EMAIL VALIDATION
+  if (email.value.trim() === "") {
+    showError(email, emailError, "Email Address is required.");
+    valid = false;
+  } else {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email.value.trim())) {
+      showError(email, emailError, "Enter a valid Email Address.");
+      valid = false;
+    } else {
+      showSuccess(email);
+    }
   }
 
-  // IF VALID → Continue exam
+  if (!valid) return;
+
+  // START EXAM
   document.getElementById("startScreen").classList.add("hidden");
   document.getElementById("examScreen").classList.remove("hidden");
 
@@ -169,6 +187,42 @@ function beginExam() {
   setupAntiCheat();
 }
 
+
+// FUNCTIONS FOR ERROR + SUCCESS
+function showError(input, errorBox, message) {
+  errorBox.textContent = message;
+  input.classList.add("input-error");
+}
+
+function showSuccess(input) {
+  input.classList.add("input-success");
+}
+
+function resetValidation(input, errorBox) {
+  input.classList.remove("input-error", "input-success");
+  errorBox.textContent = "";
+}
+
+
+// LIVE VALIDATION (as the user types)
+document.getElementById("playerName").addEventListener("input", function () {
+  if (this.value.trim() !== "") {
+    this.classList.add("input-success");
+    this.classList.remove("input-error");
+    document.getElementById("nameError").textContent = "";
+  }
+});
+
+document.getElementById("playerEmail").addEventListener("input", function () {
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const errorBox = document.getElementById("emailError");
+
+  if (emailPattern.test(this.value.trim())) {
+    this.classList.add("input-success");
+    this.classList.remove("input-error");
+    errorBox.textContent = "";
+  }
+});
 /* ============================================================
    SAFE ANTI-CHEAT
 ============================================================ */
