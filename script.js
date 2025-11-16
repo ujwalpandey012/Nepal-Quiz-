@@ -273,14 +273,15 @@ function markForReview() {
 }
 
 /* ============================================================
-   TIMER — 15 MINUTES
+   TIMER — 20 MINUTES
 ============================================================ */
-let time = 900;
+let time = 1200; // 20 minutes in seconds
 
 function startTimer() {
   let circle = document.getElementById("timerCircle");
   let text = document.getElementById("timerText");
-  const FULL = 900;
+
+  const FULL = 1200; // full 20 minutes
   const CIRCLE = 220;
 
   let timer = setInterval(() => {
@@ -297,7 +298,6 @@ function startTimer() {
     time--;
   }, 1000);
 }
-
 /* ============================================================
    ANTI-CHEAT
 ============================================================ */
