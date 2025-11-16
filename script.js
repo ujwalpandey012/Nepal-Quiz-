@@ -2,7 +2,7 @@
    GOOGLE SHEET ENDPOINT
 ============================================================ */
 const APP_URL =
-  "https://script.google.com/macros/s/AKfycbyTXArmFAAChhMuBdnZUP1k95aAElCadrmZavf7XuTZlPUn4j-RScEsHkoOV7B27J4qEw/exec";
+  "https://script.google.com/macros/s/AKfycbyTXArmFAAChhMuBdnZUP1k95aEElCadrmZavf7XuTZlPUn4j-RScEsHkoOV7B27J4qEw/exec";
 
 /* ============================================================
    YOUR NEPAL 15 QUESTIONS
