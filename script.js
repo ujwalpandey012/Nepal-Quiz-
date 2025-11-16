@@ -357,18 +357,21 @@ async function submitExam() {
 
   await fetch(APP_URL, {
     method: "POST",
-    mode: "no-cors",
-    headers: { "Content-Type": "application/json" },
+    mode: "cors",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify({
       name: document.getElementById("playerName").value,
       email: document.getElementById("playerEmail").value,
-      score,
-      percent,
+      score: score,
+      percent: percent,
       answersDetailed: list
     })
-  });
+  })
+  .then(res => console.log("SENT TO GOOGLE SCRIPT"))
+  .catch(err => console.error("FETCH ERROR:", err));
 }
-
 /* ============================================================
    REVIEW PANEL
 ============================================================ */
