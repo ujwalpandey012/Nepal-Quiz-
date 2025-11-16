@@ -4,7 +4,7 @@ body{background:#020d25;color:white;}
 .hidden{display:none!important}
 
 /* START SCREEN */
-.start-screen{height:100vh;display:flex;justify-content:center;align-items:center;}
+.start-screen{height:100vh;display:flex;justify-content:center;align-items:center;transition:0.3s;}
 .start-card{background:rgba(255,255,255,0.06);padding:40px;width:350px;border-radius:18px;
 backdrop-filter:blur(10px);box-shadow:0 0 25px rgba(255,255,255,0.1);
 border:1px solid rgba(255,255,255,0.15);text-align:center}
@@ -71,46 +71,12 @@ border-radius:15px;border:1px solid rgba(255,255,255,0.15)}
 .wrong-text{color:#ff5555;font-weight:600}
 .correct-ans{color:gold;font-weight:600}
 
-/* ERROR + SUCCESS STATES */
-.error-msg {
-  color: #ff4444;
-  font-size: 0.85rem;
-  margin-top: -5px;
-  margin-bottom: 8px;
-  display: block;
-  text-align: left;
-  padding-left: 5px;
-}
-
-.input-error {
-  border: 1px solid #ff4444 !important;
-  background: rgba(255,0,0,0.15) !important;
-  animation: shake 0.25s ease;
-}
-
-.input-success {
-  border: 1px solid #00ff88 !important;
-  background: rgba(0,255,136,0.10) !important;
-}
-
-/* SHAKE EFFECT */
-@keyframes shake {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-3px); }
-  50% { transform: translateX(3px); }
-  75% { transform: translateX(-3px); }
-  100% { transform: translateX(0); }
-}
-
-/* RULES POPUP */
+/* POPUP */
 .rules-popup {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0,0,0,0.75);
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 9999;
@@ -124,60 +90,11 @@ border-radius:15px;border:1px solid rgba(255,255,255,0.15)}
   border-radius: 12px;
   border: 1px solid rgba(255,255,255,0.2);
   backdrop-filter: blur(10px);
-  animation: fadeIn .3s ease;
 }
 
-.rules-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-}
-
-.rules-header h2 {
-  margin: 0;
-  color: gold;
-}
-
-.close-btn {
-  font-size: 28px;
-  cursor: pointer;
-  color: white;
-  padding: 5px;
-  transition: .2s;
-}
-
-.close-btn:hover {
-  color: gold;
-}
-
-.rules-content p {
-  margin: 10px 0;
-  font-size: 0.93rem;
-  line-height: 1.4rem;
-}
-
-.read-btn {
-  width: 100%;
-  padding: 12px;
-  background: gold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  color: black;
-  font-weight: 600;
-  margin-top: 15px;
-  font-size: 1rem;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-/* BLUR BACKGROUND WHEN POPUP IS OPEN */
+/* BLUR BACKGROUND */
 body.popup-active #startScreen {
   filter: blur(8px);
   pointer-events: none;
-  user-select: none;
   opacity: 0.4;
 }
