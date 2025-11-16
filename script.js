@@ -128,7 +128,8 @@ const questionBank = [
   ...pack8,
   ...pack9,
   ...pack10,
-  ...nepal15 
+  ...nepal15
+];
 /* ============================================================
    GET 20 RANDOM UNIQUE QUESTIONS
 ============================================================ */
@@ -137,8 +138,6 @@ function shuffle(arr) {
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-}
-
 function getRandom20() {
   let copy = [...questionBank];
   shuffle(copy);
