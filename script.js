@@ -249,11 +249,55 @@ function saveAnswer() {
   if (chosen) answers[current] = chosen.value;
 }
 
-function nextQuestion() {
-  saveAnswer();
-  if (current < questions.length - 1) current++;
-  loadQuestion();
+function loadQuestion() {
+  updateNav();
+
+  let q = questions[current];
+  let box = document.getElementById("questionContainer");
+
+  let html = `<h2>${current + 1}. ${q.q}</h2>`;
+
+  q.options.forEach(opt => {
+    html += `
+      <label class="option">
+        <input type="radio" name="q${current}" value="${opt}">
+        ${opt}
+      </label>`;
+  });
+
+  box.innerHTML = html;
+
+  // Auto move to next when option selected
+  document.querySelectorAll(`input[name="q${current}"]`).forEach(input => {
+    input.onclick = () => {
+      answers[current] = input.value;
+
+      // If NOT last question → go next
+      if (current < questions.length - 1) {
+        current++;
+        loadQuestion();
+      } else {
+        // LAST QUESTION → show submit button
+        document.getElementById("submitBtn").style.display = "block";
+      }
+    };
+  });
+
+  // PREVIOUS BUTTON always visible except Q1
+  if (current === 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline-block";
+  }
+
+  // Submit button ONLY on last question
+  if (current === questions.length - 1) {
+    document.getElementById("submitBtn").style.display = "block";
+  } else {
+    document.getElementById("submitBtn").style.display = "none";
+  }
 }
+
 
 function prevQuestion() {
   saveAnswer();
@@ -396,7 +440,6 @@ function buildReview(list) {
 /* ============================================================
    BUTTON EVENTS
 ============================================================ */
-document.getElementById("nextBtn").onclick = nextQuestion;
 document.getElementById("prevBtn").onclick = prevQuestion;
 document.getElementById("reviewBtn").onclick = markForReview;
 document.getElementById("submitBtn").onclick = submitExam;
