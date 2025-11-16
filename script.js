@@ -151,16 +151,22 @@ let alreadySubmitted = false;
 ============================================================ */
 window.onload = () => {
   document.getElementById("rulesPopup").style.display = "flex";
-  document.getElementById("startScreen").classList.add("hidden");
+
+  // show start screen BUT keep blurred
+  document.getElementById("startScreen").classList.remove("hidden");
+
+  // add blur to background
+  document.body.classList.add("popup-active");
 
   document.getElementById("startExamBtn").onclick = beginExam;
 };
 
 function closeRules() {
   document.getElementById("rulesPopup").style.display = "none";
-  document.getElementById("startScreen").classList.remove("hidden");
-}
 
+  // remove blur
+  document.body.classList.remove("popup-active");
+}
 /* ============================================================
    BEGIN EXAM
 ============================================================ */
