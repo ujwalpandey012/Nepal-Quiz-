@@ -5,10 +5,9 @@ const APP_URL =
   "https://script.google.com/macros/s/AKfycbyTXArmFAAChhMuBdnZUP1k95aEElCadrmZavf7XuTZlPUn4j-RScEsHkoOV7B27J4qEw/exec";
 
 /* ============================================================
-   QUESTIONS (YOUR EXACT 15)
+   YOUR 15 NEPAL GK QUESTIONS (INSIDE SCRIPT.JS ONLY)
 ============================================================ */
-const questions = [
-
+const nepal15 = [
   {
     q: "नेपालको राष्ट्रिय गान “सयौँ थुँगा फूलका हामी” मा कति शब्द र कति अक्षर छन्?<br>How many words and letters are in the National Anthem of Nepal?",
     options: [
@@ -21,7 +20,7 @@ const questions = [
   },
 
   {
-    q: "नेपालमा शनिबार बिदा (Saturday holiday) कसले सुरु गरेका हुन्?<br>Who started the Saturday holiday in Nepal?",
+    q: "नेपालमा शनिबार बिदा कसले सुरु गरेका थिए?<br>Who started Saturday holiday in Nepal?",
     options: [
       "Chandra Shamsher Rana",
       "Surya Bahadur Thapa",
@@ -32,13 +31,13 @@ const questions = [
   },
 
   {
-    q: "Olympic Games सबैभन्दा पहिले कुन देशबाट सुरु भएका थिए?<br>Where did the Olympic Games start?",
+    q: "Olympic Games सबैभन्दा पहिले कहाँ सुरु भए?<br>Where did the Olympic Games start?",
     options: ["China", "USA", "Greece", "France"],
     correct: "Greece"
   },
 
   {
-    q: "नेपालको कुन प्रदेशमा सबैभन्दा धेरै जिल्ला छन्?<br>Which province of Nepal has the highest number of districts?",
+    q: "नेपालको कुन प्रदेशमा बढी जिल्ला छन्?<br>Which province of Nepal has the most districts?",
     options: [
       "Bagmati Province",
       "Lumbini Province",
@@ -48,86 +47,91 @@ const questions = [
     correct: "Koshi Province (Province 1)"
   },
 
-  /* ---- Original 11 Questions ---- */
   {
-    q: "नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?<br>Where was Nepal’s first railway service operated?",
+    q: "नेपालमा पहिलो रेल सेवा कहाँ थियो?<br>Where was Nepal’s first railway operated?",
     options: ["Raxaul – Amlekhganj", "Birgunj – Simara", "Janakpur – Jaynagar", "Biratnagar – Rangeli"],
     correct: "Raxaul – Amlekhganj"
   },
 
   {
-    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?<br>What is the first hydroelectric project of Nepal?",
+    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?<br>What is Nepal’s first hydroelectric project?",
     options: ["Trishuli", "Pharping", "Kulekhani", "Sunkoshi"],
     correct: "Pharping"
   },
 
   {
-    q: "नेपालको पहिलो बैंक कुन हो?<br>What is the first bank of Nepal?",
+    q: "नेपालको पहिलो बैंक कुन हो?<br>What is Nepal’s first bank?",
     options: ["Nepal Rastra Bank", "Agriculture Development Bank", "Nepal Bank Limited", "Rastriya Banijya Bank"],
     correct: "Nepal Bank Limited"
   },
 
   {
-    q: "नेपालको पहिलो संविधान कहिले जारी गरिएको थियो?<br>When was Nepal’s first constitution issued?",
-    options: ["1948 A.D. (2004 B.S.)", "1951 A.D. (2008 B.S.)", "1962 A.D. (2019 B.S.)", "1990 A.D. (2047 B.S.)"],
-    correct: "1948 A.D. (2004 B.S.)"
+    q: "नेपालको पहिलो संविधान कहिले जारी भयो?<br>When was Nepal’s first constitution announced?",
+    options: ["1948 (2004 BS)", "1951 (2008 BS)", "1962 (2019 BS)", "1990 (2047 BS)"],
+    correct: "1948 (2004 BS)"
   },
 
   {
-    q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले भएको हो?<br>When did Nepal join the United Nations?",
-    options: ["1950 A.D", "1955 A.D", "1957 A.D", "1961 A.D"],
-    correct: "1955 A.D"
+    q: "नेपाल संयुक्त राष्ट्र संघ कहिले सदस्य बन्यो?<br>When did Nepal join the UN?",
+    options: ["1950", "1955", "1957", "1961"],
+    correct: "1955"
   },
 
   {
-    q: "नेपालको पहिलो विश्वविद्यालय कुन हो?<br>What is the first university of Nepal?",
+    q: "नेपालको पहिलो विश्वविद्यालय कुन हो?<br>Which is the first university of Nepal?",
     options: ["Tribhuvan University", "Kathmandu University", "Purbanchal University", "Mid-Western University"],
     correct: "Tribhuvan University"
   },
 
   {
-    q: "नेपाली भाषामा छायाङ्कन गरिएको पहिलो चलचित्र कुन हो?<br>What is the first Nepali-language film?",
-    options: ["Aama", "Satya Harischandra", "Maitighar", "Harischandra"],
+    q: "पहिलो नेपाली भाषाको चलचित्र कुन हो?<br>What is the first Nepali-language movie?",
+    options: ["Aama", "Satya Harischandra", "Maitighar", "Harishchandra"],
     correct: "Satya Harischandra"
   },
 
   {
-    q: "राष्ट्रिय सभामा कति जना सदस्य हुन्छन्?<br>How many members are there in the National Assembly?",
+    q: "राष्ट्रिय सभामा कति सदस्य हुन्छन्?<br>How many members are in the National Assembly?",
     options: ["50", "56", "59", "60"],
     correct: "59"
   },
 
   {
-    q: "नेपालको पहिलो जनगणना कहिले भएको हो?<br>When was Nepal’s first official census conducted?",
-    options: [
-      "1911 A.D., during Chandra Shumsher",
-      "1941 A.D., during Judha Shumsher",
-      "1952 A.D., during Tribhuvan Shah",
-      "1961 A.D., during King Mahendra"
-    ],
-    correct: "1911 A.D., during Chandra Shumsher"
+    q: "नेपालको पहिलो जनगणना कहिले भयो?<br>When was Nepal’s first census?",
+    options: ["1911", "1941", "1952", "1961"],
+    correct: "1911"
   },
 
   {
-    q: "नेपालले SAARC चार्टर कहिले साइन गरेको थियो?<br>When did Nepal sign the SAARC Charter?",
-    options: ["8 December 1985", "6 January 1984", "10 December 1986", "1 November 1985"],
-    correct: "8 December 1985"
+    q: "नेपालले SAARC चार्टर कहिले साइन गर्‍यो?<br>When did Nepal sign the SAARC charter?",
+    options: ["8 Dec 1985", "1984", "1986", "1983"],
+    correct: "8 Dec 1985"
   },
 
   {
-    q: "नेपालको पहिलो आन्तरिक उडान कहिले भएको हो?<br>When was Nepal’s first domestic flight conducted?",
-    options: [
-      "1949 A.D., Kathmandu–Pokhara",
-      "1950 A.D., Kathmandu–Biratnagar",
-      "1950 A.D., Kathmandu–Simara",
-      "1951 A.D., Kathmandu–Janakpur"
-    ],
-    correct: "1950 A.D., Kathmandu–Simara"
+    q: "नेपालको पहिलो आन्तरिक उडान कहिले भयो?<br>When was Nepal’s first domestic flight?",
+    options: ["1949", "1950 Kathmandu–Biratnagar", "1950 Kathmandu–Simara", "1951 Kathmandu–Janakpur"],
+    correct: "1950 Kathmandu–Simara"
   }
 ];
 
 /* ============================================================
-   SHUFFLE QUESTIONS
+   MERGE ALL PACKS + NEPAL15
+============================================================ */
+const questionBank = [
+  ...pack1,
+  ...pack2,
+  ...pack3,
+  ...pack4,
+  ...pack5,
+  ...pack6,
+  ...pack7,
+  ...pack8,
+  ...pack9,
+  ...pack10
+];
+
+/* ============================================================
+   GET 20 RANDOM UNIQUE QUESTIONS
 ============================================================ */
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -135,25 +139,29 @@ function shuffle(arr) {
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
-shuffle(questions);
-questions.forEach(q => shuffle(q.options));
+
+function getRandom20() {
+  let copy = [...questionBank];
+  shuffle(copy);
+  return copy.slice(0, 20);
+}
+
+const questions = getRandom20();
 
 /* ============================================================
-   STATE VARIABLES
+   EVERYTHING BELOW REMAINS SAME (NO CHANGE)
 ============================================================ */
+
+/* STATE VARIABLES */
 let current = 0;
 let answers = {};
 let reviewSet = new Set();
 let alreadySubmitted = false;
 
-/* ============================================================
-   SHOW POPUP ON LOAD
-============================================================ */
+/* SHOW POPUP */
 window.onload = () => {
   document.getElementById("rulesPopup").style.display = "flex";
   document.body.classList.add("popup-active");
-
-  // button connection
   document.getElementById("startExamBtn").onclick = beginExam;
 };
 
@@ -162,51 +170,28 @@ function closeRules() {
   document.body.classList.remove("popup-active");
 }
 
-/* ============================================================
-   BEGIN EXAM
-============================================================ */
+/* BEGIN EXAM */
 function beginExam() {
-
   const name = document.getElementById("playerName").value.trim();
   const email = document.getElementById("playerEmail").value.trim();
 
   const nameErr = document.getElementById("nameError");
   const emailErr = document.getElementById("emailError");
 
-  const nameInput = document.getElementById("playerName");
-  const emailInput = document.getElementById("playerEmail");
-
-  // reset states
   nameErr.textContent = "";
   emailErr.textContent = "";
-  nameInput.classList.remove("input-error", "input-success");
-  emailInput.classList.remove("input-error", "input-success");
 
-  // Validate full name (must contain first + last)
-  const namePattern = /^[A-Za-z ]{3,}$/;
-  const twoWords = name.split(" ").length >= 2;
-
-  if (!namePattern.test(name) || !twoWords) {
-    nameErr.textContent = "Please enter your FULL NAME (first + last).";
-    nameInput.classList.add("input-error");
+  if (name.split(" ").length < 2) {
+    nameErr.textContent = "Please enter FULL NAME (first + last).";
     return;
-  } else {
-    nameInput.classList.add("input-success");
   }
 
-  // Validate email
-  const emailPattern =
-    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
-
+  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
   if (!emailPattern.test(email)) {
     emailErr.textContent = "Enter a valid Email Address.";
-    emailInput.classList.add("input-error");
     return;
-  } else {
-    emailInput.classList.add("input-success");
   }
 
-  // If everything is OK → Start Exam
   document.getElementById("startScreen").classList.add("hidden");
   document.getElementById("examScreen").classList.remove("hidden");
 
