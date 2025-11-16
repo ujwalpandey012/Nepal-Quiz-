@@ -20,7 +20,7 @@ const questions = [
   },
 
   {
-    q: "नेपालमा शनिबार बिदा (Saturday holiday) कसले सुरु गरेका हुन्?<br>Who started the Saturday holiday in Nepal?",
+    q: "नेपालमा शनिबार बिदा (Saturday holiday) कसले सुरु गरेका हुन्?<br>Who started Saturday holiday in Nepal?",
     options: [
       "Chandra Shamsher Rana",
       "Surya Bahadur Thapa",
@@ -37,7 +37,7 @@ const questions = [
   },
 
   {
-    q: "नेपालको कुन प्रदेशमा सबैभन्दा धेरै जिल्ला छन्?<br>Which province has the highest number of districts?",
+    q: "नेपालको कुन प्रदेशमा सबैभन्दा धेरै जिल्ला छन्?<br>Which province has the most districts?",
     options: [
       "Bagmati Province",
       "Lumbini Province",
@@ -47,77 +47,76 @@ const questions = [
     correct: "Koshi Province (Province 1)"
   },
 
-  /* ---- Old Questions ---- */
-
+  /* Old Questions */
   {
-    q: "नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?<br>Where was Nepal’s first railway service operated?",
+    q: "नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?<br>Where was Nepal's first railway operated?",
     options: ["Raxaul – Amlekhganj", "Birgunj – Simara", "Janakpur – Jaynagar", "Biratnagar – Rangeli"],
     correct: "Raxaul – Amlekhganj"
   },
   {
-    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?<br>What is the first hydroelectric project of Nepal?",
+    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?<br>What is Nepal's first hydroelectric project?",
     options: ["Trishuli", "Pharping", "Kulekhani", "Sunkoshi"],
     correct: "Pharping"
   },
   {
-    q: "नेपालको पहिलो बैंक कुन हो?<br>What is the first bank of Nepal?",
+    q: "नेपालको पहिलो बैंक कुन हो?<br>What is Nepal's first bank?",
     options: ["Nepal Rastra Bank", "Agriculture Development Bank", "Nepal Bank Limited", "Rastriya Banijya Bank"],
     correct: "Nepal Bank Limited"
   },
   {
-    q: "नेपालको पहिलो संविधान कहिले जारी गरिएको थियो?<br>When was Nepal’s first constitution issued?",
-    options: ["1948 A.D. (2004 B.S.)", "1951 A.D. (2008 B.S.)", "1962 A.D. (2019 B.S.)", "1990 A.D. (2047 B.S.)"],
+    q: "नेपालको पहिलो संविधान कहिले जारी भयो?<br>When was Nepal's first constitution issued?",
+    options: ["1948 A.D. (2004 B.S.)", "1951 A.D.", "1962 A.D.", "1990 A.D."],
     correct: "1948 A.D. (2004 B.S.)"
   },
   {
-    q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले भएको हो?<br>When did Nepal join the United Nations?",
-    options: ["1950 A.D", "1955 A.D", "1957 A.D", "1961 A.D"],
-    correct: "1955 A.D"
+    q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले भएको हो?<br>When did Nepal join the UN?",
+    options: ["1950", "1955", "1957", "1961"],
+    correct: "1955"
   },
   {
-    q: "नेपालको पहिलो विश्वविद्यालय कुन हो?<br>What is the first university of Nepal?",
+    q: "नेपालको पहिलो विश्वविद्यालय कुन हो?<br>What is Nepal's first university?",
     options: ["Tribhuvan University", "Kathmandu University", "Purbanchal University", "Mid-Western University"],
     correct: "Tribhuvan University"
   },
   {
-    q: "नेपाली भाषामा छायाङ्कन गरिएको पहिलो चलचित्र कुन हो?<br>What is the first Nepali film?",
+    q: "नेपाली भाषामा छायाङ्कन गरिएको पहिलो चलचित्र कुन हो?<br>What is the first Nepali-language film?",
     options: ["Aama", "Satya Harischandra", "Maitighar", "Harischandra"],
     correct: "Satya Harischandra"
   },
   {
-    q: "राष्ट्रिय सभामा कति जना सदस्य हुन्छन्?<br>How many members are in the National Assembly?",
+    q: "राष्ट्रिय सभामा कति सदस्य छन्?<br>How many National Assembly members?",
     options: ["50", "56", "59", "60"],
     correct: "59"
   },
   {
-    q: "नेपालको पहिलो जनगणना कहिले भएको हो?<br>When was Nepal’s first official census?",
+    q: "नेपालको पहिलो जनगणना कहिले भयो?<br>When was Nepal's first census?",
     options: [
-      "1911 A.D., during Chandra Shumsher",
-      "1941 A.D., during Judha Shumsher",
-      "1952 A.D., during Tribhuvan Shah",
-      "1961 A.D., during King Mahendra"
+      "1911 A.D.",
+      "1941 A.D.",
+      "1952 A.D.",
+      "1961 A.D."
     ],
-    correct: "1911 A.D., during Chandra Shumsher"
+    correct: "1911 A.D."
   },
   {
-    q: "नेपालले SAARC चार्टर कहिले साइन गरेको थियो?<br>When did Nepal sign the SAARC Charter?",
-    options: ["8 December 1985", "6 January 1984", "10 December 1986", "1 November 1985"],
-    correct: "8 December 1985"
+    q: "नेपालले SAARC चार्टर कहिले साइन गरेको थियो?<br>When did Nepal sign SAARC Charter?",
+    options: ["8 Dec 1985", "6 Jan 1984", "10 Dec 1986", "1 Nov 1985"],
+    correct: "8 Dec 1985"
   },
   {
-    q: "नेपालको पहिलो आन्तरिक उडान कहिले भएको हो?<br>When was Nepal’s first domestic flight?",
+    q: "नेपालको पहिलो आन्तरिक उडान कहिले भएको हो?<br>When was Nepal's first domestic flight?",
     options: [
-      "1949 A.D., Kathmandu–Pokhara",
-      "1950 A.D., Kathmandu–Biratnagar",
-      "1950 A.D., Kathmandu–Simara",
-      "1951 A.D., Kathmandu–Janakpur"
+      "1949 A.D.",
+      "1950 A.D. Kathmandu–Simara",
+      "1950 A.D. Kathmandu–Biratnagar",
+      "1951 A.D."
     ],
-    correct: "1950 A.D., Kathmandu–Simara"
+    correct: "1950 A.D. Kathmandu–Simara"
   }
 ];
 
 /* ============================================================
-   SHUFFLE QUESTIONS + OPTIONS
+   SHUFFLE QUESTIONS
 ============================================================ */
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
@@ -137,7 +136,7 @@ let reviewSet = new Set();
 let alreadySubmitted = false;
 
 /* ============================================================
-   PAGE LOAD → SHOW RULES POPUP
+   PAGE LOAD → SHOW RULE POPUP
 ============================================================ */
 window.onload = function () {
   document.getElementById("rulesPopup").style.display = "flex";
@@ -158,29 +157,24 @@ function closeRules() {
 function beginExam() {
   const name = document.getElementById("playerName");
   const email = document.getElementById("playerEmail");
-  const nameError = document.getElementById("nameError");
-  const emailError = document.getElementById("emailError");
+  const nameErr = document.getElementById("nameError");
+  const emailErr = document.getElementById("emailError");
 
-  resetValidation(name, nameError);
-  resetValidation(email, emailError);
+  resetValidation(name, nameErr);
+  resetValidation(email, emailErr);
 
   let valid = true;
 
   if (name.value.trim() === "") {
-    showError(name, nameError, "Full Name is required.");
+    showError(name, nameErr, "Full Name is required.");
     valid = false;
   } else showSuccess(name);
 
-  if (email.value.trim() === "") {
-    showError(email, emailError, "Email Address is required.");
+  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!pattern.test(email.value.trim())) {
+    showError(email, emailErr, "Enter a valid Email Address.");
     valid = false;
-  } else {
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!pattern.test(email.value.trim())) {
-      showError(email, emailError, "Enter a valid Email Address.");
-      valid = false;
-    } else showSuccess(email);
-  }
+  } else showSuccess(email);
 
   if (!valid) return;
 
@@ -196,20 +190,20 @@ function beginExam() {
 /* ============================================================
    INPUT VALIDATION
 ============================================================ */
-function showError(input, errorBox, msg) {
-  errorBox.textContent = msg;
+function showError(input, error, msg) {
+  error.textContent = msg;
   input.classList.add("input-error");
 }
 function showSuccess(input) {
   input.classList.add("input-success");
 }
-function resetValidation(input, errorBox) {
+function resetValidation(input, error) {
   input.classList.remove("input-error", "input-success");
-  errorBox.textContent = "";
+  error.textContent = "";
 }
 
 /* ============================================================
-   FULL ANTI-CHEAT (SUPER STRONG)
+   ANTI-CHEAT ENGINE
 ============================================================ */
 function setupAntiCheat() {
   document.addEventListener("visibilitychange", () => {
@@ -306,10 +300,13 @@ function saveAns() {
 function nextQuestion() { saveAns(); current++; loadQ(); }
 function prevQuestion() { saveAns(); current--; loadQ(); }
 function go(n) { saveAns(); current = n; loadQ(); }
-function markForReview() { reviewSet.add(current); updateNav(); }
+function markForReview() {
+  reviewSet.add(current);
+  updateNav();
+}
 
 /* ============================================================
-   TIMER (10 MINUTES)
+   TIMER — 10 minutes
 ============================================================ */
 let time = 600;
 
@@ -321,7 +318,9 @@ function startTimer() {
     let m = Math.floor(time / 60);
     let s = time % 60;
 
-    text.innerHTML = `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+    text.innerHTML = `${m.toString().padStart(2, "0")}:${s
+      .toString()
+      .padStart(2, "0")}`;
 
     circle.style.strokeDashoffset = 220 - (220 * (time / 600));
 
@@ -365,13 +364,13 @@ async function submitExam() {
 
   let percent = ((score / questions.length) * 100).toFixed(2);
 
-  let res = document.getElementById("resultBox");
-  res.classList.remove("hidden");
-  res.innerHTML = `
+  let box = document.getElementById("resultBox");
+  box.classList.remove("hidden");
+  box.innerHTML = `
     <h2>धन्यवाद! परीक्षा सम्पन्न भयो।</h2>
     <p><strong>Score:</strong> ${score}/${questions.length}</p>
     <p><strong>Percentage:</strong> ${percent}%</p>
-    <p>Your answer report is shown below.</p>
+    <p>Your answer report is below.</p>
   `;
 
   buildReview(list);
