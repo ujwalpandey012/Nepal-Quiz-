@@ -415,3 +415,6 @@ document.getElementById("nextBtn").onclick = nextQuestion;
 document.getElementById("prevBtn").onclick = prevQuestion;
 document.getElementById("reviewBtn").onclick = markForReview;
 document.getElementById("submitBtn").onclick = submitExam;
+
+/* START EXAM BUTTON */
+document.getElementById("startExamBtn").onclick = beginExam;
