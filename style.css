@@ -70,6 +70,7 @@ border-radius:15px;border:1px solid rgba(255,255,255,0.15)}
 .correct-text{color:#00ff88;font-weight:600}
 .wrong-text{color:#ff5555;font-weight:600}
 .correct-ans{color:gold;font-weight:600}
+
 /* ERROR + SUCCESS STATES */
 .error-msg {
   color: #ff4444;
@@ -100,6 +101,7 @@ border-radius:15px;border:1px solid rgba(255,255,255,0.15)}
   75% { transform: translateX(-3px); }
   100% { transform: translateX(0); }
 }
+
 /* RULES POPUP */
 .rules-popup {
   position: fixed;
@@ -167,9 +169,3 @@ border-radius:15px;border:1px solid rgba(255,255,255,0.15)}
   margin-top: 15px;
   font-size: 1rem;
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
-}
-
