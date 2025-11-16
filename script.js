@@ -151,17 +151,15 @@ let alreadySubmitted = false;
 ============================================================ */
 window.onload = () => {
   document.getElementById("rulesPopup").style.display = "flex";
-  document.getElementById("startScreen").classList.remove("hidden");
   document.body.classList.add("popup-active");
 
+  // button connection
   document.getElementById("startExamBtn").onclick = beginExam;
 };
 
-/* Close popup */
 function closeRules() {
   document.getElementById("rulesPopup").style.display = "none";
   document.body.classList.remove("popup-active");
-  document.getElementById("startScreen").classList.remove("hidden");
 }
 
 /* ============================================================
@@ -171,52 +169,58 @@ function beginExam() {
 
   const name = document.getElementById("playerName").value.trim();
   const email = document.getElementById("playerEmail").value.trim();
+
   const nameErr = document.getElementById("nameError");
   const emailErr = document.getElementById("emailError");
 
-  // Reset errors
+  const nameInput = document.getElementById("playerName");
+  const emailInput = document.getElementById("playerEmail");
+
+  // reset states
   nameErr.textContent = "";
   emailErr.textContent = "";
-  document.getElementById("playerName").classList.remove("input-error", "input-success");
-  document.getElementById("playerEmail").classList.remove("input-error", "input-success");
+  nameInput.classList.remove("input-error", "input-success");
+  emailInput.classList.remove("input-error", "input-success");
 
-  // FULL NAME VALIDATION (must contain 2 words, letters only)
+  // Validate full name (must contain first + last)
   const namePattern = /^[A-Za-z ]{3,}$/;
   const twoWords = name.split(" ").length >= 2;
 
   if (!namePattern.test(name) || !twoWords) {
     nameErr.textContent = "Please enter your FULL NAME (first + last).";
-    document.getElementById("playerName").classList.add("input-error");
+    nameInput.classList.add("input-error");
     return;
   } else {
-    document.getElementById("playerName").classList.add("input-success");
+    nameInput.classList.add("input-success");
   }
 
-  // EMAIL VALIDATION (strong regex)
+  // Validate email
   const emailPattern =
     /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
 
   if (!emailPattern.test(email)) {
-    emailErr.textContent = "Please enter a valid Email Address.";
-    document.getElementById("playerEmail").classList.add("input-error");
+    emailErr.textContent = "Enter a valid Email Address.";
+    emailInput.classList.add("input-error");
     return;
   } else {
-    document.getElementById("playerEmail").classList.add("input-success");
+    emailInput.classList.add("input-success");
   }
 
-  // If both are valid → start exam
+  // If everything is OK → Start Exam
   document.getElementById("startScreen").classList.add("hidden");
   document.getElementById("examScreen").classList.remove("hidden");
 
   loadNav();
-  loadQ();
+  loadQuestion();
   startTimer();
   setupAntiCheat();
 }
+
 /* ============================================================
-   ANTI-CHEAT
+   ANTI-CHEAT ENGINE
 ============================================================ */
 function setupAntiCheat() {
+
   document.addEventListener("visibilitychange", () => {
     if (document.hidden && !alreadySubmitted) submitExam();
   });
@@ -240,7 +244,7 @@ function setupAntiCheat() {
 }
 
 /* ============================================================
-   NAVIGATION LOADER
+   NAVIGATION
 ============================================================ */
 function loadNav() {
   const nav = document.getElementById("questionNav");
@@ -269,6 +273,7 @@ function updateNav() {
    QUESTION LOADER
 ============================================================ */
 function loadQuestion() {
+
   updateNav();
 
   let q = questions[current];
@@ -318,7 +323,7 @@ function markForReview() {
 }
 
 /* ============================================================
-   TIMER
+   TIMER (10 minutes)
 ============================================================ */
 let time = 600;
 
@@ -327,10 +332,11 @@ function startTimer() {
   let circle = document.getElementById("timerCircle");
 
   let timer = setInterval(() => {
+
     let m = Math.floor(time / 60);
     let s = time % 60;
 
-    text.textContent = `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    text.textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 
     circle.style.strokeDashoffset = 220 - (220 * (time / 600));
 
