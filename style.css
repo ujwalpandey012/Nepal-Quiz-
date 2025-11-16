@@ -194,13 +194,15 @@ body{background:#020d25;color:white;}
 
 /* Square Premium Card */
 .royal-box{
-  width: 420px;
-  background: #111827; /* dark clean navy */
-  padding: 25px 30px;
-  border-radius: 16px;
+  width: 460px;          
+  height: 460px;       
+  background: #111827;
+  padding: 30px;
+  border-radius: 22px;  
   border: 2px solid rgba(255,215,0,0.5);
   box-shadow: 0 0 50px rgba(255,215,0,0.25);
   animation: popupFade 0.35s ease;
+  overflow-y: auto;     
 }
 
 @keyframes popupFade{
