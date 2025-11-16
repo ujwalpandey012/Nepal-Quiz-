@@ -158,12 +158,6 @@ let reviewSet = new Set();
 let alreadySubmitted = false;
 
 /* SHOW POPUP */
-window.onload = () => {
-  document.getElementById("rulesPopup").style.display = "flex";
-  document.body.classList.add("popup-active");
-  document.getElementById("startExamBtn").onclick = beginExam;
-};
-
 function closeRules() {
   document.getElementById("rulesPopup").style.display = "none";
   document.body.classList.remove("popup-active");
