@@ -15,7 +15,7 @@
 <body>
 
 <!-- ================ ROYAL PREMIUM RULES POPUP ================ -->
-<div id="rulesPopup" class="rules-popup royal-popup">
+<div id="rulesPopup" class="royal-popup">
     <div class="royal-box">
 
         <div class="royal-header">
@@ -25,11 +25,8 @@
 
         <div class="royal-content">
             <p>1️⃣ <strong>No minimizing, switching apps, or split-screen.</strong><br>Your exam will auto-submit.</p>
-
             <p>2️⃣ <strong>No new tabs, browsers, or devices.</strong><br>Your progress will auto-submit immediately.</p>
-
             <p>3️⃣ <strong>You have exactly 10 minutes</strong> to answer all 15 questions.</p>
-
             <p>4️⃣ Navigate using <strong>Next/Previous</strong> and submit only at the end.</p>
         </div>
 
@@ -37,6 +34,7 @@
 
     </div>
 </div>
+
 <!-- ===================== START SCREEN ===================== -->
 <div id="startScreen" class="start-screen hidden">
     <div class="start-card slide-in">
@@ -58,13 +56,9 @@
 <!-- ===================== EXAM SCREEN ===================== -->
 <div id="examScreen" class="exam-screen hidden">
 
-    <!-- Top Bar Section -->
     <div class="top-bar">
-
-        <!-- Question Navigation -->
         <div class="question-nav" id="questionNav"></div>
 
-        <!-- Timer Circle -->
         <div class="timer-ring">
             <svg>
                 <circle cx="40" cy="40" r="35"></circle>
@@ -72,13 +66,10 @@
             </svg>
             <span id="timerText">10:00</span>
         </div>
-
     </div>
 
-    <!-- Question Display -->
     <div id="questionContainer" class="question-container"></div>
 
-    <!-- Navigation Buttons -->
     <div class="btn-row">
         <button id="prevBtn">Previous</button>
         <button id="reviewBtn">Mark for Review</button>
@@ -86,16 +77,12 @@
         <button id="submitBtn">Submit Exam</button>
     </div>
 
-    <!-- Result Box -->
     <div id="resultBox" class="result-box hidden"></div>
 
-    <!-- Review Section -->
     <div id="reviewSection" class="review-section hidden"></div>
 
 </div>
 
-<!-- ===================== SCRIPT ===================== -->
 <script src="script.js"></script>
-
 </body>
 </html>
