@@ -174,8 +174,8 @@ body{background:#020d25;color:white;}
   z-index: 9999;
 }
 .royal-box {
-  width: 92%;
-  max-width: 500px;
+  width: 85%;
+  max-width: 440px;
   background: rgba(20, 20, 20, 0.85);
   padding: 32px;
   border-radius: 18px;
