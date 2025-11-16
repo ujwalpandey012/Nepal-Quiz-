@@ -150,22 +150,27 @@ let alreadySubmitted = false;
    PAGE LOAD — SHOW RULES
 ============================================================ */
 window.onload = () => {
+  // Show rules popup
   document.getElementById("rulesPopup").style.display = "flex";
 
-  // show start screen BUT keep blurred
+  // Show the start screen but with blur
   document.getElementById("startScreen").classList.remove("hidden");
 
-  // add blur to background
+  // Add blur effect
   document.body.classList.add("popup-active");
 
   document.getElementById("startExamBtn").onclick = beginExam;
 };
 
 function closeRules() {
+  // Hide popup
   document.getElementById("rulesPopup").style.display = "none";
 
-  // remove blur
+  // Remove blur
   document.body.classList.remove("popup-active");
+
+  // Start screen becomes normal
+  document.getElementById("startScreen").classList.remove("hidden");
 }
 /* ============================================================
    BEGIN EXAM
