@@ -323,14 +323,15 @@ function markForReview() {
 }
 
 /* ============================================================
-   TIMER (10 minutes)
+   TIMER (15 minutes)
 ============================================================ */
-let time = 600;
-
+let time = 900;  
 function startTimer() {
   let text = document.getElementById("timerText");
   let circle = document.getElementById("timerCircle");
 
+  const FULL_TIME = 900;  
+  const CIRCLE_LENGTH = 220; 
   let timer = setInterval(() => {
 
     let m = Math.floor(time / 60);
@@ -338,7 +339,8 @@ function startTimer() {
 
     text.textContent = `${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
 
-    circle.style.strokeDashoffset = 220 - (220 * (time / 600));
+    // FIXED: circle animation now matches full 900 seconds
+    circle.style.strokeDashoffset = CIRCLE_LENGTH - (CIRCLE_LENGTH * (time / FULL_TIME));
 
     if (time <= 0) {
       clearInterval(timer);
@@ -348,7 +350,6 @@ function startTimer() {
     time--;
   }, 1000);
 }
-
 /* ============================================================
    SUBMIT EXAM
 ============================================================ */
