@@ -2,41 +2,45 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Welcome to Ujwal Pandey | Secure GK Examination</title>
+<title>Ujwal Pandey | Secure GK Examination</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- CSS -->
 <link rel="stylesheet" href="style.css">
 
 </head>
 <body>
 
-<!-- RULES POPUP -->
+<!-- ===================== RULES POPUP ===================== -->
 <div id="rulesPopup" class="rules-popup">
     <div class="rules-box">
+
         <div class="rules-header">
             <h2>📘 Examination Rules</h2>
             <span class="close-btn" onclick="closeRules()">&times;</span>
         </div>
 
         <div class="rules-content">
-            <p>1️⃣ <strong>No minimizing, splitting screen, or switching apps.</strong> Auto submit will trigger.</p>
-            <p>2️⃣ <strong>No opening new tabs, browsers, or devices.</strong> Auto submit will trigger.</p>
-            <p>3️⃣ <strong>You have 10 minutes to answer 15 questions.</strong></p>
-            <p>4️⃣ <strong>Go next-next and submit at the last question.</strong></p>
+            <p>1️⃣ <strong>No minimizing, switching apps, or split screen.</strong> Doing this will auto-submit your exam.</p>
+            <p>2️⃣ <strong>No opening new tabs, browsers, or devices.</strong> Doing this will auto-submit your exam.</p>
+            <p>3️⃣ <strong>10 minutes total for 15 questions.</strong></p>
+            <p>4️⃣ <strong>Navigate questions and submit at the end.</strong></p>
         </div>
 
         <button class="read-btn" onclick="closeRules()">I Understand the Rules</button>
     </div>
 </div>
 
-<!-- START SCREEN -->
+<!-- ===================== START SCREEN ===================== -->
 <div id="startScreen" class="start-screen hidden">
     <div class="start-card slide-in">
 
         <h1>Ujwal Pandey</h1>
         <h2>अधिकारिक अनलाइन परीक्षा</h2>
-        <h3>Develop BY Ujwal Pandey</h3>
+        <h3>Developed By Ujwal Pandey</h3>
 
         <input type="text" id="playerName" placeholder="Full Name" required>
         <small id="nameError" class="error-msg"></small>
@@ -48,12 +52,16 @@
     </div>
 </div>
 
-<!-- EXAM SCREEN -->
+<!-- ===================== EXAM SCREEN ===================== -->
 <div id="examScreen" class="exam-screen hidden">
 
+    <!-- Top Bar Section -->
     <div class="top-bar">
+
+        <!-- Question Navigation -->
         <div class="question-nav" id="questionNav"></div>
 
+        <!-- Timer Circle -->
         <div class="timer-ring">
             <svg>
                 <circle cx="40" cy="40" r="35"></circle>
@@ -61,10 +69,13 @@
             </svg>
             <span id="timerText">10:00</span>
         </div>
+
     </div>
 
+    <!-- Question Display -->
     <div id="questionContainer" class="question-container"></div>
 
+    <!-- Navigation Buttons -->
     <div class="btn-row">
         <button id="prevBtn">Previous</button>
         <button id="reviewBtn">Mark for Review</button>
@@ -72,11 +83,16 @@
         <button id="submitBtn">Submit Exam</button>
     </div>
 
+    <!-- Result Box -->
     <div id="resultBox" class="result-box hidden"></div>
+
+    <!-- Review Section -->
     <div id="reviewSection" class="review-section hidden"></div>
 
 </div>
 
+<!-- ===================== SCRIPT ===================== -->
 <script src="script.js"></script>
+
 </body>
 </html>
