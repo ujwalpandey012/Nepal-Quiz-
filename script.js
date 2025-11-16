@@ -3,7 +3,6 @@
 ============================================================ */
 const APP_URL =
   "https://script.google.com/macros/s/AKfycbyTXArmFAAChhMuBdnZUP1k95aEElCadrmZavf7XuTZlPUn4j-RScEsHkoOV7B27J4qEw/exec";
-// 🟩 ADD THIS LINE BELOW:
 document.getElementById("startExamBtn").onclick = beginExam;
 /* ============================================================
    QUESTIONS (15 TOTAL)
@@ -140,6 +139,18 @@ let answers = {};
 let reviewSet = new Set();
 let alreadySubmitted = false;
 
+// SHOW POPUP ON PAGE LOAD
+window.onload = function() {
+  document.getElementById("rulesPopup").style.display = "flex";
+  document.getElementById("startScreen").classList.add("hidden");
+};
+
+// CLOSE POPUP
+function closeRules() {
+  document.getElementById("rulesPopup").style.display = "none";
+  document.getElementById("startScreen").classList.remove("hidden");
+}
+
 /* ============================================================
    START EXAM
 ============================================================ */
@@ -225,26 +236,55 @@ document.getElementById("playerEmail").addEventListener("input", function () {
   }
 });
 /* ============================================================
-   SAFE ANTI-CHEAT
+   FULL ANTI-CHEAT ENGINE (SUPER STRONG)
 ============================================================ */
 function setupAntiCheat() {
 
-  let cheatLock = false;
-
+  // 1️⃣ TAB CHANGE / APP SWITCH
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden && !alreadySubmitted && !cheatLock) {
-      cheatLock = true;
-      setTimeout(() => {
-        if (!alreadySubmitted) submitExam();
-      }, 300);
+    if (document.hidden && !alreadySubmitted) {
+      submitExam();
     }
   });
 
+  // 2️⃣ ALT+TAB / HOME BUTTON / SCREEN MINIMIZE
   window.addEventListener("blur", () => {
-    if (!document.hidden) return;
+    if (!alreadySubmitted) submitExam();
   });
-}
 
+  // 3️⃣ SPLIT SCREEN OR WINDOW RESIZE
+  window.addEventListener("resize", () => {
+    if (!alreadySubmitted) {
+      if (window.innerWidth < 900 || window.innerHeight < 500) {
+        submitExam();
+      }
+    }
+  });
+
+  // 4️⃣ BLOCK RIGHT CLICK
+  document.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+  });
+
+  // 5️⃣ BLOCK DEVTOOLS (F12, CTRL+SHIFT+I, etc.)
+  document.addEventListener("keydown", (e) => {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
+      (e.ctrlKey && e.key === "U")
+    ) {
+      e.preventDefault();
+      if (!alreadySubmitted) submitExam();
+    }
+  });
+
+  // 6️⃣ BLOCK BACK BUTTON (Android / Browser)
+  history.pushState(null, null, location.href);
+  window.onpopstate = function () {
+    if (!alreadySubmitted) submitExam();
+    history.pushState(null, null, location.href);
+  };
+}
 /* ============================================================
    NAVIGATION
 ============================================================ */
