@@ -5,7 +5,7 @@ const APP_URL =
   "https://script.google.com/macros/s/AKfycbyTXArmFAAChhMuBdnZUP1k95aEElCadrmZavf7XuTZlPUn4j-RScEsHkoOV7B27J4qEw/exec";
 
 /* ============================================================
-   QUESTIONS (15 TOTAL)
+   QUESTIONS
 ============================================================ */
 const questions = [
   {
@@ -20,7 +20,7 @@ const questions = [
   },
 
   {
-    q: "नेपालमा शनिबार बिदा (Saturday holiday) कसले सुरु गरेका हुन्?<br>Who started Saturday holiday in Nepal?",
+    q: "नेपालमा शनिबार बिदा कसले सुरु गरेका हुन्?<br>Who started Saturday holiday in Nepal?",
     options: [
       "Chandra Shamsher Rana",
       "Surya Bahadur Thapa",
@@ -31,13 +31,13 @@ const questions = [
   },
 
   {
-    q: "Olympic Games सबैभन्दा पहिले कुन देशबाट सुरु भएका थिए?<br>Where did the Olympic Games start?",
+    q: "Where did the Olympic Games start?",
     options: ["China", "USA", "Greece", "France"],
     correct: "Greece"
   },
 
   {
-    q: "नेपालको कुन प्रदेशमा सबैभन्दा धेरै जिल्ला छन्?<br>Which province has the most districts?",
+    q: "Which province has the most districts?",
     options: [
       "Bagmati Province",
       "Lumbini Province",
@@ -47,64 +47,68 @@ const questions = [
     correct: "Koshi Province (Province 1)"
   },
 
-  /* Old Questions */
   {
-    q: "नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?<br>Where was Nepal's first railway operated?",
+    q: "नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?",
     options: ["Raxaul – Amlekhganj", "Birgunj – Simara", "Janakpur – Jaynagar", "Biratnagar – Rangeli"],
     correct: "Raxaul – Amlekhganj"
   },
+
   {
-    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?<br>What is Nepal's first hydroelectric project?",
+    q: "नेपालको पहिलो जलविद्युत् आयोजना कुन हो?",
     options: ["Trishuli", "Pharping", "Kulekhani", "Sunkoshi"],
     correct: "Pharping"
   },
+
   {
-    q: "नेपालको पहिलो बैंक कुन हो?<br>What is Nepal's first bank?",
+    q: "नेपालको पहिलो बैंक कुन हो?",
     options: ["Nepal Rastra Bank", "Agriculture Development Bank", "Nepal Bank Limited", "Rastriya Banijya Bank"],
     correct: "Nepal Bank Limited"
   },
+
   {
-    q: "नेपालको पहिलो संविधान कहिले जारी भयो?<br>When was Nepal's first constitution issued?",
+    q: "नेपालको पहिलो संविधान कहिले जारी भयो?",
     options: ["1948 A.D. (2004 B.S.)", "1951 A.D.", "1962 A.D.", "1990 A.D."],
     correct: "1948 A.D. (2004 B.S.)"
   },
+
   {
-    q: "नेपाल संयुक्त राष्ट्रसंघ सदस्य कहिले भएको हो?<br>When did Nepal join the UN?",
+    q: "नेपाल संयुक्त राष्ट्रसंघ कहिले सदस्य बन्यो?",
     options: ["1950", "1955", "1957", "1961"],
     correct: "1955"
   },
+
   {
-    q: "नेपालको पहिलो विश्वविद्यालय कुन हो?<br>What is Nepal's first university?",
+    q: "नेपालको पहिलो विश्वविद्यालय कुन हो?",
     options: ["Tribhuvan University", "Kathmandu University", "Purbanchal University", "Mid-Western University"],
     correct: "Tribhuvan University"
   },
+
   {
-    q: "नेपाली भाषामा छायाङ्कन गरिएको पहिलो चलचित्र कुन हो?<br>What is the first Nepali-language film?",
+    q: "नेपाली भाषामा छायाङ्कन गरिएको पहिलो चलचित्र कुन हो?",
     options: ["Aama", "Satya Harischandra", "Maitighar", "Harischandra"],
     correct: "Satya Harischandra"
   },
+
   {
-    q: "राष्ट्रिय सभामा कति सदस्य छन्?<br>How many National Assembly members?",
+    q: "राष्ट्रिय सभामा कति सदस्य छन्?",
     options: ["50", "56", "59", "60"],
     correct: "59"
   },
+
   {
-    q: "नेपालको पहिलो जनगणना कहिले भयो?<br>When was Nepal's first census?",
-    options: [
-      "1911 A.D.",
-      "1941 A.D.",
-      "1952 A.D.",
-      "1961 A.D."
-    ],
+    q: "नेपालको पहिलो जनगणना कहिले भयो?",
+    options: ["1911 A.D.", "1941 A.D.", "1952 A.D.", "1961 A.D."],
     correct: "1911 A.D."
   },
+
   {
-    q: "नेपालले SAARC चार्टर कहिले साइन गरेको थियो?<br>When did Nepal sign SAARC Charter?",
+    q: "नेपालले SAARC चार्टर कहिले साइन गरेको थियो?",
     options: ["8 Dec 1985", "6 Jan 1984", "10 Dec 1986", "1 Nov 1985"],
     correct: "8 Dec 1985"
   },
+
   {
-    q: "नेपालको पहिलो आन्तरिक उडान कहिले भएको हो?<br>When was Nepal's first domestic flight?",
+    q: "नेपालको पहिलो आन्तरिक उडान कहिले भयो?",
     options: [
       "1949 A.D.",
       "1950 A.D. Kathmandu–Simara",
@@ -115,9 +119,7 @@ const questions = [
   }
 ];
 
-/* ============================================================
-   SHUFFLE QUESTIONS
-============================================================ */
+/* Shuffle questions + options */
 function shuffle(a) {
   for (let i = a.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
@@ -138,21 +140,20 @@ let alreadySubmitted = false;
 /* ============================================================
    PAGE LOAD → SHOW RULE POPUP
 ============================================================ */
-window.onload = function () {
+window.onload = () => {
   document.getElementById("rulesPopup").style.display = "flex";
-  document.getElementById("startScreen").classList.add("hidden");
-
-  document.getElementById("startExamBtn").onclick = beginExam;
 };
 
-/* CLOSE RULE POPUP */
+/* Close Rules → Show Start Screen */
 function closeRules() {
   document.getElementById("rulesPopup").style.display = "none";
   document.getElementById("startScreen").classList.remove("hidden");
+
+  document.getElementById("startExamBtn").onclick = beginExam;
 }
 
 /* ============================================================
-   START EXAM
+   START EXAM + VALIDATION
 ============================================================ */
 function beginExam() {
   const name = document.getElementById("playerName");
@@ -168,13 +169,13 @@ function beginExam() {
   if (name.value.trim() === "") {
     showError(name, nameErr, "Full Name is required.");
     valid = false;
-  } else showSuccess(name);
+  }
 
   const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!pattern.test(email.value.trim())) {
-    showError(email, emailErr, "Enter a valid Email Address.");
+    showError(email, emailErr, "Enter a valid Email.");
     valid = false;
-  } else showSuccess(email);
+  }
 
   if (!valid) return;
 
@@ -187,61 +188,17 @@ function beginExam() {
   setupAntiCheat();
 }
 
-/* ============================================================
-   INPUT VALIDATION
-============================================================ */
-function showError(input, error, msg) {
-  error.textContent = msg;
+function showError(input, errorBox, msg) {
+  errorBox.textContent = msg;
   input.classList.add("input-error");
 }
-function showSuccess(input) {
-  input.classList.add("input-success");
-}
-function resetValidation(input, error) {
-  input.classList.remove("input-error", "input-success");
-  error.textContent = "";
+function resetValidation(input, errorBox) {
+  input.classList.remove("input-error");
+  errorBox.textContent = "";
 }
 
 /* ============================================================
-   ANTI-CHEAT ENGINE
-============================================================ */
-function setupAntiCheat() {
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden && !alreadySubmitted) submitExam();
-  });
-
-  window.addEventListener("blur", () => {
-    if (!alreadySubmitted) submitExam();
-  });
-
-  window.addEventListener("resize", () => {
-    if (!alreadySubmitted && (window.innerWidth < 900 || window.innerHeight < 500)) {
-      submitExam();
-    }
-  });
-
-  document.addEventListener("contextmenu", e => e.preventDefault());
-
-  document.addEventListener("keydown", e => {
-    if (
-      e.key === "F12" ||
-      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
-      (e.ctrlKey && e.key === "U")
-    ) {
-      e.preventDefault();
-      submitExam();
-    }
-  });
-
-  history.pushState(null, null, location.href);
-  window.onpopstate = function () {
-    submitExam();
-    history.pushState(null, null, location.href);
-  };
-}
-
-/* ============================================================
-   NAVIGATION
+   LOADING QUESTIONS
 ============================================================ */
 function loadNav() {
   let nav = document.getElementById("questionNav");
@@ -250,7 +207,7 @@ function loadNav() {
   questions.forEach((_, i) => {
     let btn = document.createElement("div");
     btn.className = "nav-btn";
-    btn.innerText = i + 1;
+    btn.textContent = i + 1;
     btn.onclick = () => go(i);
     nav.appendChild(btn);
   });
@@ -266,9 +223,6 @@ function updateNav() {
   });
 }
 
-/* ============================================================
-   LOAD QUESTION
-============================================================ */
 function loadQ() {
   updateNav();
 
@@ -281,44 +235,39 @@ function loadQ() {
     html += `
       <label class="option">
         <input type="radio" name="q${current}" value="${opt}"
-        ${answers[current] === opt ? "checked" : ""}>
+          ${answers[current] === opt ? "checked" : ""}>
         ${opt}
-      </label>`;
+      </label>
+    `;
   });
 
   box.innerHTML = html;
-
-  document.getElementById("prevBtn").disabled = current === 0;
-  document.getElementById("nextBtn").disabled = current === questions.length - 1;
 }
 
 function saveAns() {
-  let selected = document.querySelector(`input[name="q${current}"]:checked`);
+  const selected = document.querySelector(`input[name="q${current}"]:checked`);
   if (selected) answers[current] = selected.value;
 }
 
 function nextQuestion() { saveAns(); current++; loadQ(); }
 function prevQuestion() { saveAns(); current--; loadQ(); }
 function go(n) { saveAns(); current = n; loadQ(); }
-function markForReview() {
-  reviewSet.add(current);
-  updateNav();
-}
+function markForReview() { reviewSet.add(current); updateNav(); }
 
 /* ============================================================
-   TIMER — 10 minutes
+   TIMER — FIXED VERSION
 ============================================================ */
 let time = 600;
 
 function startTimer() {
-  let text = document.getElementById("timerText");
-  let circle = document.getElementById("timerCircle");
+  const text = document.getElementById("timerText");
+  const circle = document.getElementById("timerCircle");
 
-  let t = setInterval(() => {
+  const t = setInterval(() => {
     let m = Math.floor(time / 60);
     let s = time % 60;
 
-    text.innerHTML = `${m.toString().padStart(2, "0")}:${s
+    text.textContent = `${m.toString().padStart(2, "0")}:${s
       .toString()
       .padStart(2, "0")}`;
 
@@ -331,6 +280,51 @@ function startTimer() {
 
     time--;
   }, 1000);
+}
+
+/* ============================================================
+   ANTI-CHEAT — FULLY ACTIVE
+============================================================ */
+function setupAntiCheat() {
+
+  // ❗ TAB CHANGE / MINIMIZE
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && !alreadySubmitted) submitExam();
+  });
+
+  // ❗ SWITCH WINDOW
+  window.addEventListener("blur", () => {
+    if (!alreadySubmitted) submitExam();
+  });
+
+  // ❗ SPLIT SCREEN / RESIZE
+  window.addEventListener("resize", () => {
+    if (!alreadySubmitted && window.innerWidth < 900) {
+      submitExam();
+    }
+  });
+
+  // ❗ BLOCK DEV TOOLS
+  document.addEventListener("keydown", e => {
+    if (
+      e.key === "F12" ||
+      (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
+      (e.ctrlKey && e.key === "U")
+    ) {
+      e.preventDefault();
+      submitExam();
+    }
+  });
+
+  // ❗ BLOCK RIGHT-CLICK
+  document.addEventListener("contextmenu", e => e.preventDefault());
+
+  // ❗ BLOCK BACK BUTTON
+  history.pushState(null, null, location.href);
+  window.onpopstate = () => {
+    submitExam();
+    history.pushState(null, null, location.href);
+  };
 }
 
 /* ============================================================
@@ -387,12 +381,10 @@ async function submitExam() {
       answersDetailed: list
     })
   });
-
-  window.onbeforeunload = () => "Exam already submitted.";
 }
 
 /* ============================================================
-   REVIEW PANEL
+   REVIEW
 ============================================================ */
 function buildReview(list) {
   let box = document.getElementById("reviewSection");
