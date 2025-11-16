@@ -357,7 +357,7 @@ async function submitExam() {
 
   await fetch(APP_URL, {
     method: "POST",
-    mode: "cors",
+    mode: "no-cors",
     headers: {
       "Content-Type": "application/json",
     },
