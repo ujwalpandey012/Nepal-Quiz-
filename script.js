@@ -48,7 +48,7 @@ const questions = [
     correct: "Koshi Province (Province 1)"
   },
 
-  /* ---- Old Questions ---- */
+  /* ---- Original 11 Questions ---- */
   {
     q: "नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?<br>Where was Nepal’s first railway service operated?",
     options: ["Raxaul – Amlekhganj", "Birgunj – Simara", "Janakpur – Jaynagar", "Biratnagar – Rangeli"],
@@ -129,10 +129,10 @@ const questions = [
 /* ============================================================
    SHUFFLE QUESTIONS
 ============================================================ */
-function shuffle(a) {
-  for (let i = a.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
 }
 shuffle(questions);
@@ -147,52 +147,45 @@ let reviewSet = new Set();
 let alreadySubmitted = false;
 
 /* ============================================================
-   PAGE LOAD — SHOW RULES
+   SHOW POPUP ON LOAD
 ============================================================ */
 window.onload = () => {
-  // Show rules popup
   document.getElementById("rulesPopup").style.display = "flex";
-
-  // Show the start screen but with blur
   document.getElementById("startScreen").classList.remove("hidden");
-
-  // Add blur effect
   document.body.classList.add("popup-active");
 
   document.getElementById("startExamBtn").onclick = beginExam;
 };
 
+/* Close popup */
 function closeRules() {
-  // Hide popup
   document.getElementById("rulesPopup").style.display = "none";
-
-  // Remove blur
   document.body.classList.remove("popup-active");
-
-  // Start screen becomes normal
   document.getElementById("startScreen").classList.remove("hidden");
 }
+
 /* ============================================================
    BEGIN EXAM
 ============================================================ */
 function beginExam() {
 
-  const name = document.getElementById("playerName").value.trim();
-  const email = document.getElementById("playerEmail").value.trim();
-  const nameErr = document.getElementById("nameError");
-  const emailErr = document.getElementById("emailError");
+  let name = document.getElementById("playerName").value.trim();
+  let email = document.getElementById("playerEmail").value.trim();
 
-  nameErr.textContent = "";
-  emailErr.textContent = "";
+  let nErr = document.getElementById("nameError");
+  let eErr = document.getElementById("emailError");
+
+  nErr.textContent = "";
+  eErr.textContent = "";
 
   if (name === "") {
-    nameErr.textContent = "Full Name is required.";
+    nErr.textContent = "Full Name is required.";
     return;
   }
 
-  const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!pattern.test(email)) {
-    emailErr.textContent = "Enter a valid Email Address.";
+    eErr.textContent = "Enter a valid Email Address.";
     return;
   }
 
@@ -200,28 +193,21 @@ function beginExam() {
   document.getElementById("examScreen").classList.remove("hidden");
 
   loadNav();
-  loadQ();
+  loadQuestion();
   startTimer();
   setupAntiCheat();
 }
 
 /* ============================================================
-   ANTI-CHEAT ENGINE
+   ANTI-CHEAT
 ============================================================ */
 function setupAntiCheat() {
-
   document.addEventListener("visibilitychange", () => {
     if (document.hidden && !alreadySubmitted) submitExam();
   });
 
   window.addEventListener("blur", () => {
     if (!alreadySubmitted) submitExam();
-  });
-
-  window.addEventListener("resize", () => {
-    if ((window.innerWidth < 900 || window.innerHeight < 500) && !alreadySubmitted) {
-      submitExam();
-    }
   });
 
   document.addEventListener("contextmenu", e => e.preventDefault());
@@ -236,27 +222,23 @@ function setupAntiCheat() {
       submitExam();
     }
   });
-
-  history.pushState(null, null, location.href);
-  window.onpopstate = () => {
-    submitExam();
-    history.pushState(null, null, location.href);
-  };
 }
 
 /* ============================================================
-   NAVIGATION
+   NAVIGATION LOADER
 ============================================================ */
 function loadNav() {
-  let nav = document.getElementById("questionNav");
+  const nav = document.getElementById("questionNav");
   nav.innerHTML = "";
+
   questions.forEach((_, i) => {
-    let btn = document.createElement("div");
-    btn.className = "nav-btn";
-    btn.innerText = i + 1;
-    btn.onclick = () => go(i);
-    nav.appendChild(btn);
+    let b = document.createElement("div");
+    b.className = "nav-btn";
+    b.innerText = i + 1;
+    b.onclick = () => go(i);
+    nav.appendChild(b);
   });
+
   updateNav();
 }
 
@@ -271,12 +253,11 @@ function updateNav() {
 /* ============================================================
    QUESTION LOADER
 ============================================================ */
-function loadQ() {
-
+function loadQuestion() {
   updateNav();
 
-  const q = questions[current];
-  const box = document.getElementById("questionContainer");
+  let q = questions[current];
+  let box = document.getElementById("questionContainer");
 
   let html = `<h2>${current + 1}. ${q.q}</h2>`;
 
@@ -293,27 +274,27 @@ function loadQ() {
   box.innerHTML = html;
 }
 
-function saveAns() {
+function saveAnswer() {
   let chosen = document.querySelector(`input[name="q${current}"]:checked`);
   if (chosen) answers[current] = chosen.value;
 }
 
 function nextQuestion() {
-  saveAns();
+  saveAnswer();
   if (current < questions.length - 1) current++;
-  loadQ();
+  loadQuestion();
 }
 
 function prevQuestion() {
-  saveAns();
+  saveAnswer();
   if (current > 0) current--;
-  loadQ();
+  loadQuestion();
 }
 
 function go(n) {
-  saveAns();
+  saveAnswer();
   current = n;
-  loadQ();
+  loadQuestion();
 }
 
 function markForReview() {
@@ -322,16 +303,15 @@ function markForReview() {
 }
 
 /* ============================================================
-   TIMER – 10 MINUTES
+   TIMER
 ============================================================ */
 let time = 600;
 
 function startTimer() {
-  const text = document.getElementById("timerText");
-  const circle = document.getElementById("timerCircle");
+  let text = document.getElementById("timerText");
+  let circle = document.getElementById("timerCircle");
 
-  const timer = setInterval(() => {
-
+  let timer = setInterval(() => {
     let m = Math.floor(time / 60);
     let s = time % 60;
 
@@ -356,7 +336,7 @@ async function submitExam() {
   if (alreadySubmitted) return;
   alreadySubmitted = true;
 
-  saveAns();
+  saveAnswer();
 
   document.querySelector(".btn-row").classList.add("hidden");
   document.querySelector(".top-bar").classList.add("hidden");
@@ -404,8 +384,6 @@ async function submitExam() {
       answersDetailed: list
     })
   });
-
-  window.onbeforeunload = () => "Exam already submitted.";
 }
 
 /* ============================================================
@@ -421,9 +399,7 @@ function buildReview(list) {
     html += `
       <div class="review-card">
         <div class="review-q">${i + 1}. ${a.question}</div>
-        <div class="${a.correct ? "correct-text" : "wrong-text"}">
-          Your Answer: ${a.user}
-        </div>
+        <div class="${a.correct ? "correct-text" : "wrong-text"}">Your Answer: ${a.user}</div>
         <div class="correct-ans">Correct Answer: ${a.correctAns}</div>
       </div>
     `;
@@ -431,3 +407,11 @@ function buildReview(list) {
 
   box.innerHTML = html;
 }
+
+/* ============================================================
+   BUTTON EVENTS
+============================================================ */
+document.getElementById("nextBtn").onclick = nextQuestion;
+document.getElementById("prevBtn").onclick = prevQuestion;
+document.getElementById("reviewBtn").onclick = markForReview;
+document.getElementById("submitBtn").onclick = submitExam;
