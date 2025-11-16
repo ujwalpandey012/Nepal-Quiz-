@@ -10,25 +10,20 @@
 
 </head>
 <body>
-    <!-- RULES POPUP -->
+
+<!-- RULES POPUP -->
 <div id="rulesPopup" class="rules-popup">
     <div class="rules-box">
-
         <div class="rules-header">
             <h2>📘 Examination Rules</h2>
             <span class="close-btn" onclick="closeRules()">&times;</span>
         </div>
 
         <div class="rules-content">
-            <p>1️⃣ <strong>Do NOT minimize, split screen, or switch apps.</strong><br>
-               If you do, your exam will auto-submit.</p>
-
-            <p>2️⃣ <strong>Do NOT open another browser or tab.</strong><br>
-               If you do, your responses will auto-save.</p>
-
+            <p>1️⃣ <strong>Do NOT minimize, split screen, or switch apps.</strong> Auto submit.</p>
+            <p>2️⃣ <strong>Do NOT open another tab or browser.</strong> Auto submit.</p>
             <p>3️⃣ <strong>You have 10 minutes for 15 questions.</strong></p>
-
-            <p>4️⃣ <strong>Go question-by-question and submit at the end.</strong></p>
+            <p>4️⃣ <strong>Go next-next and submit at the end.</strong></p>
         </div>
 
         <button class="read-btn" onclick="closeRules()">I Understand the Rules</button>
@@ -36,24 +31,20 @@
 </div>
 
 <!-- START SCREEN -->
-<div id="startScreen" class="start-screen">
+<div id="startScreen" class="start-screen hidden">
     <div class="start-card slide-in">
-        
+
         <h1>Ujwal Pandey</h1>
         <h2>अधिकारिक अनलाइन परीक्षा</h2>
         <h3>Develop BY Ujwal Pandey</h3>
 
-        <!-- Full Name -->
         <input type="text" id="playerName" placeholder="Full Name" required>
         <small id="nameError" class="error-msg"></small>
 
-        <!-- Email -->
         <input type="email" id="playerEmail" placeholder="Email Address" required>
         <small id="emailError" class="error-msg"></small>
 
-        <!-- Start Button -->
         <button id="startExamBtn" class="start-btn">Start Examination</button>
-
     </div>
 </div>
 
@@ -61,11 +52,8 @@
 <div id="examScreen" class="exam-screen hidden">
 
     <div class="top-bar">
-
-        <!-- Question Navigation -->
         <div class="question-nav" id="questionNav"></div>
 
-        <!-- Timer -->
         <div class="timer-ring">
             <svg>
                 <circle cx="40" cy="40" r="35"></circle>
@@ -73,21 +61,17 @@
             </svg>
             <span id="timerText">10:00</span>
         </div>
-
     </div>
 
-    <!-- Question Container -->
     <div id="questionContainer" class="question-container"></div>
 
-    <!-- Navigation Buttons -->
     <div class="btn-row">
-        <button id="prevBtn" onclick="prevQuestion()">Previous</button>
-        <button id="reviewBtn" onclick="markForReview()">Mark for Review</button>
-        <button id="nextBtn" onclick="nextQuestion()">Next</button>
-        <button id="submitBtn" onclick="submitExam()">Submit Exam</button>
+        <button onclick="prevQuestion()">Previous</button>
+        <button onclick="markForReview()">Mark for Review</button>
+        <button onclick="nextQuestion()">Next</button>
+        <button onclick="submitExam()">Submit Exam</button>
     </div>
 
-    <!-- Result + Review Section -->
     <div id="resultBox" class="result-box hidden"></div>
     <div id="reviewSection" class="review-section hidden"></div>
 
