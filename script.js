@@ -169,35 +169,50 @@ function closeRules() {
 ============================================================ */
 function beginExam() {
 
-  let name = document.getElementById("playerName").value.trim();
-  let email = document.getElementById("playerEmail").value.trim();
+  const name = document.getElementById("playerName").value.trim();
+  const email = document.getElementById("playerEmail").value.trim();
+  const nameErr = document.getElementById("nameError");
+  const emailErr = document.getElementById("emailError");
 
-  let nErr = document.getElementById("nameError");
-  let eErr = document.getElementById("emailError");
+  // Reset errors
+  nameErr.textContent = "";
+  emailErr.textContent = "";
+  document.getElementById("playerName").classList.remove("input-error", "input-success");
+  document.getElementById("playerEmail").classList.remove("input-error", "input-success");
 
-  nErr.textContent = "";
-  eErr.textContent = "";
+  // FULL NAME VALIDATION (must contain 2 words, letters only)
+  const namePattern = /^[A-Za-z ]{3,}$/;
+  const twoWords = name.split(" ").length >= 2;
 
-  if (name === "") {
-    nErr.textContent = "Full Name is required.";
+  if (!namePattern.test(name) || !twoWords) {
+    nameErr.textContent = "Please enter your FULL NAME (first + last).";
+    document.getElementById("playerName").classList.add("input-error");
     return;
+  } else {
+    document.getElementById("playerName").classList.add("input-success");
   }
 
-  let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!pattern.test(email)) {
-    eErr.textContent = "Enter a valid Email Address.";
+  // EMAIL VALIDATION (strong regex)
+  const emailPattern =
+    /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[A-Za-z]{2,}$/;
+
+  if (!emailPattern.test(email)) {
+    emailErr.textContent = "Please enter a valid Email Address.";
+    document.getElementById("playerEmail").classList.add("input-error");
     return;
+  } else {
+    document.getElementById("playerEmail").classList.add("input-success");
   }
 
+  // If both are valid → start exam
   document.getElementById("startScreen").classList.add("hidden");
   document.getElementById("examScreen").classList.remove("hidden");
 
   loadNav();
-  loadQuestion();
+  loadQ();
   startTimer();
   setupAntiCheat();
 }
-
 /* ============================================================
    ANTI-CHEAT
 ============================================================ */
