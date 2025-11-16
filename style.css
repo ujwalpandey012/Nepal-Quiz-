@@ -174,3 +174,10 @@ border-radius:15px;border:1px solid rgba(255,255,255,0.15)}
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
 }
+/* BLUR BACKGROUND WHEN POPUP IS OPEN */
+body.popup-active #startScreen {
+  filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.4;
+}
