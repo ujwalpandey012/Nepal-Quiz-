@@ -3,14 +3,11 @@
 ============================================================ */
 const APP_URL =
   "https://script.google.com/macros/s/AKfycbyTXArmFAAChhMuBdnZUP1k95aEElCadrmZavf7XuTZlPUn4j-RScEsHkoOV7B27J4qEw/exec";
-document.getElementById("startExamBtn").onclick = beginExam;
+
 /* ============================================================
    QUESTIONS (15 TOTAL)
 ============================================================ */
 const questions = [
-
-  /* ---- New Questions Added ---- */
-
   {
     q: "नेपालको राष्ट्रिय गान “सयौँ थुँगा फूलका हामी” मा कति शब्द र कति अक्षर छन्?<br>How many words and letters are in the National Anthem of Nepal?",
     options: [
@@ -40,7 +37,7 @@ const questions = [
   },
 
   {
-    q: "नेपालको कुन प्रदेशमा सबैभन्दा धेरै जिल्ला छन्?<br>Which province of Nepal has the highest number of districts?",
+    q: "नेपालको कुन प्रदेशमा सबैभन्दा धेरै जिल्ला छन्?<br>Which province has the highest number of districts?",
     options: [
       "Bagmati Province",
       "Lumbini Province",
@@ -50,7 +47,7 @@ const questions = [
     correct: "Koshi Province (Province 1)"
   },
 
-  /* ---- Old Original 11 Questions ---- */
+  /* ---- Old Questions ---- */
 
   {
     q: "नेपालमा पहिलो रेल सेवा कहाँ सञ्चालन भयो?<br>Where was Nepal’s first railway service operated?",
@@ -83,17 +80,17 @@ const questions = [
     correct: "Tribhuvan University"
   },
   {
-    q: "नेपाली भाषामा छायाङ्कन गरिएको पहिलो चलचित्र कुन हो?<br>What is the first Nepali-language film?",
+    q: "नेपाली भाषामा छायाङ्कन गरिएको पहिलो चलचित्र कुन हो?<br>What is the first Nepali film?",
     options: ["Aama", "Satya Harischandra", "Maitighar", "Harischandra"],
     correct: "Satya Harischandra"
   },
   {
-    q: "राष्ट्रिय सभामा कति जना सदस्य हुन्छन्?<br>How many members are there in the National Assembly?",
+    q: "राष्ट्रिय सभामा कति जना सदस्य हुन्छन्?<br>How many members are in the National Assembly?",
     options: ["50", "56", "59", "60"],
     correct: "59"
   },
   {
-    q: "नेपालको पहिलो जनगणना कहिले भएको हो?<br>When was Nepal’s first official census conducted?",
+    q: "नेपालको पहिलो जनगणना कहिले भएको हो?<br>When was Nepal’s first official census?",
     options: [
       "1911 A.D., during Chandra Shumsher",
       "1941 A.D., during Judha Shumsher",
@@ -108,7 +105,7 @@ const questions = [
     correct: "8 December 1985"
   },
   {
-    q: "नेपालको पहिलो आन्तरिक उडान कहिले भएको हो?<br>When was Nepal’s first domestic flight conducted?",
+    q: "नेपालको पहिलो आन्तरिक उडान कहिले भएको हो?<br>When was Nepal’s first domestic flight?",
     options: [
       "1949 A.D., Kathmandu–Pokhara",
       "1950 A.D., Kathmandu–Biratnagar",
@@ -122,9 +119,9 @@ const questions = [
 /* ============================================================
    SHUFFLE QUESTIONS + OPTIONS
 ============================================================ */
-function shuffle(a){
-  for(let i=a.length-1; i>0; i--){
-    let j = Math.floor(Math.random()*(i+1));
+function shuffle(a) {
+  for (let i = a.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
 }
@@ -132,20 +129,24 @@ shuffle(questions);
 questions.forEach(q => shuffle(q.options));
 
 /* ============================================================
-   STATE VARIABLES
+   STATE
 ============================================================ */
 let current = 0;
 let answers = {};
 let reviewSet = new Set();
 let alreadySubmitted = false;
 
-// SHOW POPUP ON PAGE LOAD
-window.onload = function() {
+/* ============================================================
+   PAGE LOAD → SHOW RULES POPUP
+============================================================ */
+window.onload = function () {
   document.getElementById("rulesPopup").style.display = "flex";
   document.getElementById("startScreen").classList.add("hidden");
+
+  document.getElementById("startExamBtn").onclick = beginExam;
 };
 
-// CLOSE POPUP
+/* CLOSE RULE POPUP */
 function closeRules() {
   document.getElementById("rulesPopup").style.display = "none";
   document.getElementById("startScreen").classList.remove("hidden");
@@ -165,31 +166,24 @@ function beginExam() {
 
   let valid = true;
 
-  // NAME VALIDATION
   if (name.value.trim() === "") {
     showError(name, nameError, "Full Name is required.");
     valid = false;
-  } else {
-    showSuccess(name);
-  }
+  } else showSuccess(name);
 
-  // EMAIL VALIDATION
   if (email.value.trim() === "") {
     showError(email, emailError, "Email Address is required.");
     valid = false;
   } else {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailPattern.test(email.value.trim())) {
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!pattern.test(email.value.trim())) {
       showError(email, emailError, "Enter a valid Email Address.");
       valid = false;
-    } else {
-      showSuccess(email);
-    }
+    } else showSuccess(email);
   }
 
   if (!valid) return;
 
-  // START EXAM
   document.getElementById("startScreen").classList.add("hidden");
   document.getElementById("examScreen").classList.remove("hidden");
 
@@ -199,92 +193,59 @@ function beginExam() {
   setupAntiCheat();
 }
 
-
-// FUNCTIONS FOR ERROR + SUCCESS
-function showError(input, errorBox, message) {
-  errorBox.textContent = message;
+/* ============================================================
+   INPUT VALIDATION
+============================================================ */
+function showError(input, errorBox, msg) {
+  errorBox.textContent = msg;
   input.classList.add("input-error");
 }
-
 function showSuccess(input) {
   input.classList.add("input-success");
 }
-
 function resetValidation(input, errorBox) {
   input.classList.remove("input-error", "input-success");
   errorBox.textContent = "";
 }
 
-
-// LIVE VALIDATION (as the user types)
-document.getElementById("playerName").addEventListener("input", function () {
-  if (this.value.trim() !== "") {
-    this.classList.add("input-success");
-    this.classList.remove("input-error");
-    document.getElementById("nameError").textContent = "";
-  }
-});
-
-document.getElementById("playerEmail").addEventListener("input", function () {
-  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const errorBox = document.getElementById("emailError");
-
-  if (emailPattern.test(this.value.trim())) {
-    this.classList.add("input-success");
-    this.classList.remove("input-error");
-    errorBox.textContent = "";
-  }
-});
 /* ============================================================
-   FULL ANTI-CHEAT ENGINE (SUPER STRONG)
+   FULL ANTI-CHEAT (SUPER STRONG)
 ============================================================ */
 function setupAntiCheat() {
-
-  // 1️⃣ TAB CHANGE / APP SWITCH
   document.addEventListener("visibilitychange", () => {
-    if (document.hidden && !alreadySubmitted) {
-      submitExam();
-    }
+    if (document.hidden && !alreadySubmitted) submitExam();
   });
 
-  // 2️⃣ ALT+TAB / HOME BUTTON / SCREEN MINIMIZE
   window.addEventListener("blur", () => {
     if (!alreadySubmitted) submitExam();
   });
 
-  // 3️⃣ SPLIT SCREEN OR WINDOW RESIZE
   window.addEventListener("resize", () => {
-    if (!alreadySubmitted) {
-      if (window.innerWidth < 900 || window.innerHeight < 500) {
-        submitExam();
-      }
+    if (!alreadySubmitted && (window.innerWidth < 900 || window.innerHeight < 500)) {
+      submitExam();
     }
   });
 
-  // 4️⃣ BLOCK RIGHT CLICK
-  document.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-  });
+  document.addEventListener("contextmenu", e => e.preventDefault());
 
-  // 5️⃣ BLOCK DEVTOOLS (F12, CTRL+SHIFT+I, etc.)
-  document.addEventListener("keydown", (e) => {
+  document.addEventListener("keydown", e => {
     if (
       e.key === "F12" ||
       (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "J")) ||
       (e.ctrlKey && e.key === "U")
     ) {
       e.preventDefault();
-      if (!alreadySubmitted) submitExam();
+      submitExam();
     }
   });
 
-  // 6️⃣ BLOCK BACK BUTTON (Android / Browser)
   history.pushState(null, null, location.href);
   window.onpopstate = function () {
-    if (!alreadySubmitted) submitExam();
+    submitExam();
     history.pushState(null, null, location.href);
   };
 }
+
 /* ============================================================
    NAVIGATION
 ============================================================ */
@@ -315,7 +276,6 @@ function updateNav() {
    LOAD QUESTION
 ============================================================ */
 function loadQ() {
-
   updateNav();
 
   const q = questions[current];
@@ -349,21 +309,19 @@ function go(n) { saveAns(); current = n; loadQ(); }
 function markForReview() { reviewSet.add(current); updateNav(); }
 
 /* ============================================================
-   TIMER (10 MIN)
+   TIMER (10 MINUTES)
 ============================================================ */
 let time = 600;
 
 function startTimer() {
-  let timerText = document.getElementById("timerText");
+  let text = document.getElementById("timerText");
   let circle = document.getElementById("timerCircle");
 
   let t = setInterval(() => {
-
     let m = Math.floor(time / 60);
     let s = time % 60;
 
-    timerText.innerHTML =
-      `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+    text.innerHTML = `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 
     circle.style.strokeDashoffset = 220 - (220 * (time / 600));
 
@@ -380,7 +338,6 @@ function startTimer() {
    SUBMIT EXAM
 ============================================================ */
 async function submitExam() {
-
   if (alreadySubmitted) return;
   alreadySubmitted = true;
 
@@ -395,14 +352,13 @@ async function submitExam() {
 
   questions.forEach((q, i) => {
     let user = answers[i] || "Not Answered";
-    let correct = q.correct;
-    let ok = (user === correct);
+    let ok = user === q.correct;
     if (ok) score++;
 
     list.push({
       question: q.q,
       user,
-      correctAns: correct,
+      correctAns: q.correct,
       correct: ok
     });
   });
@@ -452,9 +408,7 @@ function buildReview(list) {
         <div class="${a.correct ? "correct-text" : "wrong-text"}">
           Your Answer: ${a.user}
         </div>
-        <div class="correct-ans">
-          Correct Answer: ${a.correctAns}
-        </div>
+        <div class="correct-ans">Correct Answer: ${a.correctAns}</div>
       </div>
     `;
   });
