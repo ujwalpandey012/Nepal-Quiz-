@@ -84,7 +84,7 @@ const pack1 = [
       "USA<br>अमेरिका",
       "Indonesia<br>इन्डोनेसिया"
     ],
-    correct: "China<br>चीन"
+    correct: "India<br>भारत"
   },
 
   {
