@@ -1,111 +1,221 @@
 const pack5 = [
   {
-    q: "What does CPU stand for?<br>CPU को पूरा रूप के हो?",
+    q: "Which layer of the OSI model is responsible for routing of data packets?<br>OSI मोडेलको कुन तहले डाटा प्याकेटको राउटिङको जिम्मा लिन्छ?",
     options: [
-      "Central Processing Unit<br>केन्द्रीय प्रशोधन इकाई",
-      "Computer Power Unit<br>कम्प्युटर पावर यूनिट",
-      "Control Program Utility<br>नियन्त्रण कार्यक्रम उपयोगिता",
-      "Central Performance Unit<br>केन्द्रीय प्रदर्शन इकाई"
+      "Network Layer<br>नेटवर्क तह",
+      "Transport Layer<br>ट्रान्सपोर्ट तह",
+      "Session Layer<br>सेसन तह",
+      "Data Link Layer<br>डेटा लिंक तह"
     ],
-    correct: "Central Processing Unit<br>केन्द्रीय प्रशोधन इकाई"
+    correct: "Network Layer<br>नेटवर्क तह"
   },
 
   {
-    q: "What is the brain of the computer?<br>कम्प्युटरको दिमागलाई के भनिन्छ?",
+    q: "Which protocol is used to securely transfer files over a network?<br>नेटवर्कमा सुरक्षित रूपमा फाइल पठाउन कुन प्रोटोकल प्रयोग हुन्छ?",
     options: [
-      "CPU<br>सीपीयू",
+      "SFTP<br>एसएफटीपी",
+      "FTP<br>एफटीपी",
+      "HTTP<br>एचटीटीपी",
+      "SMTP<br>एसएमटीपी"
+    ],
+    correct: "SFTP<br>एसएफटीपी"
+  },
+
+  {
+    q: "Which type of memory is non-volatile and retains data even when power is off?<br>कुन मेमोरी नन-भोलाटाइल हो र पावर अफ हुँदा पनि डेटा राख्छ?",
+    options: [
+      "ROM<br>रोम",
       "RAM<br>र्याम",
-      "Monitor<br>मोनिटर",
+      "Cache<br>क्याश",
+      "Register<br>रजिस्टर"
+    ],
+    correct: "ROM<br>रोम"
+  },
+
+  {
+    q: "Which port number is used for HTTPS?<br>HTTPS को लागि कुन पोर्ट नम्बर प्रयोग हुन्छ?",
+    options: [
+      "443<br>४४३",
+      "80<br>८०",
+      "21<br>२१",
+      "23<br>२३"
+    ],
+    correct: "443<br>४४३"
+  },
+
+  {
+    q: "Which database language is used to define the structure of a database?<br>डेटाबेसको संरचना परिभाषित गर्न कुन भाषा प्रयोग हुन्छ?",
+    options: [
+      "DDL<br>डीडिएल",
+      "DML<br>डीएमएल",
+      "DCL<br>डीसीएल",
+      "TCL<br>टीसीएल"
+    ],
+    correct: "DDL<br>डीडिएल"
+  },
+
+  {
+    q: "What is the main function of a firewall?<br>फायरवालको मुख्य कार्य के हो?",
+    options: [
+      "To block unauthorized access<br>अनधिकृत पहुँच रोक्नु",
+      "To store passwords<br>पासवर्ड भण्डारण गर्नु",
+      "To increase internet speed<br>इन्टरनेट स्पिड बढाउनु",
+      "To compress files<br>फाइल संकुचन गर्नु"
+    ],
+    correct: "To block unauthorized access<br>अनधिकृत पहुँच रोक्नु"
+  },
+
+  {
+    q: "What does BIOS stand for?<br>BIOS को पूरा रूप के हो?",
+    options: [
+      "Basic Input Output System<br>बेसिक इन्पुट आउटपुट सिस्टम",
+      "Binary Integrated Operating System<br>बाइनरी एकीकृत अपरेटिङ सिस्टम",
+      "Basic Internet Operating Setup<br>बेसिक इन्टरनेट अपरेटिङ सेटअप",
+      "Bus Input Output Service<br>बस इन्पुट आउटपुट सेवा"
+    ],
+    correct: "Basic Input Output System<br>बेसिक इन्पुट आउटपुट सिस्टम"
+  },
+
+  {
+    q: "What is the function of DNS?<br>DNS को काम के हो?",
+    options: [
+      "Convert domain name to IP address<br>डोमेन नामलाई IP मा बदल्नु",
+      "Send emails<br>इमेल पठाउनु",
+      "Encrypt data<br>डेटा इन्क्रिप्ट गर्नु",
+      "Create websites<br>वेबसाइट बनाउनु"
+    ],
+    correct: "Convert domain name to IP address<br>डोमेन नामलाई IP मा बदल्नु"
+  },
+
+  {
+    q: "Which type of cyber attack floods a network with traffic, overwhelming the server?<br>कुन साइबर आक्रमणले धेरै ट्राफिक पठाएर सर्भर डाउन बनाउँछ?",
+    options: [
+      "DDoS Attack<br>डिडोस आक्रमण",
+      "Phishing<br>फिसिङ",
+      "Malware<br>मालवेयर",
+      "SQL Injection<br>एसक्यूएल इन्जेक्सन"
+    ],
+    correct: "DDoS Attack<br>डिडोस आक्रमण"
+  },
+
+  {
+    q: "Which storage device uses NAND flash memory?<br>कुन भण्डारण उपकरणले NAND फ्ल्यास मेमोरी प्रयोग गर्छ?",
+    options: [
+      "SSD<br>एसएसडी",
+      "HDD<br>एचडीडी",
+      "CD-ROM<br>सिडी–रोम",
+      "Floppy Disk<br>फ्लप्पी डिस्क"
+    ],
+    correct: "SSD<br>एसएसडी"
+  },
+
+  {
+    q: "What does GPU mainly handle?<br>GPU मुख्यत: के सम्भाल्छ?",
+    options: [
+      "Graphics processing<br>ग्राफिक्स प्रशोधन",
+      "Sound processing<br>ध्वनि प्रशोधन",
+      "Data storage<br>डेटा भण्डारण",
+      "Power distribution<br>विद्युत वितरण"
+    ],
+    correct: "Graphics processing<br>ग्राफिक्स प्रशोधन"
+  },
+
+  {
+    q: "Which operating system is open-source?<br>कुन अपरेटिङ सिस्टम खुला स्रोत (open-source) हो?",
+    options: [
+      "Linux<br>लिनक्स",
+      "Windows<br>विन्डोज",
+      "macOS<br>म्याकओएस",
+      "iOS<br>आइओएस"
+    ],
+    correct: "Linux<br>लिनक्स"
+  },
+
+  {
+    q: "Which of the following is NOT a programming language?<br>यसमध्ये कुन प्रोग्रामिङ भाषा होइन?",
+    options: [
+      "HTML<br>एचटीएमएल",
+      "Python<br>पाइथन",
+      "Java<br>जाभा",
+      "C++<br>सी++"
+    ],
+    correct: "HTML<br>एचटीएमएल"
+  },
+
+  {
+    q: "What does SQL stand for?<br>SQL को पूरा रूप के हो?",
+    options: [
+      "Structured Query Language<br>स्ट्रक्चर्ड क्वेरी ल्याङ्ग्वेज",
+      "Simple Query Logic<br>सिम्पल क्वेरी लजिक",
+      "System Query Language<br>सिस्टम क्वेरी ल्याङ्ग्वेज",
+      "Standard Question Language<br>स्ट्यान्डर्ड क्वेस्चन ल्याङ्ग्वेज"
+    ],
+    correct: "Structured Query Language<br>स्ट्रक्चर्ड क्वेरी ल्याङ्ग्वेज"
+  },
+
+  {
+    q: "Which company developed the Android operating system?<br>एन्ड्रोइड अपरेटिङ सिस्टम कसले विकास गर्यो?",
+    options: [
+      "Google<br>गुगल",
+      "Apple<br>एप्पल",
+      "Microsoft<br>माइक्रोसफ्ट",
+      "IBM<br>आईबीएम"
+    ],
+    correct: "Google<br>गुगल"
+  },
+
+  {
+    q: "What type of software is an antivirus?<br>एन्टिभाइरस कस्तो प्रकारको सफ्टवेयर हो?",
+    options: [
+      "Utility Software<br>युटिलिटी सफ्टवेयर",
+      "System Software<br>सिस्टम सफ्टवेयर",
+      "Application Software<br>एप्लिकेसन सफ्टवेयर",
+      "Malicious Software<br>मालिसस सफ्टवेयर"
+    ],
+    correct: "Utility Software<br>युटिलिटी सफ्टवेयर"
+  },
+
+  {
+    q: "Which command is used to view the IP configuration in Windows?<br>Windows मा IP कन्फिगरेसन हेर्न कुन कमाण्ड प्रयोग हुन्छ?",
+    options: [
+      "ipconfig<br>ipconfig",
+      "ifconfig<br>ifconfig",
+      "ping<br>ping",
+      "netstat<br>netstat"
+    ],
+    correct: "ipconfig<br>ipconfig"
+  },
+
+  {
+    q: "Which storage type is the fastest?<br>सबैभन्दा छिटो भण्डारण प्रकार कुन हो?",
+    options: [
+      "Cache Memory<br>क्याश मेमोरी",
+      "RAM<br>र्याम",
+      "SSD<br>एसएसडी",
       "Hard Disk<br>हार्ड डिस्क"
     ],
-    correct: "CPU<br>सीपीयू"
+    correct: "Cache Memory<br>क्याश मेमोरी"
   },
 
   {
-    q: "Which device is used to store data permanently?<br>स्थायी रूपमा डेटा भण्डारण गर्न कुन उपकरण प्रयोग हुन्छ?",
+    q: "What does HTTP stand for?<br>HTTP को पूरा रूप के हो?",
     options: [
-      "Hard Disk<br>हार्ड डिस्क",
-      "RAM<br>र्याम",
-      "Cache Memory<br>क्याश मेमोरी",
-      "Registers<br>रजिस्टर"
+      "HyperText Transfer Protocol<br>हाइपरटेक्स्ट ट्रान्सफर प्रोटोकल",
+      "High Transmission Text Protocol<br>हाई ट्रान्समिशन टेक्स्ट प्रोटोकल",
+      "Hyperlink Transfer Program<br>हाइपरलिङ्क ट्रान्सफर प्रोग्राम",
+      "High Tech Transfer Program<br>हाई टेक ट्रान्सफर प्रोग्राम"
     ],
-    correct: "Hard Disk<br>हार्ड डिस्क"
+    correct: "HyperText Transfer Protocol<br>हाइपरटेक्स्ट ट्रान्सफर प्रोटोकल"
   },
 
   {
-    q: "What does 'www' stand for?<br>WWW को पूरा रूप के हो?",
+    q: "Which shortcut key is used to refresh a webpage?<br>वेबपेज रिफ्रेस गर्न कुन सर्टकट की प्रयोग हुन्छ?",
     options: [
-      "World Wide Web<br>वर्ल्ड वाइड वेब",
-      "World Web Window<br>वर्ल्ड वेब विन्डो",
-      "Wide World Web<br>वाइड वर्ल्ड वेब",
-      "Web World Wide<br>वेब वर्ल्ड वाइड"
+      "F5<br>F5",
+      "F2<br>F2",
+      "Ctrl + R<br>Ctrl + R",
+      "Ctrl + F<br>Ctrl + F"
     ],
-    correct: "World Wide Web<br>वर्ल्ड वाइड वेब"
-  },
-
-  {
-    q: "What is used to connect multiple computers in a network?<br>कति कम्प्युटरलाई नेटवर्कमा जोड्न के प्रयोग हुन्छ?",
-    options: [
-      "Router<br>राउटर",
-      "Keyboard<br>किबोर्ड",
-      "Scanner<br>स्क्यानर",
-      "Monitor<br>मोनिटर"
-    ],
-    correct: "Router<br>राउटर"
-  },
-
-  {
-    q: "What does USB stand for?<br>USB को पूरा नाम के हो?",
-    options: [
-      "Universal Serial Bus<br>युनिभर्सल सिरियल बस",
-      "United System Board<br>युनाइटेड सिस्टम बोर्ड",
-      "Universal System Base<br>युनिभर्सल सिस्टम बेस",
-      "Ultra Speed Bus<br>अल्ट्रा स्पीड बस"
-    ],
-    correct: "Universal Serial Bus<br>युनिभर्सल सिरियल बस"
-  },
-
-  {
-    q: "Which technology is used for wireless internet?<br>वायरलेस इन्टरनेटका लागि कुन प्रविधि प्रयोग हुन्छ?",
-    options: [
-      "Wi-Fi<br>वाई-फाई",
-      "USB<br>युएसबी",
-      "HDMI<br>एचडीएमआई",
-      "VGA<br>भीजिए"
-    ],
-    correct: "Wi-Fi<br>वाई-फाई"
-  },
-
-  {
-    q: "What is the full form of AI?<br>AI को पूरा रूप के हो?",
-    options: [
-      "Artificial Intelligence<br>कृत्रिम बुद्धिमत्ता",
-      "Advanced Information<br>उन्नत जानकारी",
-      "Automated Input<br>स्वचालित इनपुट",
-      "Auto Intelligence<br>अटो इन्टेलिजेन्स"
-    ],
-    correct: "Artificial Intelligence<br>कृत्रिम बुद्धिमत्ता"
-  },
-
-  {
-    q: "Which device is used for typing?<br>टाइप गर्न कुन उपकरण प्रयोग हुन्छ?",
-    options: [
-      "Keyboard<br>किबोर्ड",
-      "Mouse<br>माउस",
-      "Monitor<br>मोनिटर",
-      "Printer<br>प्रिन्टर"
-    ],
-    correct: "Keyboard<br>किबोर्ड"
-  },
-
-  {
-    q: "What does RAM stand for?<br>RAM को पूरा रूप के हो?",
-    options: [
-      "Random Access Memory<br>र्यान्डम एक्सेस मेमोरी",
-      "Rapid Action Module<br>र्‍यापिड एक्शन मोड्युल",
-      "Read Access Mode<br>रीड एक्सेस मोड",
-      "Rapid Access Memory<br>र्‍यापिड एक्सेस मेमोरी"
-    ],
-    correct: "Random Access Memory<br>र्यान्डम एक्सेस मेमोरी"
+    correct: "F5<br>F5"
   }
 ];
